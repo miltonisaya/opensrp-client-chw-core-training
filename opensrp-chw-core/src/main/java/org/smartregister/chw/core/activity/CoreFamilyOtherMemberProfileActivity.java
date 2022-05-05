@@ -147,7 +147,7 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_pregnancy_out_come) {
             startPncRegister();
             return true;
-        }else if (i == R.id.action_fp_initiation) {
+        } else if (i == R.id.action_fp_initiation) {
             startFpRegister();
             return true;
         } else if (i == R.id.action_fp_change) {
@@ -175,14 +175,17 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_cbhs_registration) {
             startHivRegister();
             return true;
-        }
-        else if (i == R.id.action_tb_registration) {
+        } else if (i == R.id.action_tb_registration) {
             startTbRegister();
         } else if (i == R.id.action_malaria_diagnosis) {
             startHfMalariaFollowupForm();
             return true;
-        } else if(i == R.id.action_pmtct_register) {
+        } else if (i == R.id.action_pmtct_register) {
             startPmtctRegisration();
+            return true;
+        } else if (i == R.id.action_ld_registration) {
+            startLDRegistration();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -211,6 +214,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startHfMalariaFollowupForm();
 
     protected abstract void startPmtctRegisration();
+
+    protected abstract void startLDRegistration();
 
     protected abstract void setIndependentClient(boolean isIndependent);
 

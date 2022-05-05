@@ -807,5 +807,6 @@
 
     <!--L&D Titles -->
     <string name="menu_ld">L&amp;D</string>
+    <string name="ld_registration">L&amp;D Registration</string>
 
 </resources>

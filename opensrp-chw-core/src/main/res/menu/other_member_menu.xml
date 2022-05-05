@@ -98,6 +98,12 @@
         android:title="@string/pmtct_registration"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_ld_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/ld_registration"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
         android:title="@string/remove_this_person"

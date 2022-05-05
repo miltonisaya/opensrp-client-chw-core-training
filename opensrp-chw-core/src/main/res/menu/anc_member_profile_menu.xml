@@ -46,6 +46,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_ld_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/ld_registration"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_anc_partner_followup_referral"
         android:enabled="true"
         android:visible="false"
