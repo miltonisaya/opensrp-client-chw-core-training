@@ -134,11 +134,11 @@ tasks.withType(Test) {
 }
 
 def getVersionName = { ->
-    return "1.5.30.10-NACP-SNAPSHOT" // Library version
+    return VERSION_NAME // Library version
 }
 
 def getArtificatId = { ->
-    return "opensrp-client-chw-core" // Library name
+    return POM_SETTING_ARTIFACT_ID // Library name
 }
 
 publishing {
@@ -375,7 +375,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-ld:1.0.0-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-ld:1.0.1-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
