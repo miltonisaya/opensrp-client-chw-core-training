@@ -81,6 +81,7 @@ android {
                 includeCompileClasspath = true
             }
         }
+        project.archivesBaseName = "opensrp-client-chw-core"
     }
 
     android.defaultConfig.javaCompileOptions.annotationProcessorOptions.includeCompileClasspath = true
