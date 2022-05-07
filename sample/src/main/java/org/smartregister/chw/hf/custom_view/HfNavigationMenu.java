@@ -48,6 +48,26 @@ public class HfNavigationMenu implements NavigationMenu.Flavour {
     }
 
     @Override
+    public String childNavigationMenuCountString() {
+        return null;
+    }
+
+    @Override
+    public Intent getHIA2ReportActivityIntent(Activity activity) {
+        return null;
+    }
+
+    @Override
+    public boolean hasInAppReports() {
+        return false;
+    }
+
+    @Override
+    public Intent getInAppReportsActivityIntent(Activity activity) {
+        return null;
+    }
+
+    @Override
     public boolean hasCommunityResponders() {
         return false;
     }

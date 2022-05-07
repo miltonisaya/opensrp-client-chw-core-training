@@ -181,6 +181,11 @@ public class AncMemberProfileActivity extends CoreAncMemberProfileActivity {
     }
 
     @Override
+    protected void startLDRegistration() {
+        //TODO implement start l&d registration
+    }
+
+    @Override
     public void setupViews() {
         super.setupViews();
         initializeTasksRecyclerView();

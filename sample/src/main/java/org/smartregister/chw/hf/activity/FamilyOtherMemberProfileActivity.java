@@ -89,6 +89,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startLDRegistration() {
+        //TODO implement start l&d registration
+    }
+
+    @Override
     protected void startPncRegister() {
         //TODO implement start pnc registration
     }
