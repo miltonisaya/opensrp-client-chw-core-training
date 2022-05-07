@@ -79,6 +79,8 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
         } else if (itemId == R.id.anc_danger_signs_outcome) {
             ancMemberProfilePresenter().startAncDangerSignsOutcomeForm(memberObject);
             return true;
+        } else if(itemId == R.id.action_ld_registration) {
+            startLDRegistration();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -143,6 +145,9 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
 
     @Override
     public abstract void openFamilyDueServices();
+
+
+    protected abstract void startLDRegistration();
 
 
     @Override
