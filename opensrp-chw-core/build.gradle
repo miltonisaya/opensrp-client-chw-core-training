@@ -224,7 +224,7 @@ dependencies {
         exclude group: 'xpp3', module: 'xpp3'
     }
 
-    api('org.smartregister:opensrp-client-native-form:1.14.8.1-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-native-form:1.14.8.3-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
@@ -233,6 +233,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'io.ona.rdt-capture', module: 'lib'
         exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'com.github.rey5137', module: 'material'
     }
 
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
@@ -248,6 +249,8 @@ dependencies {
         exclude group: 'com.ibm.fhir', module: 'fhir-model'
         exclude group: 'id.zelory', module: 'compressor'
     }
+
+    implementation 'com.github.rey5137:material:1.2.5'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0'
 
@@ -375,7 +378,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-ld:1.0.4-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-ld:1.0.5-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
