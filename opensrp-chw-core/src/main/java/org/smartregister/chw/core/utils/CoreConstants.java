@@ -107,6 +107,9 @@ public class CoreConstants {
     }
 
     public static final class EventType {
+        public static final String ANC_PREGNANCY_CONFIRMATION = "Pregnancy Confirmation";
+        public static final String ANC_FOLLOWUP_CLIENT_FOLLOWUP = "ANC Followup Client Registration";
+
         public static final String BIRTH_CERTIFICATION = "Birth Certification";
         public static final String OBS_ILLNESS = "Observations Illness";
         public static final String COUNSELING = "Counseling";
