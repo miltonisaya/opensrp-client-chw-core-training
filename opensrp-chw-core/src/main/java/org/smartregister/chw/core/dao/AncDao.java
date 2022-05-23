@@ -130,4 +130,40 @@ public class AncDao extends AlertDao {
 
         return new ArrayList<>();
     }
+
+    public static boolean isRestartAncCase(String baseEntityId) {
+        String sql = "SELECT is_closed FROM ec_anc_register WHERE base_entity_id = '" + baseEntityId + "'";
+
+        DataMap<Integer> dataMap = cursor -> getCursorIntValue(cursor, "is_closed");
+
+        List<Integer> res = readData(sql, dataMap);
+        //if new case register would be empty
+        //if active the is_closed would be 0
+        //if inactive the is_closed would be 1
+        if (res == null || res.size() < 1)
+            return false;
+        return res.get(0) == 1;
+    }
+
+    public static void cleanAncDataForClient(String baseEntityId) {
+        String cleanANCRegisterSql = "DELETE FROM ec_anc_register WHERE base_entity_id = '" + baseEntityId + "'";
+        updateDB(cleanANCRegisterSql);
+
+        String cleanANCFollowupsSql = "DELETE FROM ec_anc_followup WHERE entity_id = '" + baseEntityId + "'";
+        updateDB(cleanANCFollowupsSql);
+    }
+
+    public static void incrementPregnancyNumber(String baseEntityId) {
+        //increment pregnancy_number by one
+        String updatePregnancyNumberSql = "" +
+                "UPDATE ec_anc_pregnancy_lookup SET pregnancy_number = " +
+                "CASE " +
+                "   WHEN pregnancy_number IS NULL " +
+                "       THEN 1 " +
+                "   ELSE  pregnancy_number + 1 " +
+                "   END " +
+                "WHERE base_entity_id = '" + baseEntityId + "'";
+        updateDB(updatePregnancyNumberSql);
+    }
+
 }
