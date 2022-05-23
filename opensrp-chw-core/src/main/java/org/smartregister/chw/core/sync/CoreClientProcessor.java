@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.anc.util.DBConstants;
 import org.smartregister.chw.anc.util.NCUtils;
 import org.smartregister.chw.core.application.CoreChwApplication;
+import org.smartregister.chw.core.dao.AncDao;
 import org.smartregister.chw.core.dao.ChildDao;
 import org.smartregister.chw.core.dao.ChwNotificationDao;
 import org.smartregister.chw.core.dao.EventDao;
@@ -327,6 +328,11 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case CoreConstants.EventType.MOTHER_CHAMPION_SBCC:
                 processSBCCEvent(eventClient.getEvent());
                 break;
+            case CoreConstants.EventType.ANC_PREGNANCY_CONFIRMATION:
+            case CoreConstants.EventType.ANC_REGISTRATION:
+            case CoreConstants.EventType.ANC_FOLLOWUP_CLIENT_FOLLOWUP:
+                processAncRegistrationEvent(eventClient, clientClassification);
+                break;
             default:
                 if (eventClient.getClient() != null) {
                     if (eventType.equals(CoreConstants.EventType.UPDATE_FAMILY_RELATIONS) && event.getEntityType().equalsIgnoreCase(CoreConstants.TABLE_NAME.FAMILY_MEMBER)) {
@@ -336,6 +342,19 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
                 break;
         }
+    }
+
+    private void processAncRegistrationEvent(EventClient eventClient, ClientClassification clientClassification) throws Exception{
+        String baseEntityId = eventClient.getClient().getBaseEntityId();
+        if (eventClient.getClient() == null) {
+            return;
+        }
+        if(AncDao.isRestartAncCase(baseEntityId)){
+            AncDao.cleanAncDataForClient(baseEntityId);
+            AncDao.incrementPregnancyNumber(baseEntityId);
+        }
+        processVisitEvent(eventClient);
+        processEvent(eventClient.getEvent(), eventClient.getClient(), clientClassification);
     }
 
     public void processDeleteEvent(Event event) {
