@@ -151,6 +151,12 @@ public class AncDao extends AlertDao {
 
         String cleanANCFollowupsSql = "DELETE FROM ec_anc_followup WHERE entity_id = '" + baseEntityId + "'";
         updateDB(cleanANCFollowupsSql);
+
+        String cleanANCFacilityVisits = "DELETE " +
+                " FROM visits " +
+                " WHERE base_entity_id = '" + baseEntityId + "' " +
+                "  AND (visit_type = 'ANC First Facility Visit' OR visit_type = 'ANC Recurring Facility Visit')";
+        updateDB(cleanANCFacilityVisits);
     }
 
     public static void incrementPregnancyNumber(String baseEntityId) {
