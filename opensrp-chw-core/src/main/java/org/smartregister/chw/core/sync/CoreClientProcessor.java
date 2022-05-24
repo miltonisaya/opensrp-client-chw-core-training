@@ -345,10 +345,10 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     }
 
     private void processAncRegistrationEvent(EventClient eventClient, ClientClassification clientClassification) throws Exception{
-        String baseEntityId = eventClient.getClient().getBaseEntityId();
         if (eventClient.getClient() == null) {
             return;
         }
+        String baseEntityId = eventClient.getClient().getBaseEntityId();
         if(AncDao.isRestartAncCase(baseEntityId)){
             AncDao.cleanAncDataForClient(baseEntityId);
             AncDao.incrementPregnancyNumber(baseEntityId);
