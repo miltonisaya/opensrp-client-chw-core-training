@@ -200,8 +200,9 @@ public class CoreConstants {
         public static final String ANC_PARTNER_COMMUNITY_FOLLOWUP_FEEDBACK = "ANC Partner Community Followup Feedback";
         public static final String PMTCT_COMMUNITY_FOLLOWUP = "PMTCT Community Followup";
         public static final String CLOSE_PMTCT_FEEDBACK = "Close PMTCT Feedback";
-
         public static final String MOTHER_CHAMPION_SBCC = "Mother Champion SBCC Sessions";
+        public static final String HIV_REGISTRATION = "HIV Registration";
+        public static final String CBHS_REGISTRATION = "CBHS Registration";
     }
 
     public static final class EncounterType {
