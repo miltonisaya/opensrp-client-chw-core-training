@@ -13,6 +13,7 @@ import org.smartregister.chw.core.dao.AncDao;
 import org.smartregister.chw.core.dao.ChildDao;
 import org.smartregister.chw.core.dao.ChwNotificationDao;
 import org.smartregister.chw.core.dao.EventDao;
+import org.smartregister.chw.core.dao.CoreHivDao;
 import org.smartregister.chw.core.dao.SbccDao;
 import org.smartregister.chw.core.domain.MonthlyTally;
 import org.smartregister.chw.core.domain.StockUsage;
@@ -333,6 +334,10 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case CoreConstants.EventType.ANC_FOLLOWUP_CLIENT_FOLLOWUP:
                 processAncRegistrationEvent(eventClient, clientClassification);
                 break;
+            case CoreConstants.EventType.HIV_REGISTRATION:
+            case CoreConstants.EventType.CBHS_REGISTRATION:
+                processHivRegistrationEvent(eventClient, clientClassification);
+                break;
             default:
                 if (eventClient.getClient() != null) {
                     if (eventType.equals(CoreConstants.EventType.UPDATE_FAMILY_RELATIONS) && event.getEntityType().equalsIgnoreCase(CoreConstants.TABLE_NAME.FAMILY_MEMBER)) {
@@ -342,6 +347,19 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
                 break;
         }
+    }
+
+    private void processHivRegistrationEvent(EventClient eventClient, ClientClassification clientClassification) throws Exception{
+        if (eventClient.getClient() == null) {
+            return;
+        }
+        String baseEntityId = eventClient.getClient().getBaseEntityId();
+        if(CoreHivDao.isHivMember(baseEntityId)){
+            //this deletes from ec_hiv_register, ec_cbhs_register, ec_hiv_outcome if the client was initially tested negative and now re-registering
+            CoreHivDao.cleanAncDataForClient(baseEntityId);
+        }
+        processEvent(eventClient.getEvent(), eventClient.getClient(), clientClassification);
+        processVisitEvent(eventClient);
     }
 
     private void processAncRegistrationEvent(EventClient eventClient, ClientClassification clientClassification) throws Exception{
