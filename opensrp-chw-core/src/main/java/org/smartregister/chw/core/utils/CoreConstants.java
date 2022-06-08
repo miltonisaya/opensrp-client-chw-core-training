@@ -868,6 +868,7 @@ public class CoreConstants {
         public static final String MOTHER_CHAMPION = "ec_mother_champion";
         public static final String HEI = "ec_hei";
         public static final String LABOUR_AND_DELIVERY = "ec_ld_confirmation";
+        public static final String LTFU_REFERRALS = "ec_ltfu_referrals";
     }
 
     public static final class INTENT_KEY {
@@ -923,6 +924,7 @@ public class CoreConstants {
         public static final String CBHS_CLIENTS = "CBHS Clients";
         public static final String HEI = "HEI";
         public static final String REPORTS = "Reports";
+        public static final String LTFU = "LTFU Referrals";
     }
 
     public static final class RULE_FILE {
@@ -1170,6 +1172,7 @@ public class CoreConstants {
         public static final String MOTHER_CHAMPION_ACTIVITY = "MOTHER_CHAMPION_ACTIVITY";
         public static final String REPORTS = "REPORTS_ACTIVITY";
         public static final String LD = "L&D_REGISTER_ACTIVITY";
+        public static final String LTFU_REFERRALS_REGISTER_ACTIVITY = "LTFU_REFERRALS_REGISTER_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {
