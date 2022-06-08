@@ -783,6 +783,7 @@
     <!--L&D Titles -->
     <string name="menu_ld">L&amp;D</string>
     <string name="ld_registration">L&amp;D Registration</string>
+    <string name="menu_ltfu">LTFU</string>
 
 </resources>
 

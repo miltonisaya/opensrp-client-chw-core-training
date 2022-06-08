@@ -448,4 +448,5 @@
     <!--    TB Register-->
     <string name="tb_register">Registre TB</string>
     <string name="routine_tb_visit"> · Visite de routine en tuberculose</string>
+    <string name="menu_ltfu">LTFU</string>
 </resources>

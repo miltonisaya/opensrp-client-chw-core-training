@@ -65,6 +65,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         tableMap.put(CoreConstants.DrawerMenu.MOTHER_CHAMPION, CoreConstants.TABLE_NAME.MOTHER_CHAMPION);
         tableMap.put(CoreConstants.DrawerMenu.HEI, CoreConstants.TABLE_NAME.HEI);
         tableMap.put(CoreConstants.DrawerMenu.LD, CoreConstants.TABLE_NAME.LABOUR_AND_DELIVERY);
+        tableMap.put(CoreConstants.DrawerMenu.LTFU, CoreConstants.TABLE_NAME.LTFU_REFERRALS);
     }
 
     public HashMap<String, String> getTableMap() {
