@@ -8,10 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.vijay.jsonwizard.constants.JsonFormConstants;
 import com.vijay.jsonwizard.domain.Form;
 
@@ -22,16 +18,17 @@ import org.smartregister.chw.anc.util.VisitUtils;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.contract.CoreHivProfileContract;
 import org.smartregister.chw.core.contract.FamilyProfileExtendedContract;
+import org.smartregister.chw.core.dataloader.CoreFamilyMemberDataLoader;
+import org.smartregister.chw.core.form_data.NativeFormsDataBinder;
 import org.smartregister.chw.core.interactor.CoreHivProfileInteractor;
 import org.smartregister.chw.core.presenter.CoreHivProfilePresenter;
 import org.smartregister.chw.core.rule.HivFollowupRule;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.HomeVisitUtil;
+import org.smartregister.chw.core.utils.UpdateDetailsUtil;
 import org.smartregister.chw.hiv.activity.BaseHivProfileActivity;
 import org.smartregister.chw.hiv.dao.HivDao;
-import org.smartregister.chw.hiv.dao.HivIndexDao;
-import org.smartregister.chw.hiv.domain.HivIndexContactObject;
 import org.smartregister.chw.hiv.domain.HivMemberObject;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -40,12 +37,15 @@ import org.smartregister.family.contract.FamilyProfileContract;
 import org.smartregister.family.domain.FamilyEventClient;
 import org.smartregister.family.interactor.FamilyProfileInteractor;
 import org.smartregister.family.model.BaseFamilyProfileModel;
+import org.smartregister.family.util.DBConstants;
 import org.smartregister.family.util.JsonFormUtils;
 import org.smartregister.family.util.Utils;
 
 import java.util.Date;
-import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -53,6 +53,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
 import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 import static org.smartregister.chw.hiv.util.Constants.ActivityPayload.HIV_MEMBER_OBJECT;
 
@@ -105,7 +106,14 @@ public abstract class CoreHivProfileActivity extends BaseHivProfileActivity impl
             return true;
         } else if (itemId == R.id.action_registration) {
             startFormForEdit(R.string.registration_info,
-                    CoreConstants.JSON_FORM.getFamilyMemberRegister());
+                    CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+            return true;
+        } else if (itemId == R.id.action_location_info) {
+            JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
+                    CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
+                    UpdateDetailsUtil.getFamilyRegistrationDetails(getHivMemberObject().getFamilyBaseEntityId()), Utils.metadata().familyRegister.updateEventType);
+            if (preFilledForm != null)
+                UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
         }
 
@@ -200,18 +208,36 @@ public abstract class CoreHivProfileActivity extends BaseHivProfileActivity impl
         } else if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
             form = CoreJsonFormUtils.getAutoJsonEditAncFormString(
                     getHivMemberObject().getBaseEntityId(), this, formName, org.smartregister.chw.hiv.util.Constants.EventType.REGISTRATION, getResources().getString(titleResource));
+        } else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm())) {
+            String titleString = titleResource != null ? getResources().getString(titleResource) : null;
+            CommonPersonObjectClient commonPersonObjectClient = UpdateDetailsUtil.getFamilyRegistrationDetails(getHivMemberObject().getFamilyBaseEntityId());
+            String uniqueID = commonPersonObjectClient.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
+            boolean isPrimaryCareGiver = commonPersonObjectClient.getCaseId().equalsIgnoreCase(getHivMemberObject().getPrimaryCareGiver());
+
+            NativeFormsDataBinder binder = new NativeFormsDataBinder(getContext(), getHivMemberObject().getBaseEntityId());
+            binder.setDataLoader(new CoreFamilyMemberDataLoader(getHivMemberObject().getFamilyName(), isPrimaryCareGiver, titleString,
+                    org.smartregister.chw.core.utils.Utils.metadata().familyMemberRegister.updateEventType, uniqueID));
+            JSONObject jsonObject = binder.getPrePopulatedForm(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+
+            try {
+                if (jsonObject != null) {
+                    UpdateDetailsUtil.startUpdateClientDetailsActivity(jsonObject, this);
+                }
+            } catch (Exception e) {
+                Timber.e(e);
+            }
         }
 
         try {
             assert form != null;
-            startFormActivity(form, getHivMemberObject(), titleResource != null ? getResources().getString(titleResource): null);
+            startFormActivity(form, getHivMemberObject(), titleResource != null ? getResources().getString(titleResource) : null);
         } catch (Exception e) {
             Timber.e(e);
         }
     }
 
     @Override
-    public void startFormActivity(JSONObject formJson, HivMemberObject hivMemberObject,String formName) {
+    public void startFormActivity(JSONObject formJson, HivMemberObject hivMemberObject, String formName) {
         Intent intent = org.smartregister.chw.core.utils.Utils.formActivityIntent(this, formJson.toString());
         intent.putExtra(HIV_MEMBER_OBJECT, hivMemberObject);
 
