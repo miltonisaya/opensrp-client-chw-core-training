@@ -34,6 +34,7 @@ import org.smartregister.chw.core.presenter.CoreAncMemberProfilePresenter;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.HomeVisitUtil;
+import org.smartregister.chw.core.utils.UpdateDetailsUtil;
 import org.smartregister.chw.core.utils.VisitSummary;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.domain.AlertStatus;
@@ -47,6 +48,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
+import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
 import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
 import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 
@@ -71,9 +73,17 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
             onBackPressed();
             return true;
         } else if (itemId == R.id.action_anc_member_registration) {
-            startFormForEdit(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getFamilyMemberRegister());
+            startFormForEdit(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
             return true;
-        } else if (itemId == R.id.action_anc_registration) {
+        } else if(itemId == R.id.action_location_info){
+            JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
+                    CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
+                    UpdateDetailsUtil.getFamilyRegistrationDetails(memberObject.getFamilyBaseEntityId()), Utils.metadata().familyRegister.updateEventType);
+            if (preFilledForm != null)
+                UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
+            return true;
+        }
+        else if (itemId == R.id.action_anc_registration) {
             startFormForEdit(R.string.edit_anc_registration_form_title, CoreConstants.JSON_FORM.getAncRegistration());
             return true;
         } else if (itemId == R.id.anc_danger_signs_outcome) {
@@ -218,7 +228,7 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
             getLayoutVisibility();
 
         } else if (visitStatus.equalsIgnoreCase(CoreConstants.VISIT_STATE.DUE)) {
-            textview_record_anc_visit.setBackgroundResource(R.drawable.record_btn_anc_selector);
+            //textview_record_anc_visit.setBackgroundResource(R.drawable.record_btn_anc_selector);
             getLayoutVisibility();
         } else if (visitStatus.equalsIgnoreCase(CoreConstants.VISIT_STATE.NOT_VISIT_THIS_MONTH)) {
             textViewUndo.setVisibility(View.VISIBLE);
@@ -245,8 +255,8 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
                     String monthString = (String) DateFormat.format("MMMM", date);
                     layoutRecordView.setVisibility(View.GONE);
                     tvEdit.setVisibility(View.VISIBLE);
-                    textViewNotVisitMonth.setText(getContext().getString(R.string.anc_visit_done, monthString));
-                    imageViewCross.setImageResource(R.drawable.activityrow_visited);
+                    //textViewNotVisitMonth.setText(getContext().getString(R.string.anc_visit_done, monthString));
+                   // imageViewCross.setImageResource(R.drawable.activityrow_visited);
                 } else {
                     record_reccuringvisit_done_bar.setVisibility(View.VISIBLE);
                     layoutNotRecordView.setVisibility(View.GONE);

@@ -9,10 +9,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import org.json.JSONObject;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.chw.anc.util.NCUtils;
@@ -26,6 +22,7 @@ import org.smartregister.chw.core.presenter.CorePncMemberProfilePresenter;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.MalariaFollowUpStatusTaskUtil;
+import org.smartregister.chw.core.utils.UpdateDetailsUtil;
 import org.smartregister.chw.malaria.dao.MalariaDao;
 import org.smartregister.chw.pnc.activity.BasePncMemberProfileActivity;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -37,8 +34,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import timber.log.Timber;
 
+import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
 import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
 import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 
@@ -52,6 +53,10 @@ public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileA
     protected RecyclerView notificationAndReferralRecyclerView;
     protected RelativeLayout notificationAndReferralLayout;
 
+    protected static CommonPersonObjectClient getClientDetailsByBaseEntityID(@NonNull String baseEntityId) {
+        return getCommonPersonObjectClient(baseEntityId);
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
@@ -60,6 +65,13 @@ public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileA
             return true;
         } else if (itemId == R.id.action_pnc_member_registration) {
             startActivityForResult(getPNCIntent(), JsonFormUtils.REQUEST_CODE_GET_JSON);
+            return true;
+        } else if (itemId == R.id.action_location_info) {
+            JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
+                    CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
+                    UpdateDetailsUtil.getFamilyRegistrationDetails(memberObject.getFamilyBaseEntityId()), org.smartregister.family.util.Utils.metadata().familyRegister.updateEventType);
+            if (preFilledForm != null)
+                UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
         } else if (itemId == R.id.action_pnc_registration) {
             getEditMenuItem(item);
@@ -72,12 +84,10 @@ public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileA
         } else if (itemId == R.id.action_fp_initiation_pnc) {
             startFpRegister();
             return true;
-        }
-        else if (itemId == R.id.action_cbhs_registration) {
+        } else if (itemId == R.id.action_cbhs_registration) {
             startHivRegister();
             return true;
-        }
-        else if (itemId == R.id.action_hiv_registration) {
+        } else if (itemId == R.id.action_hiv_registration) {
             startHivRegister();
             return true;
         } else if (itemId == R.id.action_tb_registration) {
@@ -95,21 +105,16 @@ public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileA
         } else if (itemId == R.id.action__pnc_danger_sign_outcome) {
             getPncMemberProfilePresenter().startPncDangerSignsOutcomeForm();
             return true;
-        }
-        else if(itemId == R.id.action_malaria_diagnosis){
+        } else if (itemId == R.id.action_malaria_diagnosis) {
             startHfMalariaFollowupForm();
-            return  true;
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    protected Intent getPNCIntent(){
-        JSONObject form = CoreJsonFormUtils.getAncPncForm(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getFamilyMemberRegister(), memberObject, this);
+    protected Intent getPNCIntent() {
+        JSONObject form = CoreJsonFormUtils.getAncPncForm(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm(), memberObject, this);
         return CoreJsonFormUtils.getAncPncStartFormIntent(form, this);
-    }
-
-    protected static CommonPersonObjectClient getClientDetailsByBaseEntityID(@NonNull String baseEntityId) {
-        return getCommonPersonObjectClient(baseEntityId);
     }
 
     @Override
