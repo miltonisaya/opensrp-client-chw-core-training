@@ -212,7 +212,7 @@ public abstract class CoreHivProfileActivity extends BaseHivProfileActivity impl
             String titleString = titleResource != null ? getResources().getString(titleResource) : null;
             CommonPersonObjectClient commonPersonObjectClient = UpdateDetailsUtil.getFamilyRegistrationDetails(getHivMemberObject().getFamilyBaseEntityId());
             String uniqueID = commonPersonObjectClient.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
-            boolean isPrimaryCareGiver = commonPersonObjectClient.getCaseId().equalsIgnoreCase(getHivMemberObject().getPrimaryCareGiver());
+            boolean isPrimaryCareGiver = commonPersonObjectClient.getCaseId().equalsIgnoreCase(getHivMemberObject().getFamilyBaseEntityId());
 
             NativeFormsDataBinder binder = new NativeFormsDataBinder(getContext(), getHivMemberObject().getBaseEntityId());
             binder.setDataLoader(new CoreFamilyMemberDataLoader(getHivMemberObject().getFamilyName(), isPrimaryCareGiver, titleString,
