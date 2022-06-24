@@ -14,6 +14,7 @@ import org.smartregister.opd.activity.BaseOpdFormActivity;
 import org.smartregister.opd.utils.OpdConstants;
 
 import static org.smartregister.chw.core.utils.CoreReferralUtils.getCommonRepository;
+import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
 
 public class UpdateDetailsUtil {
     @NotNull
@@ -40,5 +41,12 @@ public class UpdateDetailsUtil {
         form.setWizard(false);
         intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, form);
         activity.startActivityForResult(intent, org.smartregister.family.util.JsonFormUtils.REQUEST_CODE_GET_JSON);
+    }
+
+    /** Use this for ANC and PNC Member profile to get FamilyBaseEntityID
+     * @param client  commonPersonObject client
+     * @return familyBaseEntityId */
+    public static String getFamilyBaseEntityId(CommonPersonObjectClient client){
+        return org.smartregister.util.Utils.getValue(client.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.RELATIONAL_ID, false);
     }
 }

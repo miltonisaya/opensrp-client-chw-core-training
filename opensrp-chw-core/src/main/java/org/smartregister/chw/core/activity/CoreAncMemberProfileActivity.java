@@ -50,6 +50,7 @@ import java.util.Set;
 
 
 import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
+import static org.smartregister.chw.core.utils.UpdateDetailsUtil.getFamilyBaseEntityId;
 import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
 import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 
@@ -79,7 +80,7 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
         } else if(itemId == R.id.action_location_info){
             JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
                     CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
-                    UpdateDetailsUtil.getFamilyRegistrationDetails(getFamilyBaseEntityId()), Utils.metadata().familyRegister.updateEventType);
+                    UpdateDetailsUtil.getFamilyRegistrationDetails(getFamilyBaseEntityId(getCommonPersonObjectClient(memberObject.getBaseEntityId()))), Utils.metadata().familyRegister.updateEventType);
             if (preFilledForm != null)
                 UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
@@ -96,10 +97,6 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
         return super.onOptionsItemSelected(item);
     }
 
-    protected String getFamilyBaseEntityId(){
-        CommonPersonObjectClient client = getCommonPersonObjectClient(memberObject.getBaseEntityId());
-        return org.smartregister.util.Utils.getValue(client.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.RELATIONAL_ID, false);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
