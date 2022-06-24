@@ -12,6 +12,7 @@
     <item android:id="@+id/action_location_info"
         android:enabled="true"
         android:title="@string/location_info"
+        android:orderInCategory="100"
         app:showAsAction="never"/>
 
     <item
