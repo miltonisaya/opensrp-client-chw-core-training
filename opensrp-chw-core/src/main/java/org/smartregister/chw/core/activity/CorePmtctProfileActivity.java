@@ -132,6 +132,7 @@ public abstract class CorePmtctProfileActivity extends BasePmtctProfileActivity 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.pmtct_profile_menu, menu);
+        menu.findItem(R.id.action_location_info).setVisible(UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId()));
         return true;
     }
 

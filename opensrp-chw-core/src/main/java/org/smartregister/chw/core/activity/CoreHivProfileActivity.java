@@ -123,6 +123,7 @@ public abstract class CoreHivProfileActivity extends BaseHivProfileActivity impl
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.hiv_profile_menu, menu);
+        menu.findItem(R.id.action_location_info).setVisible(UpdateDetailsUtil.isIndependentClient(getHivMemberObject().getBaseEntityId()));
         return true;
     }
 

@@ -101,6 +101,7 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.anc_member_profile_menu, menu);
+        menu.findItem(R.id.action_location_info).setVisible(UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId()));
         return true;
     }
 
