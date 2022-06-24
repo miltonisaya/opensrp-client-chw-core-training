@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 import org.smartregister.commonregistry.CommonPersonObject;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
+import org.smartregister.family.util.DBConstants;
 import org.smartregister.opd.activity.BaseOpdFormActivity;
 import org.smartregister.opd.utils.OpdConstants;
 
@@ -48,5 +49,15 @@ public class UpdateDetailsUtil {
      * @return familyBaseEntityId */
     public static String getFamilyBaseEntityId(CommonPersonObjectClient client){
         return org.smartregister.util.Utils.getValue(client.getColumnmaps(), org.smartregister.family.util.DBConstants.KEY.RELATIONAL_ID, false);
+    }
+
+    /** Use this to determine if client is independent, family members won't have the location info option menu
+     * @param baseEntityId  baseEntityId
+     * @return true if client is independent and false if its a family member */
+    public static boolean isIndependentClient(String baseEntityId){
+        final CommonPersonObject personObject = getCommonRepository(Utils.metadata().familyMemberRegister.tableName)
+                .findByBaseEntityId(baseEntityId);
+        String entityType = org.smartregister.util.Utils.getValue(personObject.getColumnmaps(), DBConstants.KEY.ENTITY_TYPE, false);
+        return entityType.equalsIgnoreCase("ec_independent_client");
     }
 }
