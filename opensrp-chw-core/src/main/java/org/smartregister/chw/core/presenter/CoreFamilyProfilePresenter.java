@@ -2,7 +2,6 @@ package org.smartregister.chw.core.presenter;
 
 import android.content.Context;
 import android.util.Pair;
-import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
