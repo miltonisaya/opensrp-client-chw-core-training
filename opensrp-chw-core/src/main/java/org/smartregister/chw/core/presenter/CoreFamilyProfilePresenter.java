@@ -2,9 +2,11 @@ package org.smartregister.chw.core.presenter;
 
 import android.content.Context;
 import android.util.Pair;
+import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.application.CoreChwApplication;
@@ -23,6 +25,7 @@ import org.smartregister.chw.core.utils.ChwDBConstants;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.CoreJsonFormUtils;
 import org.smartregister.chw.core.utils.Utils;
+import org.smartregister.chw.referral.util.JsonFormConstants;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
 import org.smartregister.clientandeventmodel.Obs;
@@ -76,7 +79,13 @@ public abstract class CoreFamilyProfilePresenter extends BaseFamilyProfilePresen
     @Override
     public void startFormForEdit(CommonPersonObjectClient client) {
         JSONObject form = CoreJsonFormUtils.getAutoPopulatedJsonEditFormString(CoreConstants.JSON_FORM.getFamilyDetailsRegister(), getView().getApplicationContext(), client, Utils.metadata().familyRegister.updateEventType);
+
         try {
+            JSONArray fields = form.getJSONObject(JsonFormConstants.STEP1).getJSONArray(JsonFormConstants.FIELDS);
+            JSONObject fam_name = org.smartregister.util.JsonFormUtils.getFieldJSONObject(fields, "fam_name");
+            if(fam_name != null) {
+                fam_name.put("type", "edit_text");
+            }
             getView().startFormActivity(form);
         } catch (Exception e) {
             Timber.e(e);
