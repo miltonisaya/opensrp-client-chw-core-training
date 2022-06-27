@@ -92,9 +92,13 @@ public abstract class CoreHivIndexContactProfileActivity extends BaseIndexContac
             onBackPressed();
             return true;
         } else if (itemId == R.id.action_registration) {
-            startFormForEdit(R.string.registration_info,
-                    CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
-            return true;
+            if (UpdateDetailsUtil.isIndependentClient(getHivIndexContactObject().getBaseEntityId())) {
+                startFormForEdit(R.string.registration_info,
+                        CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+            } else {
+                startFormForEdit(R.string.edit_member_form_title,
+                        CoreConstants.JSON_FORM.getFamilyMemberRegister());
+            }
         } else if (itemId == R.id.action_location_info) {
             JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
                     CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,

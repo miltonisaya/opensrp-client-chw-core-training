@@ -75,7 +75,13 @@ public abstract class CoreAncMemberProfileActivity extends BaseAncMemberProfileA
             onBackPressed();
             return true;
         } else if (itemId == R.id.action_anc_member_registration) {
-            startFormForEdit(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+            if (UpdateDetailsUtil.isIndependentClient(baseEntityID)) {
+                startFormForEdit(R.string.registration_info,
+                        CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+            } else {
+                startFormForEdit(R.string.edit_member_form_title,
+                        CoreConstants.JSON_FORM.getFamilyMemberRegister());
+            }
             return true;
         } else if(itemId == R.id.action_location_info){
             JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(

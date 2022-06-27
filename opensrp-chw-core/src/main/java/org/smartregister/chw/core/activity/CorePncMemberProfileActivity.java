@@ -113,7 +113,13 @@ public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileA
     }
 
     protected Intent getPNCIntent() {
-        JSONObject form = CoreJsonFormUtils.getAncPncForm(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm(), memberObject, this);
+        JSONObject form;
+        if(UpdateDetailsUtil.isIndependentClient(baseEntityID)){
+            form = CoreJsonFormUtils.getAncPncForm(R.string.registration_info, CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm(), memberObject, this);
+        }
+        else {
+             form = CoreJsonFormUtils.getAncPncForm(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getFamilyMemberRegister(), memberObject, this);
+        }
         return CoreJsonFormUtils.getAncPncStartFormIntent(form, this);
     }
 

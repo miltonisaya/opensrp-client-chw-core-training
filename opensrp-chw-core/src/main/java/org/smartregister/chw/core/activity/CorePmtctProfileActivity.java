@@ -112,8 +112,13 @@ public abstract class CorePmtctProfileActivity extends BasePmtctProfileActivity 
             onBackPressed();
             return true;
         } else if (itemId == R.id.action_registration) {
-            startFormForEdit(R.string.registration_info,
-                    CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+            if (UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId())) {
+                startFormForEdit(R.string.registration_info,
+                        CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+            } else {
+                startFormForEdit(R.string.edit_member_form_title,
+                        CoreConstants.JSON_FORM.getFamilyMemberRegister());
+            }
             return true;
         } else if (itemId == R.id.action_location_info) {
             JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
