@@ -863,7 +863,7 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
 
             NativeFormsDataBinder binder = new NativeFormsDataBinder(context, memberObject.getBaseEntityId());
             binder.setDataLoader(new CoreFamilyMemberDataLoader(memberObject.getFamilyName(), isPrimaryCareGiver, titleString,
-                    org.smartregister.chw.core.utils.Utils.metadata().familyMemberRegister.updateEventType, uniqueID));
+                    Utils.metadata().familyMemberRegister.updateEventType, uniqueID));
             JSONObject jsonObject = binder.getPrePopulatedForm(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
 
             try {
