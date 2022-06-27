@@ -21,6 +21,7 @@ import org.smartregister.chw.core.contract.FamilyProfileExtendedContract;
 import org.smartregister.chw.core.dataloader.CoreFamilyMemberDataLoader;
 import org.smartregister.chw.core.form_data.NativeFormsDataBinder;
 import org.smartregister.chw.core.interactor.CoreHivProfileInteractor;
+import org.smartregister.chw.core.model.CoreAllClientsMemberModel;
 import org.smartregister.chw.core.presenter.CoreHivProfilePresenter;
 import org.smartregister.chw.core.rule.HivFollowupRule;
 import org.smartregister.chw.core.utils.CoreConstants;
@@ -139,6 +140,11 @@ public abstract class CoreHivProfileActivity extends BaseHivProfileActivity impl
                         if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(Utils.metadata().familyMemberRegister.updateEventType)) {
                             FamilyEventClient familyEventClient =
                                     new BaseFamilyProfileModel(getHivMemberObject().getFamilyName()).processUpdateMemberRegistration(jsonString, getHivMemberObject().getBaseEntityId());
+                            new FamilyProfileInteractor().saveRegistration(familyEventClient, jsonString, true, (FamilyProfileContract.InteractorCallBack) getHivProfilePresenter());
+                        }
+                        if (form.getString(JsonFormUtils.ENCOUNTER_TYPE).equals(Utils.metadata().familyRegister.updateEventType)) {
+                            FamilyEventClient familyEventClient = new CoreAllClientsMemberModel().processJsonForm(jsonString, getHivMemberObject().getFamilyBaseEntityId());
+                            familyEventClient.getEvent().setEntityType(CoreConstants.TABLE_NAME.INDEPENDENT_CLIENT);
                             new FamilyProfileInteractor().saveRegistration(familyEventClient, jsonString, true, (FamilyProfileContract.InteractorCallBack) getHivProfilePresenter());
                         }
                     } catch (Exception e) {
