@@ -1,5 +1,6 @@
 package org.smartregister.chw.core.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,7 +22,9 @@ import org.json.JSONObject;
 import org.smartregister.chw.anc.domain.MemberObject;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.application.CoreChwApplication;
+import org.smartregister.chw.core.dataloader.CoreFamilyMemberDataLoader;
 import org.smartregister.chw.core.domain.FamilyMember;
+import org.smartregister.chw.core.form_data.NativeFormsDataBinder;
 import org.smartregister.clientandeventmodel.Address;
 import org.smartregister.clientandeventmodel.Client;
 import org.smartregister.clientandeventmodel.Event;
@@ -850,6 +853,26 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
                     (title_resource != null) ? context.getResources().getString(title_resource) : null,
                     CoreConstants.JSON_FORM.getFamilyMemberRegister(),
                     context, client, Utils.metadata().familyMemberRegister.updateEventType, memberObject.getFamilyName(), isPrimaryCareGiver);
+        }
+        else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm())) {
+            String titleString = title_resource != null ? context.getResources().getString(title_resource) : null;
+            String familyBaseEntityId = UpdateDetailsUtil.getFamilyBaseEntityId(client);
+            CommonPersonObjectClient commonPersonObjectClient = UpdateDetailsUtil.getFamilyRegistrationDetails(familyBaseEntityId);
+            String uniqueID = commonPersonObjectClient.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
+
+
+            NativeFormsDataBinder binder = new NativeFormsDataBinder(context, memberObject.getBaseEntityId());
+            binder.setDataLoader(new CoreFamilyMemberDataLoader(memberObject.getFamilyName(), isPrimaryCareGiver, titleString,
+                    Utils.metadata().familyMemberRegister.updateEventType, uniqueID));
+            JSONObject jsonObject = binder.getPrePopulatedForm(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm());
+
+            try {
+                if (jsonObject != null) {
+                    UpdateDetailsUtil.startUpdateClientDetailsActivity(jsonObject, (Activity) context);
+                }
+            } catch (Exception e) {
+                Timber.e(e);
+            }
         }
         return form;
     }
