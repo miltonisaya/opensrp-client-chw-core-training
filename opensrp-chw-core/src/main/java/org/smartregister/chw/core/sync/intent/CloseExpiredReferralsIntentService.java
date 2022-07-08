@@ -100,6 +100,11 @@ public class CloseExpiredReferralsIntentService extends IntentService {
                         }
                         checkIfExpired(expiredCalendar, task);
                         break;
+                    case TASKS_FOCUS.LTFU:
+                        expiredCalendar.setTimeInMillis(Long.parseLong(startDate));
+                        expiredCalendar.add(Calendar.DAY_OF_MONTH, 30);
+                        checkIfExpired(expiredCalendar, task);
+                        break;
                     default:
                         if (appointmentDate != null && !appointmentDate.isEmpty()) {
                             try{
