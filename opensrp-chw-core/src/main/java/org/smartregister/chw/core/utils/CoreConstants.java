@@ -1197,6 +1197,8 @@ public class CoreConstants {
         public static final String SUSPECTED_GBV = "Suspected GBV";
         public static final String SUSPECTED_CHILD_GBV = "Suspected Child GBV";
         public static final String ANC_MALE_ENGAGEMENT = "ANC Male engagement";
+        public static final String LTFU = "LTFU";
+        public static final String LTFU_FEEDBACK= "LTFU Community Followup Feedback";
     }
 
     public static final class REGISTER_TYPE {
