@@ -9,6 +9,7 @@ import org.jeasy.rules.core.DefaultRulesEngine;
 import org.jeasy.rules.core.InferenceRulesEngine;
 import org.jeasy.rules.core.RulesEngineParameters;
 import org.jeasy.rules.mvel.MVELRuleFactory;
+import org.jeasy.rules.support.YamlRuleDefinitionReader;
 import org.smartregister.chw.core.rule.HeiFollowupRule;
 import org.smartregister.chw.core.rule.HivFollowupRule;
 import org.smartregister.chw.core.rule.ICommonRule;
@@ -35,6 +36,7 @@ public class RulesEngineHelper {
     private RulesEngine inferentialRulesEngine;
     private RulesEngine defaultRulesEngine;
     private Map<String, Rules> ruleMap;
+    private MVELRuleFactory mvelRuleFactory;
 
     public RulesEngineHelper(Context context) {
         this.context = context;
@@ -42,6 +44,7 @@ public class RulesEngineHelper {
         RulesEngineParameters parameters = new RulesEngineParameters().skipOnFirstAppliedRule(true);
         this.defaultRulesEngine = new DefaultRulesEngine(parameters);
         this.ruleMap = new HashMap<>();
+        this.mvelRuleFactory = new MVELRuleFactory(new YamlRuleDefinitionReader());
 
     }
 
@@ -75,7 +78,7 @@ public class RulesEngineHelper {
 
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(context.getAssets().open(fileName)));
                 try {
-                    ruleMap.put(fileName, MVELRuleFactory.createRulesFrom(bufferedReader));
+                    ruleMap.put(fileName, mvelRuleFactory.createRules(bufferedReader));
                 } catch (Exception e) {
                     Timber.e(e);
                 }
