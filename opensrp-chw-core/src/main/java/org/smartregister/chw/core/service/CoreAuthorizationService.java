@@ -87,7 +87,9 @@ public class CoreAuthorizationService implements P2PAuthorizationService {
                         TreeNode<String, Location> currentNode = locationQueue.get(i);
                         if (!foundHighLocation && currentNode.getId().equals(highLocationId)) {
                             foundHighLocation = true;
-                        } else if (currentNode.getId().equals(lowerLocationId)) {
+                        }
+
+                        if (foundHighLocation && currentNode.getId().equals(lowerLocationId)) {
                             // If we had already found the high location, then this is TRUE
                             // Else this is FALSE, because the lower location is higher than the expected-high-location
                             return foundHighLocation;
