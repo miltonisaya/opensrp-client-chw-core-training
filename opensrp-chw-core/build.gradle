@@ -59,6 +59,18 @@ allprojects {
 
             name = "GitHubPackages"
 
+            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-core")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+
+        }
+
+        maven {
+
+            name = "GitHubPackages"
+
             url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-referral")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
@@ -250,7 +262,7 @@ dependencies {
 
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-    api('org.smartregister:opensrp-client-core:1.15.7-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-core:1.15.8-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
