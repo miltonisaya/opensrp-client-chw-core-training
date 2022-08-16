@@ -51,6 +51,7 @@
     <string name="menu_child">Child</string>
     <string name="menu_family_planning">Family Planning</string>
     <string name="menu_ltfu">LTFU</string>
+    <string name="menu_hivst">Self Testing</string>
 
     <!-- Family Register -->
     <string name="menu_malaria">Malaria</string>
