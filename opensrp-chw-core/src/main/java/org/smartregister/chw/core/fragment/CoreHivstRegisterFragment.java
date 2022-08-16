@@ -16,13 +16,12 @@ import org.smartregister.chw.anc.util.DBConstants;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
 import org.smartregister.chw.core.model.CoreHivstRegisterFragmentModel;
-import org.smartregister.chw.core.provider.CoreHivstRegisterProvider;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.QueryBuilder;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.hivst.fragment.BaseHivstRegisterFragment;
-import org.smartregister.chw.hivst.model.BaseHivstRegisterFragmentModel;
 import org.smartregister.chw.hivst.presenter.BaseHivstRegisterFragmentPresenter;
+import org.smartregister.chw.hivst.provider.BaseHivstRegisterProvider;
 import org.smartregister.commonregistry.CommonRepository;
 import org.smartregister.cursoradapter.RecyclerViewPaginatedAdapter;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
@@ -44,7 +43,7 @@ public class CoreHivstRegisterFragment extends BaseHivstRegisterFragment {
 
     @Override
     public void initializeAdapter(Set<org.smartregister.configurableviews.model.View> visibleColumns) {
-        CoreHivstRegisterProvider hivstRegisterProvider = new CoreHivstRegisterProvider(getActivity(), paginationViewHandler, registerActionHandler, visibleColumns);
+        BaseHivstRegisterProvider hivstRegisterProvider = new BaseHivstRegisterProvider(getActivity(), paginationViewHandler, registerActionHandler, visibleColumns);
         clientAdapter = new RecyclerViewPaginatedAdapter(null, hivstRegisterProvider, context().commonrepository(this.tablename));
         clientAdapter.setCurrentlimit(20);
         clientsView.setAdapter(clientAdapter);
