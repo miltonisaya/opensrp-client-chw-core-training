@@ -94,6 +94,11 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void  startHivstRegistration(){
+        //TODO implement in HF and CHW
+    }
+
+    @Override
     protected void startPncRegister() {
         //TODO implement start pnc registration
     }
