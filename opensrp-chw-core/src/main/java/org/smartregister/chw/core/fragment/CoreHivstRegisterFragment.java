@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.anc.util.DBConstants;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
+import org.smartregister.chw.core.model.CoreHivstRegisterFragmentModel;
 import org.smartregister.chw.core.provider.CoreHivstRegisterProvider;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.QueryBuilder;
@@ -112,7 +113,7 @@ public class CoreHivstRegisterFragment extends BaseHivstRegisterFragment {
         } catch (NullPointerException e) {
             Timber.e(e);
         }
-        presenter = new BaseHivstRegisterFragmentPresenter(this, new BaseHivstRegisterFragmentModel(), viewConfigurationIdentifier);
+        presenter = new BaseHivstRegisterFragmentPresenter(this, new CoreHivstRegisterFragmentModel(), viewConfigurationIdentifier);
     }
 
 
