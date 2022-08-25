@@ -1,6 +1,7 @@
 package org.smartregister.chw.core.activity;
 
 import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
+import static org.smartregister.chw.core.utils.UpdateDetailsUtil.getFamilyBaseEntityId;
 import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
 import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 
@@ -122,24 +123,30 @@ public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity 
         } else if (itemId == R.id.action_location_info) {
             JSONObject preFilledForm = getAutoPopulatedJsonEditFormString(
                     CoreConstants.JSON_FORM.getFamilyDetailsRegister(), this,
-                    UpdateDetailsUtil.getFamilyRegistrationDetails(memberObject.getFamilyBaseEntityId()), Utils.metadata().familyRegister.updateEventType);
+                    UpdateDetailsUtil.getFamilyRegistrationDetails(getFamilyBaseEntityId(getCommonPersonObjectClient(memberObject.getBaseEntityId()))), Utils.metadata().familyRegister.updateEventType);
             if (preFilledForm != null)
                 UpdateDetailsUtil.startUpdateClientDetailsActivity(preFilledForm, this);
             return true;
         }else if (itemId == R.id.action_remove_member) {
             removeMember();
             return true;
+        } else if (itemId == R.id.action_cbhs_registration || itemId == R.id.action_hiv_registration){
+            startHivServicesRegistration();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    protected abstract void startHivServicesRegistration();
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //TODO Redirect to Hivst menu
-        getMenuInflater().inflate(R.menu.pmtct_profile_menu, menu);
+        getMenuInflater().inflate(R.menu.hivst_profile_menu, menu);
         menu.findItem(R.id.action_location_info).setVisible(UpdateDetailsUtil.isIndependentClient(memberObject.getBaseEntityId()));
         return true;
     }
+    
+    
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -205,12 +212,9 @@ public abstract class CoreHivstProfileActivity extends BaseHivstProfileActivity 
                     CoreConstants.JSON_FORM.getFamilyMemberRegister(),
                     this, client,
                     Utils.metadata().familyMemberRegister.updateEventType, memberObject.getLastName(), false);
-        } else if (formName.equals(CoreConstants.JSON_FORM.getAncRegistration())) {
-            form = CoreJsonFormUtils.getAutoJsonEditAncFormString(
-                    memberObject.getBaseEntityId(), this, formName, CoreConstants.EventType.UPDATE_ANC_REGISTRATION, getResources().getString(title_resource));
         } else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm())) {
             String titleString = title_resource != null ? getResources().getString(title_resource) : null;
-            CommonPersonObjectClient commonPersonObjectClient = UpdateDetailsUtil.getFamilyRegistrationDetails(memberObject.getFamilyBaseEntityId());
+            CommonPersonObjectClient commonPersonObjectClient = UpdateDetailsUtil.getFamilyRegistrationDetails(getFamilyBaseEntityId(getCommonPersonObjectClient(memberObject.getBaseEntityId())));
             String uniqueID = commonPersonObjectClient.getColumnmaps().get(DBConstants.KEY.UNIQUE_ID);
             boolean isPrimaryCareGiver = commonPersonObjectClient.getCaseId().equalsIgnoreCase(memberObject.getFamilyBaseEntityId());
 
