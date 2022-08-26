@@ -392,6 +392,15 @@ dependencies {
         exclude group: 'com.nerdstone', module: 'neat-form-core'
     }
 
+    api('org.smartregister:opensrp-client-chw-cdp:1.0.0-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+    }
+
     api('org.smartregister:opensrp-client-chw-pmtct:1.1.0.7-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
