@@ -2,7 +2,6 @@ package org.smartregister.chw.core.fragment;
 
 import android.view.View;
 
-import org.smartregister.chw.cdp.fragment.BaseCdpRegisterFragment;
 import org.smartregister.chw.cdp.fragment.BaseOrdersRegisterFragment;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
 
