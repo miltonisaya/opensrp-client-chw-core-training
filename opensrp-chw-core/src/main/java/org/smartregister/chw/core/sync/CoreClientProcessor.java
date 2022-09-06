@@ -8,12 +8,14 @@ import net.sqlcipher.database.SQLiteDatabase;
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.anc.util.DBConstants;
 import org.smartregister.chw.anc.util.NCUtils;
+import org.smartregister.chw.cdp.CdpLibrary;
+import org.smartregister.chw.cdp.dao.CdpOrderDao;
 import org.smartregister.chw.core.application.CoreChwApplication;
 import org.smartregister.chw.core.dao.AncDao;
 import org.smartregister.chw.core.dao.ChildDao;
 import org.smartregister.chw.core.dao.ChwNotificationDao;
-import org.smartregister.chw.core.dao.EventDao;
 import org.smartregister.chw.core.dao.CoreHivDao;
+import org.smartregister.chw.core.dao.EventDao;
 import org.smartregister.chw.core.dao.SbccDao;
 import org.smartregister.chw.core.domain.MonthlyTally;
 import org.smartregister.chw.core.domain.StockUsage;
@@ -349,12 +351,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         }
     }
 
-    private void processHivRegistrationEvent(EventClient eventClient, ClientClassification clientClassification) throws Exception{
+    private void processHivRegistrationEvent(EventClient eventClient, ClientClassification clientClassification) throws Exception {
         if (eventClient.getClient() == null) {
             return;
         }
         String baseEntityId = eventClient.getClient().getBaseEntityId();
-        if(CoreHivDao.isHivMember(baseEntityId)){
+        if (CoreHivDao.isHivMember(baseEntityId)) {
             //this deletes from ec_hiv_register, ec_cbhs_register, ec_hiv_outcome if the client was initially tested negative and now re-registering
             CoreHivDao.cleanAncDataForClient(baseEntityId);
         }
@@ -362,12 +364,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         processVisitEvent(eventClient);
     }
 
-    private void processAncRegistrationEvent(EventClient eventClient, ClientClassification clientClassification) throws Exception{
+    private void processAncRegistrationEvent(EventClient eventClient, ClientClassification clientClassification) throws Exception {
         if (eventClient.getClient() == null) {
             return;
         }
         String baseEntityId = eventClient.getClient().getBaseEntityId();
-        if(AncDao.isRestartAncCase(baseEntityId)){
+        if (AncDao.isRestartAncCase(baseEntityId)) {
             AncDao.cleanAncDataForClient(baseEntityId);
             AncDao.incrementPregnancyNumber(baseEntityId);
         }
@@ -464,6 +466,30 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             }
 
             SbccDao.updateData(event.getBaseEntityId(), sbccDate, sbccLocationType, sbccParticipantsNumber);
+        }
+    }
+
+    protected void processCDPOrderEvent(Event event, String tableName) {
+        List<Obs> visitObs = event.getObs();
+        String condomBrand = "";
+        String condomType = "";
+        String quantityRequested = "0";
+        String locationId = event.getLocationId();
+        String baseEntityId = event.getBaseEntityId();
+        String formSubmissionId = event.getFormSubmissionId();
+
+        if (visitObs.size() > 0) {
+            for (Obs obs : visitObs) {
+                if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_TYPE.equals(obs.getFieldCode())) {
+                    condomType = (String) obs.getValue();
+                } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_BRAND.equals(obs.getFieldCode())) {
+                    condomBrand = (String) obs.getValue();
+                } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOMS_REQUESTED.equals(obs.getFieldCode())) {
+                    quantityRequested = (String) obs.getValue();
+                }
+            }
+            CdpOrderDao.updateOrderData(tableName, locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, org.smartregister.chw.cdp.util.Constants.ORDER_TYPES.COMMUNITY_TO_FACILITY_ORDER);
+            CdpLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
         }
     }
 
