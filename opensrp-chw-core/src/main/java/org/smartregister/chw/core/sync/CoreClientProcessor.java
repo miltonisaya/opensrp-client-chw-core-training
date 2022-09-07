@@ -340,6 +340,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case CoreConstants.EventType.CBHS_REGISTRATION:
                 processHivRegistrationEvent(eventClient, clientClassification);
                 break;
+            case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_CONDOM_ORDER:
+                if (eventClient.getEvent() == null) {
+                    return;
+                }
+                processCDPOrderEvent(eventClient.getEvent());
+                break;
             default:
                 if (eventClient.getClient() != null) {
                     if (eventType.equals(CoreConstants.EventType.UPDATE_FAMILY_RELATIONS) && event.getEntityType().equalsIgnoreCase(CoreConstants.TABLE_NAME.FAMILY_MEMBER)) {
@@ -469,11 +475,13 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         }
     }
 
-    protected void processCDPOrderEvent(Event event, String tableName) {
+    protected void processCDPOrderEvent(Event event) {
         List<Obs> visitObs = event.getObs();
         String condomBrand = "";
         String condomType = "";
         String quantityRequested = "0";
+        //By default the request type would be set to community_to_facility
+        String requestType = org.smartregister.chw.cdp.util.Constants.ORDER_TYPES.COMMUNITY_TO_FACILITY_ORDER;
         String locationId = event.getLocationId();
         String baseEntityId = event.getBaseEntityId();
         String formSubmissionId = event.getFormSubmissionId();
@@ -486,9 +494,11 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     condomBrand = (String) obs.getValue();
                 } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOMS_REQUESTED.equals(obs.getFieldCode())) {
                     quantityRequested = (String) obs.getValue();
+                } else if(org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.REQUEST_TYPE.equals(obs.getFieldCode())) {
+                    requestType = (String) obs.getValue();
                 }
             }
-            CdpOrderDao.updateOrderData(tableName, locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, org.smartregister.chw.cdp.util.Constants.ORDER_TYPES.COMMUNITY_TO_FACILITY_ORDER);
+            CdpOrderDao.updateOrderData(locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, requestType);
             CdpLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
         }
     }
