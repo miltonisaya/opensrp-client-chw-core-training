@@ -529,7 +529,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_BRAND:
                         condomBrand = (String) obs.getValue();
                         break;
-                    case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOMS_REQUESTED:
+                    case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.QUANTITY_RES:
                         quantityResponse = (String) obs.getValue();
                         break;
                     case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.REQUEST_REFERENCE:
