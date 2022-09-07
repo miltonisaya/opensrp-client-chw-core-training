@@ -346,6 +346,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
                 processCDPOrderEvent(eventClient.getEvent());
                 break;
+            case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_ORDER_FEEDBACK:
+                if (eventClient.getEvent() == null) {
+                    return;
+                }
+                processCDPOrderFeedback(eventClient.getEvent());
+                break;
             default:
                 if (eventClient.getClient() != null) {
                     if (eventType.equals(CoreConstants.EventType.UPDATE_FAMILY_RELATIONS) && event.getEntityType().equalsIgnoreCase(CoreConstants.TABLE_NAME.FAMILY_MEMBER)) {
@@ -494,11 +500,50 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     condomBrand = (String) obs.getValue();
                 } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOMS_REQUESTED.equals(obs.getFieldCode())) {
                     quantityRequested = (String) obs.getValue();
-                } else if(org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.REQUEST_TYPE.equals(obs.getFieldCode())) {
+                } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.REQUEST_TYPE.equals(obs.getFieldCode())) {
                     requestType = (String) obs.getValue();
                 }
             }
             CdpOrderDao.updateOrderData(locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, requestType);
+            CdpLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
+        }
+    }
+
+    protected void processCDPOrderFeedback(Event event) {
+        List<Obs> visitObs = event.getObs();
+        String condomBrand = "";
+        String condomType = "";
+        String quantityResponse = "0";
+        String requestReference = "";
+        String responseStatus = "";
+        String responseDate = "";
+        String locationId = event.getLocationId();
+        String baseEntityId = event.getBaseEntityId();
+
+        if (visitObs.size() > 0) {
+            for (Obs obs : visitObs) {
+                switch (obs.getFieldCode()) {
+                    case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_TYPE:
+                        condomType = (String) obs.getValue();
+                        break;
+                    case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_BRAND:
+                        condomBrand = (String) obs.getValue();
+                        break;
+                    case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOMS_REQUESTED:
+                        quantityResponse = (String) obs.getValue();
+                        break;
+                    case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.REQUEST_REFERENCE:
+                        requestReference = (String) obs.getValue();
+                        break;
+                    case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.RESPONSE_STATUS:
+                        responseStatus = (String) obs.getValue();
+                        break;
+                    case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.RESPONSE_DATE:
+                        responseDate = (String) obs.getValue();
+                        break;
+                }
+            }
+            CdpOrderDao.updateFeedbackData(locationId, baseEntityId, requestReference, condomType, condomBrand, quantityResponse, responseStatus, responseDate);
             CdpLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
         }
     }
