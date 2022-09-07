@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.task;
 
+import static com.vijay.jsonwizard.constants.JsonFormConstants.REPORT_MONTH;
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -31,12 +33,10 @@ import java.util.Locale;
 
 import timber.log.Timber;
 
-import static com.vijay.jsonwizard.constants.JsonFormConstants.REPORT_MONTH;
-
 public class StartDraftMonthlyFormTask extends AsyncTask<Void, Void, Intent> {
-    private final HIA2ReportsActivity baseActivity;
-    private final Date date;
-    private final String formName;
+    protected final HIA2ReportsActivity baseActivity;
+    protected final Date date;
+    protected final String formName;
 
     public StartDraftMonthlyFormTask(HIA2ReportsActivity baseActivity,
                                      Date date, String formName) {
@@ -144,7 +144,7 @@ public class StartDraftMonthlyFormTask extends AsyncTask<Void, Void, Intent> {
         return null;
     }
 
-    private Intent createServiceIntent(JSONObject form) {
+    protected Intent createServiceIntent(JSONObject form) {
         Intent intent = new Intent(baseActivity, ServiceJsonFormActivity.class);
         intent.putExtra("json", form.toString());
 
@@ -163,7 +163,7 @@ public class StartDraftMonthlyFormTask extends AsyncTask<Void, Void, Intent> {
         return intent;
     }
 
-    private void updateJsonObjects(JSONObject editTextJsonObject, JSONObject labelJsonObject, Hia2Indicator hia2Indicator, String label, List<MonthlyTally> monthlyTallies) {
+    protected void updateJsonObjects(JSONObject editTextJsonObject, JSONObject labelJsonObject, Hia2Indicator hia2Indicator, String label, List<MonthlyTally> monthlyTallies) {
         try {
             //Update label JsonObject
             labelJsonObject.put(JsonFormConstants.KEY, String.format("%s_%s", JsonFormConstants.LABEL, hia2Indicator.getIndicatorCode()));
@@ -172,14 +172,14 @@ public class StartDraftMonthlyFormTask extends AsyncTask<Void, Void, Intent> {
             labelJsonObject.put(JsonFormConstants.TEXT, label);
             labelJsonObject.put(JsonFormConstants.V_REQUIRED, new JSONObject().put(JsonFormConstants.VALUE, true));
 
-             //Update EditTextJsonObject
+            //Update EditTextJsonObject
             editTextJsonObject.put(JsonFormConstants.KEY, hia2Indicator.getIndicatorCode());
             editTextJsonObject.put(JsonFormConstants.TYPE, JsonFormConstants.NATIVE_EDIT_TEXT);
             editTextJsonObject.put(JsonFormConstants.EDIT_TEXT_STYLE, JsonFormConstants.BORDERED_EDIT_TEXT);
             editTextJsonObject.put(JsonFormConstants.VALUE, Utils.retrieveValue(monthlyTallies, hia2Indicator));
             JSONObject vRequired = new JSONObject();
             vRequired.put(JsonFormConstants.VALUE, "true");
-            vRequired.put(JsonFormConstants.ERR,"Specify: " + label);
+            vRequired.put(JsonFormConstants.ERR, "Specify: " + label);
             editTextJsonObject.put(JsonFormConstants.V_REQUIRED, vRequired);
             JSONObject vNumeric = new JSONObject();
             vNumeric.put(JsonFormConstants.VALUE, "true");
@@ -195,7 +195,7 @@ public class StartDraftMonthlyFormTask extends AsyncTask<Void, Void, Intent> {
     }
 
     @NonNull
-    private JSONObject createFormConfirmButton() throws JSONException {
+    protected JSONObject createFormConfirmButton() throws JSONException {
         JSONObject buttonObject = new JSONObject();
         buttonObject.put(JsonFormConstants.KEY, HIA2ReportsActivity.FORM_KEY_CONFIRM);
         buttonObject.put(JsonFormConstants.VALUE, "false");
