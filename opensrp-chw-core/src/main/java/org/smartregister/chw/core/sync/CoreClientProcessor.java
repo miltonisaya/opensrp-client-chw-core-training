@@ -541,6 +541,8 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     case org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.RESPONSE_DATE:
                         responseDate = (String) obs.getValue();
                         break;
+                    default:
+                        break;
                 }
             }
             CdpOrderDao.updateFeedbackData(locationId, baseEntityId, requestReference, condomType, condomBrand, quantityResponse, responseStatus, responseDate);
