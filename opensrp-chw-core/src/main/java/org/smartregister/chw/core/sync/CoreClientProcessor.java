@@ -486,6 +486,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String condomBrand = "";
         String condomType = "";
         String quantityRequested = "0";
+        String requestDate = "";
         //By default the request type would be set to community_to_facility
         String requestType = org.smartregister.chw.cdp.util.Constants.ORDER_TYPES.COMMUNITY_TO_FACILITY_ORDER;
         String locationId = event.getLocationId();
@@ -502,9 +503,11 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     quantityRequested = (String) obs.getValue();
                 } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.REQUEST_TYPE.equals(obs.getFieldCode())) {
                     requestType = (String) obs.getValue();
+                }else if(org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_REQUEST_DATE.equals(obs.getFieldCode())){
+                    requestDate = (String) obs.getValue();
                 }
             }
-            CdpOrderDao.updateOrderData(locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, requestType);
+            CdpOrderDao.updateOrderData(locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, requestType, requestDate);
             CdpLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
         }
     }
