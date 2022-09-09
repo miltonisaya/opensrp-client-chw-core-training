@@ -341,6 +341,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 processHivRegistrationEvent(eventClient, clientClassification);
                 break;
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_CONDOM_ORDER:
+            case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_ORDER_FROM_FACILITY:
                 if (eventClient.getEvent() == null) {
                     return;
                 }
