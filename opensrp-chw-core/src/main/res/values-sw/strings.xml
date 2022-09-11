@@ -48,6 +48,7 @@
     <string name="menu_child">Mtoto</string>
     <string name="menu_family_planning">Uzazi wa Mpango</string>
     <string name="menu_hiv_index_contacts">Washirika wa Ngono/Wakujidunga</string>
+    <string name="menu_hivst">Self Testing</string>
 
     <!-- Family Register -->
     <string name="menu_malaria">Malaria</string>
