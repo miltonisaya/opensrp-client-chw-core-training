@@ -82,7 +82,7 @@ public abstract class ChwCoreSyncIntentService extends SyncIntentService {
         return getHttpAgent().postWithJsonResponse(url, syncParams.toString());
     }
 
-    private void processClientEvent(JSONObject jsonObject) {
+    protected void processClientEvent(JSONObject jsonObject) {
         final ECSyncHelper ecSyncUpdater = ECSyncHelper.getInstance(getContext());
         final Pair<Long, Long> serverVersionPair = getMinMaxServerVersions(jsonObject);
         boolean isSaved = ecSyncUpdater.saveAllClientsAndEvents(jsonObject);
