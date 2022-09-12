@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import org.json.JSONObject;
 import org.smartregister.chw.cdp.activity.BaseCdpRegisterActivity;
-import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.FormUtils;
