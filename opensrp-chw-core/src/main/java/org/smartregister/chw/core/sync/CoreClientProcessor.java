@@ -350,6 +350,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 processCDPOrderEvent(eventClient.getEvent());
                 break;
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_ORDER_FEEDBACK:
+            case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_ORDER_FEEDBACK_OWN_COPY:
                 if (eventClient.getEvent() == null) {
                     return;
                 }
