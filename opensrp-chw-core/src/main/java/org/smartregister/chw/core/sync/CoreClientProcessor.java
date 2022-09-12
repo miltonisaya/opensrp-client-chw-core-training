@@ -31,6 +31,7 @@ import org.smartregister.chw.core.utils.StockUsageReportUtils;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
 import org.smartregister.chw.fp.util.FpUtil;
+import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.MalariaUtil;
 import org.smartregister.clientandeventmodel.DateUtil;
@@ -333,6 +334,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case CoreConstants.EventType.MOTHER_CHAMPION_SBCC:
                 processSBCCEvent(eventClient.getEvent());
                 break;
+            case org.smartregister.chw.hivst.util.Constants.EVENT_TYPE.HIVST_MOBILIZATION:
+                processMobilizationEvent(eventClient.getEvent());
+                break;
             case CoreConstants.EventType.ANC_PREGNANCY_CONFIRMATION:
             case CoreConstants.EventType.ANC_REGISTRATION:
             case CoreConstants.EventType.ANC_FOLLOWUP_CLIENT_FOLLOWUP:
@@ -488,6 +492,32 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             }
 
             SbccDao.updateData(event.getBaseEntityId(), sbccDate, sbccLocationType, sbccParticipantsNumber);
+        }
+    }
+
+    private void processMobilizationEvent(Event event){
+        List<Obs> mobilizationObs = event.getObs();
+        String mobilizationDate = null;
+        String femaleClientsReached = null;
+        String maleClientsReached = null;
+        String femaleCondomsIssued = null;
+        String maleCondomsIssued = null;
+
+        if (mobilizationObs.size() > 0) {
+            for (Obs obs : mobilizationObs) {
+                if (org.smartregister.chw.hivst.util.DBConstants.KEY.MOBILIZATION_DATE.equals(obs.getFormSubmissionField())) {
+                    mobilizationDate = (String) obs.getValue();
+                } else if (org.smartregister.chw.hivst.util.DBConstants.KEY.FEMALE_CLIENTS_REACHED.equals(obs.getFormSubmissionField())) {
+                    femaleClientsReached = (String) obs.getValue();
+                } else if (org.smartregister.chw.hivst.util.DBConstants.KEY.MALE_CLIENTS_REACHED.equals(obs.getFormSubmissionField())) {
+                    maleClientsReached = (String) obs.getValue();
+                } else if (org.smartregister.chw.hivst.util.DBConstants.KEY.MALE_CONDOMS_ISSUED.equals(obs.getFormSubmissionField())) {
+                    maleCondomsIssued = (String) obs.getValue();
+                } else if (org.smartregister.chw.hivst.util.DBConstants.KEY.FEMALE_CONDOMS_ISSUED.equals(obs.getFormSubmissionField())) {
+                    femaleCondomsIssued = (String) obs.getValue();
+                }
+            }
+            HivstMobilizationDao.updateData(event.getBaseEntityId(), mobilizationDate, femaleClientsReached, maleClientsReached, maleCondomsIssued, femaleCondomsIssued);
         }
     }
 
