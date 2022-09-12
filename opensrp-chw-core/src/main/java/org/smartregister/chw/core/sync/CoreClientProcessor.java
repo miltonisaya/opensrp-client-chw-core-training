@@ -501,6 +501,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String locationId = event.getLocationId();
         String baseEntityId = event.getBaseEntityId();
         String formSubmissionId = event.getFormSubmissionId();
+        String teamId = event.getTeamId();
 
         if (visitObs.size() > 0) {
             for (Obs obs : visitObs) {
@@ -516,7 +517,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     requestDate = (String) obs.getValue();
                 }
             }
-            CdpOrderDao.updateOrderData(locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, requestType, requestDate);
+            CdpOrderDao.updateOrderData(locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, requestType, requestDate, teamId);
             CdpLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
         }
     }
