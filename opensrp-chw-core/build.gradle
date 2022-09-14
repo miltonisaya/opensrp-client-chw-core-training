@@ -273,7 +273,7 @@ dependencies {
 
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-    api('org.smartregister:opensrp-client-core:1.15.12-NACP-SNAPSHOT') {
+    api('org.smartregister:opensrp-client-core:1.16.0-NACP-SNAPSHOT') {
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -401,6 +401,15 @@ dependencies {
         exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.nerdstone', module: 'neat-form-core'
+    }
+
+    api('org.smartregister:opensrp-client-chw-cdp:1.0.0-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
     }
 
     api('org.smartregister:opensrp-client-chw-pmtct:1.1.0.7-NACP-SNAPSHOT@aar') {

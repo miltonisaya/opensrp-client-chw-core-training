@@ -66,6 +66,7 @@ public class NavigationPresenter implements NavigationContract.Presenter {
         tableMap.put(CoreConstants.DrawerMenu.HEI, CoreConstants.TABLE_NAME.HEI);
         tableMap.put(CoreConstants.DrawerMenu.LD, CoreConstants.TABLE_NAME.LABOUR_AND_DELIVERY);
         tableMap.put(CoreConstants.DrawerMenu.LTFU, CoreConstants.TABLE_NAME.LTFU_REFERRALS);
+        tableMap.put(CoreConstants.DrawerMenu.CDP, org.smartregister.chw.cdp.util.Constants.TABLES.CDP_REGISTER);
         tableMap.put(CoreConstants.DrawerMenu.HIV_SELF_TESTING, org.smartregister.chw.hivst.util.Constants.TABLES.HIVST_REGISTER);
     }
 
