@@ -89,6 +89,17 @@ allprojects {
             }
         }
 
+        maven {
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-cdp")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
     }
 }
 
