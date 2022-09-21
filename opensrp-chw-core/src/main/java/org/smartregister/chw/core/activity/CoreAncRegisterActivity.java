@@ -116,9 +116,11 @@ public class CoreAncRegisterActivity extends BaseAncRegisterActivity {
             values.put(org.smartregister.family.util.DBConstants.KEY.RELATIONAL_ID, familyBaseEntityId);
             values.put(DBConstants.KEY.LAST_MENSTRUAL_PERIOD, lastMenstrualPeriod);
             try {
-                JSONObject min_date = CoreJsonFormUtils.getFieldJSONObject(jsonArray, "delivery_date");
-                min_date.put("min_date", lastMenstrualPeriod);
-            }catch (Exception e){
+                if (lastMenstrualPeriod != null) {
+                    JSONObject min_date = CoreJsonFormUtils.getFieldJSONObject(jsonArray, "delivery_date");
+                    min_date.put("min_date", lastMenstrualPeriod);
+                }
+            } catch (Exception e) {
                 Timber.e(e);
             }
 
