@@ -16,6 +16,13 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/action_pmtct_register"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/pmtct_registration"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_pnc_registration"
         android:enabled="true"
         android:visible="false"
