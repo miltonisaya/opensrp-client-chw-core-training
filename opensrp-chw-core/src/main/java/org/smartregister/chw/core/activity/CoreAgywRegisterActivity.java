@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import org.json.JSONObject;
 import org.smartregister.chw.agyw.activity.BaseAGYWRegisterActivity;
-import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
 import org.smartregister.chw.core.fragment.CoreAgywRegisterFragment;
 import org.smartregister.chw.core.utils.CoreConstants;
@@ -35,6 +34,6 @@ public class CoreAgywRegisterActivity extends BaseAGYWRegisterActivity {
 
     @Override
     public void startFormActivity(JSONObject jsonForm) {
-        startActivityForResult(FormUtils.getStartFormActivity(jsonForm, this.getString(R.string.hivst), this), JsonFormUtils.REQUEST_CODE_GET_JSON);
+        startActivityForResult(FormUtils.getStartFormActivity(jsonForm, null, this), JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 }
