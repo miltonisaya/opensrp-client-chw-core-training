@@ -280,6 +280,7 @@ public class CoreConstants {
         private static final String TB_COMMUNITY_FOLLOW_FEEDBACK = "tb_community_followup_feedback";
         private static final String ALL_CLIENT_REGISTRATION_FORM = "all_clients_registration_form";
         private static final String ALL_CLIENT_UPDATE_REGISTRATION_INFO_FORM = "all_clients_update_registration_info_form";
+        private static final String AGYW_REFERRAL_FORM = "referrals/agyw_services_referral_form";
 
         private static final String HIV_INDEX_CLIENTS_CONTACTS_REGISTRATION_FORM = "hiv_index_clients_contacts_registration_form";
 
@@ -583,6 +584,10 @@ public class CoreConstants {
 
         public static String getTbCommunityFollowFeedback() {
             return TB_COMMUNITY_FOLLOW_FEEDBACK;
+        }
+
+        public static String getAgywReferralForm() {
+            return AGYW_REFERRAL_FORM;
         }
 
         public static class CHILD_HOME_VISIT {
@@ -1205,6 +1210,7 @@ public class CoreConstants {
         public static final String ANC_MALE_ENGAGEMENT = "ANC Male engagement";
         public static final String LTFU = "LTFU";
         public static final String LTFU_FEEDBACK= "LTFU Community Followup Feedback";
+        public static final String AGYW_REFERRAL = "AGYW Services";
     }
 
     public static final class REGISTER_TYPE {
