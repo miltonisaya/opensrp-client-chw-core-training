@@ -189,6 +189,9 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         }else if(i == R.id.action_hivst_registration){
             startHivstRegistration();
             return true;
+        } else if(i == R.id.action_agyw_screening){
+            startAgywScreening();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -221,6 +224,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startLDRegistration();
 
     protected abstract void startHivstRegistration();
+
+    protected abstract void startAgywScreening();
 
     protected abstract void setIndependentClient(boolean isIndependent);
 
