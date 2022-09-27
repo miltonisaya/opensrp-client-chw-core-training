@@ -927,6 +927,7 @@ public class CoreConstants {
         public static final String LTFU = "LTFU Referrals";
         public static final String CDP = "Condom Programming";
         public static final String HIV_SELF_TESTING = "Self Testing";
+        public static final String AGYW = "AGYW";
     }
 
     public static final class RULE_FILE {
@@ -1177,6 +1178,7 @@ public class CoreConstants {
         public static final String LTFU_REFERRALS_REGISTER_ACTIVITY = "LTFU_REFERRALS_REGISTER_ACTIVITY";
         public static final String HIV_SELF_TESTING_REGISTER_ACTIVITY = "HIV_SELF_TESTING_REGISTER_ACTIVITY";
         public static final String CDP_REGISTER_ACTIVITY = "CDP_REGISTER_ACTIVITY";
+        public static final String AGYW_REGISTER_ACTIVITY = "AGYW_REGISTER_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {

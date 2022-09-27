@@ -69,6 +69,9 @@ public class NavigationListener implements View.OnClickListener {
                 case CoreConstants.DrawerMenu.HIV_SELF_TESTING:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.HIV_SELF_TESTING_REGISTER_ACTIVITY));
                     break;
+                case CoreConstants.DrawerMenu.AGYW:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.AGYW_REGISTER_ACTIVITY));
+                    break;
                 case CoreConstants.DrawerMenu.ALL_CLIENTS:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.ALL_CLIENTS_REGISTERED_ACTIVITY));
                     break;
