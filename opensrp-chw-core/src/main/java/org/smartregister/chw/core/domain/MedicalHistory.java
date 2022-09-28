@@ -34,6 +34,8 @@ public class MedicalHistory {
         this.text.add(text);
     }
 
+    //This implementation allows passing of SpannableStringBuilders to allow formatting of the
+    //text set into the Medical Histories
     public List<SpannableStringBuilder> getSpannableStringBuilders() {
         return SpannableStringBuilders;
     }
