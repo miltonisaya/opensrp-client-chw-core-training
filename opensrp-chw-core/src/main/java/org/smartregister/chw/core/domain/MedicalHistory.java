@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.domain;
 
+import android.text.SpannableStringBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ public class MedicalHistory {
 
     private String title;
     private List<String> text;
+    private List<android.text.SpannableStringBuilder> SpannableStringBuilders;
 
     public String getTitle() {
         return title;
@@ -29,5 +32,13 @@ public class MedicalHistory {
             this.text = new ArrayList<>();
 
         this.text.add(text);
+    }
+
+    public List<SpannableStringBuilder> getSpannableStringBuilders() {
+        return SpannableStringBuilders;
+    }
+
+    public void setSpannableStringBuilders(List<SpannableStringBuilder> spannableStringBuilders) {
+        SpannableStringBuilders = spannableStringBuilders;
     }
 }

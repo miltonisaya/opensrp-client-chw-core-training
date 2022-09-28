@@ -199,7 +199,7 @@ public class VisitDao extends AbstractDao {
     }
 
     public static List<Visit> getPNCVisitsMedicalHistory(String motherBaseEntityId) {
-        String sql = "SELECT  visit_id , visit_date , base_entity_id from visits " +
+        String sql = "SELECT  visit_id , visit_date , base_entity_id, visit_type from visits " +
                 "WHERE base_entity_id  = '" + motherBaseEntityId + "' COLLATE NOCASE " +
                 "OR base_entity_id in (SELECT base_entity_id from ec_child WHERE mother_entity_id  = '" + motherBaseEntityId + "' COLLATE NOCASE )";
 
@@ -208,6 +208,7 @@ public class VisitDao extends AbstractDao {
             visit.setBaseEntityId(getCursorValue(c, "base_entity_id"));
             visit.setVisitId(getCursorValue(c, "visit_id"));
             visit.setDate(getCursorValueAsDate(c, "visit_date"));
+            visit.setVisitType(getCursorValue(c, "visit_type"));
             return visit;
         };
 
