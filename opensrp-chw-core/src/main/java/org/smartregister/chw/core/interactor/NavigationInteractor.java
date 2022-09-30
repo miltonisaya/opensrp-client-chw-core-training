@@ -11,7 +11,9 @@ import static org.smartregister.chw.core.utils.QueryConstant.PNC_DANGER_SIGNS_OU
 import static org.smartregister.chw.core.utils.QueryConstant.PREGNANCY_CONFIRMATION_UPDATES_COUNT_QUERY;
 import static org.smartregister.chw.core.utils.QueryConstant.SICK_CHILD_FOLLOW_UP_COUNT_QUERY;
 import static org.smartregister.chw.core.utils.QueryConstant.TB_OUTCOME_COUNT_QUERY;
+import static org.smartregister.util.Utils.getAllSharedPreferences;
 
+import org.smartregister.chw.cdp.util.DBConstants;
 import org.smartregister.chw.core.contract.CoreApplication;
 import org.smartregister.chw.core.contract.NavigationContract;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
@@ -481,6 +483,24 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "where m.date_removed is null and t.business_status = '" + CoreConstants.BUSINESS_STATUS.REFERRED + "' " +
                                 "AND p.chw_referral_service = 'LTFU' COLLATE NOCASE ";
                 return NavigationDao.getQueryCount(sqlLTFU);
+            case org.smartregister.chw.cdp.util.Constants.TABLES.CDP_ORDERS:
+                String userLocationTag = getAllSharedPreferences().fetchUserLocationTag();
+                String mainOrdersTable = org.smartregister.chw.cdp.util.Constants.TABLES.CDP_ORDERS;
+                String mainCondition = mainOrdersTable + "." + DBConstants.KEY.IS_CLOSED + " IS 0";
+                String sqlCDPOrdersCondition;
+                if (userLocationTag.contains("msd_code")) {
+                    sqlCDPOrdersCondition = mainCondition + " AND (" + mainOrdersTable + "." + DBConstants.KEY.REQUEST_TYPE + " = '" + org.smartregister.chw.cdp.util.Constants.ORDER_TYPES.FACILITY_TO_FACILITY_ORDER + "'" +
+                            " OR " + mainOrdersTable + "." + DBConstants.KEY.REQUEST_TYPE + " = '" + org.smartregister.chw.cdp.util.Constants.ORDER_TYPES.COMMUNITY_TO_FACILITY_ORDER + "') " ;
+                }else {
+                    sqlCDPOrdersCondition = mainCondition + " AND " + mainOrdersTable + "." + DBConstants.KEY.REQUEST_TYPE + " = '" + org.smartregister.chw.cdp.util.Constants.ORDER_TYPES.COMMUNITY_TO_FACILITY_ORDER + "'";
+                }
+
+                String sqlCDPOrders =
+                        "select count(*) " +
+                                "from " + mainOrdersTable +
+                                " INNER JOIN task ON  " + mainOrdersTable + "." + "base_entity_id" + " = " + "task" + "." + "for" + " COLLATE NOCASE " +
+                                " where " + sqlCDPOrdersCondition;
+                return NavigationDao.getQueryCount(sqlCDPOrders);
             default:
                 return NavigationDao.getTableCount(tableName);
         }
