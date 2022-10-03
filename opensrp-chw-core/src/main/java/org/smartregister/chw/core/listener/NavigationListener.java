@@ -64,6 +64,7 @@ public class NavigationListener implements View.OnClickListener {
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.LTFU_REFERRALS_REGISTER_ACTIVITY));
                     break;
                 case CoreConstants.DrawerMenu.CDP:
+                case CoreConstants.DrawerMenu.CDP_HF:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.CDP_REGISTER_ACTIVITY));
                     break;
                 case CoreConstants.DrawerMenu.HIV_SELF_TESTING:

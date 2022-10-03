@@ -414,7 +414,7 @@ dependencies {
         exclude group: 'com.nerdstone', module: 'neat-form-core'
     }
 
-    api('org.smartregister:opensrp-client-chw-cdp:1.0.0-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-cdp:1.0.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'

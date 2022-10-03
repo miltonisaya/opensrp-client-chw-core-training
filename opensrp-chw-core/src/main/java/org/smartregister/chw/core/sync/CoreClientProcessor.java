@@ -363,6 +363,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_RECEIVE_FROM_FACILITY:
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_RESTOCK:
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_CONDOM_DISTRIBUTION_OUTSIDE:
+            case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_CONDOM_DISTRIBUTION_WITHIN:
                 processCDPStockChanges(eventClient.getEvent());
                 processVisitEvent(eventClient);
                 break;

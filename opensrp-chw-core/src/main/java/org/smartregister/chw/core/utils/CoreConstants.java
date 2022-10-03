@@ -931,6 +931,7 @@ public class CoreConstants {
         public static final String REPORTS = "Reports";
         public static final String LTFU = "LTFU Referrals";
         public static final String CDP = "Condom Programming";
+        public static final String CDP_HF = "Condom Programming HF";
         public static final String HIV_SELF_TESTING = "Self Testing";
         public static final String KVP_PrEP = "KVP/PrEP";
         public static final String KVP = "KVP";
