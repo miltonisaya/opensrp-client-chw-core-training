@@ -603,6 +603,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String locationId = event.getLocationId();
         String chwName = event.getProviderId();
         String stockEventType = "";
+        String issuingOrganization = "";
 
         if (visitObs.size() > 0) {
             for (Obs obs : visitObs) {
@@ -614,11 +615,13 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     restockDate = (String) obs.getValue();
                 } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.STOCK_EVENT_TYPE.equals(obs.getFieldCode())) {
                     stockEventType = (String) obs.getValue();
+                } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.ISSUING_ORGANIZATION.equals(obs.getFieldCode())) {
+                    issuingOrganization = (String) obs.getValue();
                 }
             }
 
 
-            CdpStockingDao.updateStockLogData(locationId, event.getFormSubmissionId(), chwName, maleCondomsOffset, femaleCondomsOffset, stockEventType, event.getEventType(), restockDate);
+            CdpStockingDao.updateStockLogData(locationId, event.getFormSubmissionId(), chwName, maleCondomsOffset, femaleCondomsOffset, stockEventType, issuingOrganization, event.getEventType(), restockDate);
             CdpStockingDao.updateStockCountData(locationId, event.getFormSubmissionId(), chwName, maleCondomsOffset, femaleCondomsOffset, stockEventType, restockDate);
 
 
