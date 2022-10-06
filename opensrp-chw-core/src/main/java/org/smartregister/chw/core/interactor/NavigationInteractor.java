@@ -199,8 +199,8 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         "             FROM ec_tb_register\n" +
                         "             WHERE ec_tb_register.tb_case_closure_date is null\n" +
                         "             UNION ALL\n" +
-                        "             SELECT ec_hiv_register.base_entity_id AS base_entity_id\n" +
-                        "             FROM ec_hiv_register\n" +
+                        "             SELECT ec_cbhs_register.base_entity_id AS base_entity_id\n" +
+                        "             FROM ec_cbhs_register WHERE is_closed is 0\n" +
                         "         )\n" +
                         "         UNION ALL\n" +
                         "/*COUNT INDEPENDENT MEMBERS*/\n" +
@@ -229,8 +229,8 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         "             FROM ec_tb_register\n" +
                         "             WHERE ec_tb_register.tb_case_closure_date is null\n" +
                         "             UNION ALL\n" +
-                        "             SELECT ec_hiv_register.base_entity_id AS base_entity_id\n" +
-                        "             FROM ec_hiv_register\n" +
+                        "             SELECT ec_cbhs_register.base_entity_id AS base_entity_id\n" +
+                        "             FROM ec_cbhs_register WHERE is_closed is 0\n" +
                         "         )\n" +
                         "         UNION ALL\n" +
                         "/**COUNT REGISTERED MALARIA CLIENTS*/\n" +
@@ -282,9 +282,10 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         "         SELECT COUNT(*) AS c\n" +
                         "         FROM ec_family_member\n" +
                         "                  inner join ec_family on ec_family.base_entity_id = ec_family_member.relational_id\n" +
-                        "                  inner join ec_hiv_register\n" +
-                        "                             on ec_family_member.base_entity_id = ec_hiv_register.base_entity_id\n" +
+                        "                  inner join ec_cbhs_register\n" +
+                        "                             on ec_family_member.base_entity_id = ec_cbhs_register.base_entity_id\n" +
                         "         where ec_family_member.date_removed is null\n" +
+                        "           AND ec_cbhs_register.is_closed is 0 \n" +
                         "           AND ec_family_member.base_entity_id NOT IN (\n" +
                         "             SELECT ec_anc_register.base_entity_id AS base_entity_id\n" +
                         "             FROM ec_anc_register\n" +
@@ -370,18 +371,11 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         "SELECT SUM(c)\n" +
                                 "FROM (\n" +
                                 "              select count(*) as c " +
-                                "              from " + org.smartregister.chw.hiv.util.Constants.Tables.HIV + " p " +
+                                "              from ec_cbhs_register p " +
                                 "              inner join ec_family_member m on p.base_entity_id = m.base_entity_id COLLATE NOCASE " +
                                 "              inner join ec_family f on f.base_entity_id = m.relational_id COLLATE NOCASE " +
                                 "              where m.date_removed is null and p.is_closed = '0' and " +
-                                "              ( UPPER (p.client_hiv_status_after_testing) LIKE UPPER('Positive') OR p.client_hiv_status_after_testing IS NULL) " +
-                                "         UNION ALL\n" +
-                                "              select count(*) as c " +
-                                "              from " + org.smartregister.chw.hiv.util.Constants.Tables.HIV_COMMUNITY_FOLLOWUP + " p " +
-                                "              inner join ec_family_member m on p.entity_id = m.base_entity_id COLLATE NOCASE " +
-                                "              inner join ec_family f on f.base_entity_id = m.relational_id COLLATE NOCASE " +
-                                "              where m.date_removed is null and p.is_closed = '0' AND " +
-                                "              p.base_entity_id NOT IN (SELECT community_referral_form_id FROM " + org.smartregister.chw.hiv.util.Constants.Tables.HIV_COMMUNITY_FEEDBACK + " ))";
+                                "              ( UPPER (p.client_hiv_status_after_testing) LIKE UPPER('Positive') OR p.client_hiv_status_after_testing IS NULL))";
                 return NavigationDao.getQueryCount(sqlCbhs);
 
             case CoreConstants.TABLE_NAME.HTS_MEMBERS:
