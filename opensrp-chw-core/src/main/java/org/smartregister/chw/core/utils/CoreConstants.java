@@ -1226,6 +1226,7 @@ public class CoreConstants {
         public static final String OTHER = "Other";
         public static final String INDEPENDENT = "Independent";
         public static final String LD = "Labour & Delivery";
+        public static final String AGYW = "AGYW";
     }
 
     public static final class KeyIndicatorsUtil {
