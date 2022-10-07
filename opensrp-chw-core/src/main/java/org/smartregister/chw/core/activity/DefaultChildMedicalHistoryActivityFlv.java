@@ -61,7 +61,7 @@ public abstract class DefaultChildMedicalHistoryActivityFlv implements CoreChild
         this.visits = visits;
         this.vaccineMap = vaccineMap;
 
-        if(visitMap == null)
+        if (visitMap == null)
             visitMap = new LinkedHashMap<>();
 
         for (Visit v : this.visits) {
@@ -419,6 +419,8 @@ public abstract class DefaultChildMedicalHistoryActivityFlv implements CoreChild
                 }
             }
             if (history.getText() != null && !history.getText().isEmpty())
+                medicalHistories.add(history);
+            else if (history.getSpannableStringBuilders() != null && !history.getSpannableStringBuilders().isEmpty())
                 medicalHistories.add(history);
         }
     }

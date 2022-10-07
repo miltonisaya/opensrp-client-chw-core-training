@@ -27,6 +27,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_kvp_prep_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/kvp_prep_registration"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
         android:title="@string/remove_this_person"

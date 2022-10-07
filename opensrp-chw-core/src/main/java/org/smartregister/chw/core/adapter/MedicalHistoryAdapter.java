@@ -1,5 +1,6 @@
 package org.smartregister.chw.core.adapter;
 
+import android.text.SpannableStringBuilder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,14 +43,26 @@ public class MedicalHistoryAdapter extends RecyclerView.Adapter<MedicalHistoryAd
         if (StringUtils.isNotBlank(item.getTitle()))
             myViewHolder.tvSubTitle.setText(item.getTitle());
 
-        if (item.getText() == null) return;
+        if (item.getText() == null && item.getSpannableStringBuilders() == null) return;
 
-        for (String content : item.getText()) {
-            View view = inflater.inflate(layoutID, null);
-            TextView tvContent = view.findViewById(R.id.tvContent);
-            tvContent.setText(content);
+        if (item.getText() != null) {
+            for (String content : item.getText()) {
+                View view = inflater.inflate(layoutID, null);
+                TextView tvContent = view.findViewById(R.id.tvContent);
+                tvContent.setText(content);
 
-            myViewHolder.llItems.addView(view);
+                myViewHolder.llItems.addView(view);
+            }
+        } else {
+            //This implementation allows passing of SpannableStringBuilders to allow formatting of the
+            //text set into the Medical Histories
+            for (SpannableStringBuilder content : item.getSpannableStringBuilders()) {
+                View view = inflater.inflate(layoutID, null);
+                TextView tvContent = view.findViewById(R.id.tvContent);
+                tvContent.setText(content);
+
+                myViewHolder.llItems.addView(view);
+            }
         }
     }
 

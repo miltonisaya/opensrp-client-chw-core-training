@@ -243,6 +243,7 @@ public class CoreConstants {
         private static final String HTS_REFERRAL_FORM = "referrals/hts_referral_form";
         private static final String TB_REFERRAL_FORM = "referrals/tb_referral_form";
         private static final String GBV_REFERRAL_FORM = "referrals/gbv_referral_form";
+        private static final String KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/kvp_referral_form";
         public static String PREGNANCY_CONFIRMATION_REFERRAL_FORM = "referrals/pregnancy_confirmation_referral_form";
         private static final String FEMALE_FAMILY_PLANNING_UNIFIED_REFERRAL_FORM = "referrals/female_fp_referral_form";
         private static final String MALE_FAMILY_PLANNING_UNIFIED_REFERRAL_FORM = "referrals/male_fp_referral_form";
@@ -259,10 +260,6 @@ public class CoreConstants {
         private static final String MALE_FAMILY_PLANNING_CHANGE_METHOD_FORM = "male_family_planning_change_method";
         private static final String PNC_DANGER_SIGNS_OUTCOME_FORM = "pnc_danger_signs_outcome";
         private static final String MALARIA_FOLLOW_UP_HF_FORM = "malaria_follow_up_hf";
-        private static final String FEMALE_HIV_REGISTRATION = "female_hiv_registration";
-        private static final String MALE_HIV_REGISTRATION = "male_hiv_registration";
-        private static final String FEMALE_HIV_FOLLOWUP_VISIT = "female_hiv_followup_visit";
-        private static final String MALE_HIV_FOLLOWUP_VISIT = "male_hiv_followup_visit";
         private static final String FEMALE_HIV_FOLLOWUP_VISIT_FOR_CLIENTS_WITH_CTC_NUMBERS = "female_hiv_followup_visit_for_clients_with_ctc_numbers";
         private static final String MALE_HIV_FOLLOWUP_VISIT_FOR_CLIENTS_WITH_CTC_NUMBERS = "male_hiv_followup_visit_for_clients_with_ctc_numbers";
         private static final String HIV_INDEX_CONTACT_FOLLOWUP_VISIT = "hiv_index_contact_followup";
@@ -462,6 +459,10 @@ public class CoreConstants {
             return GBV_REFERRAL_FORM;
         }
 
+        public static String getKvpFriendlyServicesReferralForm() {
+            return KVP_FRIENDLY_SERVICES_REFERRAL_FORM;
+        }
+
         public static String getChildGbvReferralForm() {
             return CHILD_GBV_REFERRAL_FORM;
         }
@@ -482,24 +483,8 @@ public class CoreConstants {
             return Utils.getLocalForm(MALARIA_FOLLOW_UP_HF_FORM, locale, assetManager);
         }
 
-        public static String getFemaleHivRegistration() {
-            return FEMALE_HIV_REGISTRATION;
-        }
-
-        public static String getMaleHivRegistration() {
-            return MALE_HIV_REGISTRATION;
-        }
-
         public static String getTbRegistration() {
             return TB_REGISTRATION;
-        }
-
-        public static String getFemaleHivFollowupVisit() {
-            return FEMALE_HIV_FOLLOWUP_VISIT;
-        }
-
-        public static String getMaleHivFollowupVisit() {
-            return MALE_HIV_FOLLOWUP_VISIT;
         }
 
         public static String getMaleHivFollowupVisitForClientsWithCtcNumbers() {
@@ -931,7 +916,11 @@ public class CoreConstants {
         public static final String REPORTS = "Reports";
         public static final String LTFU = "LTFU Referrals";
         public static final String CDP = "Condom Programming";
+        public static final String CDP_HF = "Condom Programming HF";
         public static final String HIV_SELF_TESTING = "Self Testing";
+        public static final String KVP_PrEP = "KVP/PrEP";
+        public static final String KVP = "KVP";
+        public static final String PrEP = "PrEP";
         public static final String AGYW = "AGYW";
     }
 
@@ -1183,6 +1172,9 @@ public class CoreConstants {
         public static final String LTFU_REFERRALS_REGISTER_ACTIVITY = "LTFU_REFERRALS_REGISTER_ACTIVITY";
         public static final String HIV_SELF_TESTING_REGISTER_ACTIVITY = "HIV_SELF_TESTING_REGISTER_ACTIVITY";
         public static final String CDP_REGISTER_ACTIVITY = "CDP_REGISTER_ACTIVITY";
+        public static final String KVP_PrEP_REGISTER_ACTIVITY = "KVP_PrEP_REGISTER_ACTIVITY";
+        public static final String KVP_REGISTER_ACTIVITY = "KVP_REGISTER_ACTIVITY";
+        public static final String PrEP_REGISTER_ACTIVITY = "PrEP_REGISTER_ACTIVITY";
         public static final String AGYW_REGISTER_ACTIVITY = "AGYW_REGISTER_ACTIVITY";
     }
 
@@ -1209,7 +1201,8 @@ public class CoreConstants {
         public static final String SUSPECTED_CHILD_GBV = "Suspected Child GBV";
         public static final String ANC_MALE_ENGAGEMENT = "ANC Male engagement";
         public static final String LTFU = "LTFU";
-        public static final String LTFU_FEEDBACK= "LTFU Community Followup Feedback";
+        public static final String LTFU_FEEDBACK = "LTFU Community Followup Feedback";
+        public static final String KVP_FRIENDLY_SERVICES = "KVP Friendly Services";
         public static final String STI_REFERRAL = "STI Services";
     }
 
