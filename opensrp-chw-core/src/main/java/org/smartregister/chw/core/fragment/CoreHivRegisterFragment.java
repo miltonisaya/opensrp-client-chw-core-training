@@ -29,7 +29,6 @@ import org.smartregister.view.activity.BaseRegisterActivity;
 import org.smartregister.view.customcontrols.CustomFontTextView;
 
 import java.text.MessageFormat;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -62,7 +61,7 @@ public abstract class CoreHivRegisterFragment extends BaseHivRegisterFragment {
 
         try {
             NavigationMenu.getInstance(getActivity(), null, toolbar);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             Timber.e(e);
         }
 
@@ -194,7 +193,7 @@ public abstract class CoreHivRegisterFragment extends BaseHivRegisterFragment {
             customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.LAST_NAME, filters));
             customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.MIDDLE_NAME, filters));
             customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ", CoreConstants.TABLE_NAME.FAMILY_MEMBER, DBConstants.KEY.UNIQUE_ID, filters));
-            customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ) ", CoreConstants.TABLE_NAME.HIV_MEMBER,CoreConstants.DB_CONSTANTS.CTC_NUMBER,filters));
+            customFilter.append(MessageFormat.format(" or {0}.{1} like ''%{2}%'' ) ", presenter().getMainTable(), CoreConstants.DB_CONSTANTS.CTC_NUMBER, filters));
 
         }
         if (dueFilterActive) {

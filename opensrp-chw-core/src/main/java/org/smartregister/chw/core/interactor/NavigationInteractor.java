@@ -374,8 +374,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "              from ec_cbhs_register p " +
                                 "              inner join ec_family_member m on p.base_entity_id = m.base_entity_id COLLATE NOCASE " +
                                 "              inner join ec_family f on f.base_entity_id = m.relational_id COLLATE NOCASE " +
-                                "              where m.date_removed is null and p.is_closed = '0' and " +
-                                "              ( UPPER (p.client_hiv_status_after_testing) LIKE UPPER('Positive') OR p.client_hiv_status_after_testing IS NULL))";
+                                "              where m.date_removed is null and p.is_closed = '0')";
                 return NavigationDao.getQueryCount(sqlCbhs);
 
             case CoreConstants.TABLE_NAME.HTS_MEMBERS:
