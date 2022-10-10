@@ -1,18 +1,5 @@
 package org.smartregister.chw.core.interactor;
 
-import static org.smartregister.chw.core.utils.CoreConstants.TABLE_NAME.MOTHER_CHAMPION;
-import static org.smartregister.chw.core.utils.QueryConstant.ANC_DANGER_SIGNS_OUTCOME_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.FAMILY_PLANNING_UPDATE_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_REFERRAL_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.HIV_OUTCOME_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.MALARIA_HF_FOLLOW_UP_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.NOT_YET_DONE_REFERRAL_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.PNC_DANGER_SIGNS_OUTCOME_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.PREGNANCY_CONFIRMATION_UPDATES_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.SICK_CHILD_FOLLOW_UP_COUNT_QUERY;
-import static org.smartregister.chw.core.utils.QueryConstant.TB_OUTCOME_COUNT_QUERY;
-import static org.smartregister.util.Utils.getAllSharedPreferences;
-
 import org.smartregister.chw.cdp.util.DBConstants;
 import org.smartregister.chw.core.contract.CoreApplication;
 import org.smartregister.chw.core.contract.NavigationContract;
@@ -26,6 +13,19 @@ import org.smartregister.family.util.AppExecutors;
 import java.util.Date;
 
 import timber.log.Timber;
+
+import static org.smartregister.chw.core.utils.CoreConstants.TABLE_NAME.MOTHER_CHAMPION;
+import static org.smartregister.chw.core.utils.QueryConstant.ANC_DANGER_SIGNS_OUTCOME_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.FAMILY_PLANNING_UPDATE_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.HIV_INDEX_CONTACT_COMMUNITY_FOLLOWUP_REFERRAL_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.HIV_OUTCOME_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.MALARIA_HF_FOLLOW_UP_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.NOT_YET_DONE_REFERRAL_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.PNC_DANGER_SIGNS_OUTCOME_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.PREGNANCY_CONFIRMATION_UPDATES_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.SICK_CHILD_FOLLOW_UP_COUNT_QUERY;
+import static org.smartregister.chw.core.utils.QueryConstant.TB_OUTCOME_COUNT_QUERY;
+import static org.smartregister.util.Utils.getAllSharedPreferences;
 
 public class NavigationInteractor implements NavigationContract.Interactor {
 
@@ -476,6 +476,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "where m.date_removed is null and t.business_status = '" + CoreConstants.BUSINESS_STATUS.REFERRED + "' " +
                                 "AND p.chw_referral_service = 'LTFU' COLLATE NOCASE ";
                 return NavigationDao.getQueryCount(sqlLTFU);
+            case org.smartregister.chw.agyw.util.Constants.TABLES.AGYW_REGISTER:
+                String sqlAgyw =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.agyw.util.Constants.TABLES.AGYW_REGISTER + " p " +
+                                "              where p.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlAgyw);
             case org.smartregister.chw.cdp.util.Constants.TABLES.CDP_ORDERS:
                 String userLocationTag = getAllSharedPreferences().fetchUserLocationTag();
                 String mainOrdersTable = org.smartregister.chw.cdp.util.Constants.TABLES.CDP_ORDERS;

@@ -45,6 +45,12 @@
         android:visible="false"
         android:title="@string/hivst_registration"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_agyw_screening"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/agyw_screening"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/action_kvp_prep_registration"

@@ -811,5 +811,6 @@
     <string name="menu_ld">L&amp;D</string>
     <string name="ld_registration">L&amp;D Registration</string>
     <string name="hivst_registration">HIVST Registration</string>
+    <string name="agyw_screening">AGYW Screening</string>
 
 </resources>
