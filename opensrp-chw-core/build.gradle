@@ -104,6 +104,28 @@ allprojects {
 
             name = "GitHubPackages"
 
+            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-kvp")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-agyw")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
+
+            name = "GitHubPackages"
+
             url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-hiv")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
@@ -380,7 +402,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-agyw:1.0.1-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-agyw:1.0.2-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -452,7 +474,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-kvp:1.0.1-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-kvp:1.0.1-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
