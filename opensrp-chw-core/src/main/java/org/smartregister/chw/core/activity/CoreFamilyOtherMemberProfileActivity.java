@@ -196,6 +196,12 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
             startKvpPrEPRegistration();
             return true;
         }
+        else if(i == R.id.action_kvp_registration) {
+            startKvpRegistration();
+        }
+        else if(i == R.id.action_prep_registration) {
+            startPrEPRegistration();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -229,6 +235,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startHivstRegistration();
 
     protected abstract void startKvpPrEPRegistration();
+
+    protected abstract void startKvpRegistration();
+
+    protected abstract void startPrEPRegistration();
 
     protected abstract void startAgywScreening();
 
