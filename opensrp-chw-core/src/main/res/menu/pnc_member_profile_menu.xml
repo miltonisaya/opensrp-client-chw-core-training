@@ -143,4 +143,18 @@
         android:title="@string/kvp_prep_registration"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_kvp_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/kvp_registration"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_prep_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/prep_registration"
+        app:showAsAction="never" />
+
 </menu>

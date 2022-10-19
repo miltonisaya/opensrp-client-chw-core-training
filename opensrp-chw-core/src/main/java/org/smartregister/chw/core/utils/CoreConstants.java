@@ -1220,6 +1220,8 @@ public class CoreConstants {
         public static final String INDEPENDENT = "Independent";
         public static final String LD = "Labour & Delivery";
         public static final String AGYW = "AGYW";
+        public static final String KVP = "KVP";
+        public static final String KVP_PrEP = "KVP/PrEP";
     }
 
     public static final class KeyIndicatorsUtil {
