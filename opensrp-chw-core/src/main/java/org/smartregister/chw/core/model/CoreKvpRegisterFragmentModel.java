@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.smartregister.chw.core.utils.ChildDBConstants;
 import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.kvp.model.BaseKvpRegisterFragmentModel;
+import org.smartregister.chw.kvp.util.Constants;
 import org.smartregister.cursoradapter.SmartRegisterQueryBuilder;
 import org.smartregister.family.util.DBConstants;
 
@@ -31,6 +32,9 @@ public class CoreKvpRegisterFragmentModel extends BaseKvpRegisterFragmentModel {
         Set<String> columnList = new HashSet<>();
 
         columnList.add(tableName + "." + DBConstants.KEY.BASE_ENTITY_ID);
+        if(tableName.equalsIgnoreCase(Constants.TABLES.PrEP_REGISTER)){
+            columnList.add(tableName + "." + org.smartregister.chw.kvp.util.DBConstants.KEY.PrEP_STATUS);
+        }
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.RELATIONAL_ID + " as " + ChildDBConstants.KEY.RELATIONAL_ID);
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.FIRST_NAME);
         columnList.add(CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.MIDDLE_NAME);
