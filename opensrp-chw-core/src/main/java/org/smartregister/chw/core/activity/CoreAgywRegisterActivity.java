@@ -1,6 +1,9 @@
 package org.smartregister.chw.core.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import com.vijay.jsonwizard.constants.JsonFormConstants;
 
 import org.json.JSONObject;
 import org.smartregister.chw.agyw.activity.BaseAGYWRegisterActivity;
@@ -34,6 +37,10 @@ public class CoreAgywRegisterActivity extends BaseAGYWRegisterActivity {
 
     @Override
     public void startFormActivity(JSONObject jsonForm) {
-        startActivityForResult(FormUtils.getStartFormActivity(jsonForm, null, this), JsonFormUtils.REQUEST_CODE_GET_JSON);
+        Intent intent = FormUtils.getStartFormActivity(jsonForm, null, this);
+        if (getFormConfig() != null) {
+            intent.putExtra(JsonFormConstants.JSON_FORM_KEY.FORM, getFormConfig());
+        }
+        startActivityForResult(intent, JsonFormUtils.REQUEST_CODE_GET_JSON);
     }
 }
