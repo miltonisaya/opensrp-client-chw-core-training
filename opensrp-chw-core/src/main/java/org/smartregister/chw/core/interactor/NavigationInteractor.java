@@ -482,6 +482,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 "   from " + org.smartregister.chw.agyw.util.Constants.TABLES.AGYW_REGISTER + " p " +
                                 "              where p.is_closed is 0 ";
                 return NavigationDao.getQueryCount(sqlAgyw);
+            case org.smartregister.chw.kvp.util.Constants.TABLES.PrEP_REGISTER:
+                String sqlPrEP =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.kvp.util.Constants.TABLES.PrEP_REGISTER + " p " +
+                                "              where p.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlPrEP);
             case org.smartregister.chw.cdp.util.Constants.TABLES.CDP_ORDERS:
                 String userLocationTag = getAllSharedPreferences().fetchUserLocationTag();
                 String mainOrdersTable = org.smartregister.chw.cdp.util.Constants.TABLES.CDP_ORDERS;
