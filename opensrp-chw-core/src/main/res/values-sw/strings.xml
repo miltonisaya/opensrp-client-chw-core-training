@@ -786,5 +786,9 @@
     <string name="ld_registration">L&amp;D Registration</string>
     <string name="menu_ltfu">LTFU</string>
 
+    <string name="hivst_registration">Usajili kwenye huduma za jipime</string>
+    <string name="agyw_screening">Uchunguzi wa AGYW</string>
+    <string name="kvp_prep_registration">Usajili wa makundi maalumu (KVP/PrEP)</string>
+
 </resources>
 
