@@ -243,7 +243,8 @@ public class CoreConstants {
         private static final String HTS_REFERRAL_FORM = "referrals/hts_referral_form";
         private static final String TB_REFERRAL_FORM = "referrals/tb_referral_form";
         private static final String GBV_REFERRAL_FORM = "referrals/gbv_referral_form";
-        private static final String KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/kvp_referral_form";
+        private static final String MALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/male_kvp_referral_form";
+        private static final String FEMALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/female_kvp_referral_form";
         public static String PREGNANCY_CONFIRMATION_REFERRAL_FORM = "referrals/pregnancy_confirmation_referral_form";
         private static final String FEMALE_FAMILY_PLANNING_UNIFIED_REFERRAL_FORM = "referrals/female_fp_referral_form";
         private static final String MALE_FAMILY_PLANNING_UNIFIED_REFERRAL_FORM = "referrals/male_fp_referral_form";
@@ -459,8 +460,12 @@ public class CoreConstants {
             return GBV_REFERRAL_FORM;
         }
 
-        public static String getKvpFriendlyServicesReferralForm() {
-            return KVP_FRIENDLY_SERVICES_REFERRAL_FORM;
+        public static String getMaleKvpFriendlyServicesReferralForm(){
+            return MALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM;
+        }
+
+        public static String getFemaleKvpFriendlyServicesReferralForm(){
+            return FEMALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM;
         }
 
         public static String getChildGbvReferralForm() {
