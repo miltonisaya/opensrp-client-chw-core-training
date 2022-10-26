@@ -131,7 +131,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlMalaria = "select count (p.base_entity_id) from ec_malaria_confirmation p " +
                         "inner join ec_family_member m on p.base_entity_id = m.base_entity_id COLLATE NOCASE " +
                         "inner join ec_family f on f.base_entity_id = m.relational_id COLLATE NOCASE " +
-                        "where m.date_removed is null and p.is_closed = 0 AND p.malaria = 1 " +
+                        "where m.date_removed is null and p.is_closed = 0 " +
                         "AND datetime('NOW') <= datetime(p.last_interacted_with/1000, 'unixepoch', 'localtime','+15 days')";
                 return NavigationDao.getQueryCount(sqlMalaria);
 
