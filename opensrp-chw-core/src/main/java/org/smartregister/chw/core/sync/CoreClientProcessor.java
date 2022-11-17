@@ -496,7 +496,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         }
     }
 
-    private void processMobilizationEvent(Event event){
+    private void processMobilizationEvent(Event event) {
         List<Obs> mobilizationObs = event.getObs();
         String mobilizationDate = null;
         String femaleClientsReached = null;
@@ -526,6 +526,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         List<Obs> visitObs = event.getObs();
         String condomBrand = "";
         String condomType = "";
+        String receivingOrderFacility = "";
         String quantityRequested = "0";
         String requestDate = "";
         //By default the request type would be set to community_to_facility
@@ -543,13 +544,15 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     condomBrand = (String) obs.getValue();
                 } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOMS_REQUESTED.equals(obs.getFieldCode())) {
                     quantityRequested = (String) obs.getValue();
+                } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.RECEIVING_ORDER_FACILITY.equals(obs.getFieldCode())) {
+                    receivingOrderFacility = (String) obs.getValue();
                 } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.REQUEST_TYPE.equals(obs.getFieldCode())) {
                     requestType = (String) obs.getValue();
-                }else if(org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_REQUEST_DATE.equals(obs.getFieldCode())){
+                } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_REQUEST_DATE.equals(obs.getFieldCode())) {
                     requestDate = (String) obs.getValue();
                 }
             }
-            CdpOrderDao.updateOrderData(locationId, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, requestType, requestDate, teamId);
+            CdpOrderDao.updateOrderData(locationId, receivingOrderFacility, baseEntityId, formSubmissionId, condomType, condomBrand, quantityRequested, requestType, requestDate, teamId);
             CdpLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
         }
     }
@@ -600,6 +603,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String maleCondomsOffset = "0";
         String femaleCondomsOffset = "0";
         String restockDate = "";
+        String condomBrand = "";
         String locationId = event.getLocationId();
         String chwName = event.getProviderId();
         String stockEventType = "";
@@ -617,11 +621,13 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     stockEventType = (String) obs.getValue();
                 } else if (org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.ISSUING_ORGANIZATION.equals(obs.getFieldCode())) {
                     issuingOrganization = (String) obs.getValue();
+                } else if (obs.getFieldCode().contains(org.smartregister.chw.cdp.util.Constants.JSON_FORM_KEY.CONDOM_BRAND)) {
+                    condomBrand = (String) obs.getValue();
                 }
             }
 
 
-            CdpStockingDao.updateStockLogData(locationId, event.getFormSubmissionId(), chwName, maleCondomsOffset, femaleCondomsOffset, stockEventType, issuingOrganization, event.getEventType(), restockDate);
+            CdpStockingDao.updateStockLogData(locationId, event.getFormSubmissionId(), chwName, condomBrand, maleCondomsOffset, femaleCondomsOffset, stockEventType, issuingOrganization, event.getEventType(), restockDate);
             CdpStockingDao.updateStockCountData(locationId, event.getFormSubmissionId(), chwName, maleCondomsOffset, femaleCondomsOffset, stockEventType, restockDate);
 
 

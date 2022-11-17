@@ -439,7 +439,7 @@ dependencies {
     }
 
     implementation "id.zelory:compressor:2.1.1"
-    api('org.smartregister:opensrp-client-chw-hiv:1.0.3.6-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-hiv:1.0.3.7-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
@@ -456,7 +456,7 @@ dependencies {
         exclude group: 'com.nerdstone', module: 'neat-form-core'
     }
 
-    api('org.smartregister:opensrp-chw-cdp:1.0.2-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-cdp:1.0.3-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
