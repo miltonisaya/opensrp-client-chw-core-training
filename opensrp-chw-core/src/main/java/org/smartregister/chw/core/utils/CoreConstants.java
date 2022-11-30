@@ -203,6 +203,7 @@ public class CoreConstants {
         public static final String MOTHER_CHAMPION_SBCC = "Mother Champion SBCC Sessions";
         public static final String HIV_REGISTRATION = "HIV Registration";
         public static final String CBHS_REGISTRATION = "CBHS Registration";
+        public static final String ANC_PARTNER_TESTING = "Partner Testing";
     }
 
     public static final class EncounterType {
@@ -289,6 +290,7 @@ public class CoreConstants {
         private static final String PMTCTC_COMMUNITY_FOLLOWUP_REFERRAL = "pmtct_community_followup_referral";
         private static final String ANC_PARTNER_COMMUNITY_FOLLOWUP_FEEDBACK = "anc_partner_community_followup_feedback";
         private static final String PMTCT_REFERRAL_FORM = "referrals/pmtct_referral_form";
+        public static final String PARTNER_TESTING = "anc_partner_testing";
 
         public static AssetManager assetManager;
         public static Locale locale;
@@ -442,6 +444,10 @@ public class CoreConstants {
 
         public static String getRoutineHouseholdVisit() {
             return Utils.getLocalForm(ROUTINE_HOUSEHOLD_VISIT, locale, assetManager);
+        }
+
+        public static String getPartnerTesting() {
+            return Utils.getLocalForm(PARTNER_TESTING, locale, assetManager);
         }
 
         public static String getHivReferralForm() {
