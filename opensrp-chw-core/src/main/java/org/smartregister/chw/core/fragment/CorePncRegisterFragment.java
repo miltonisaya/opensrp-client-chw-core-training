@@ -241,7 +241,7 @@ public abstract class CorePncRegisterFragment extends BasePncRegisterFragment {
 
     private String getCountMainCondition() {
         return " " + CoreConstants.TABLE_NAME.FAMILY_MEMBER + "." + DBConstants.KEY.DATE_REMOVED + " is null " +
-                "AND " + CoreConstants.TABLE_NAME.ANC_MEMBER + "." + DBConstants.KEY.IS_CLOSED + " is 0 ";
+                "AND " + presenter().getMainTable() + "." + DBConstants.KEY.IS_CLOSED + " is 0 ";
     }
 
     @Override

@@ -91,20 +91,38 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
-
-        <org.smartregister.view.customcontrols.CustomFontTextView
-            android:id="@+id/customFontTextViewHealthFacilityVisitTitle"
-            style="@style/CustomFontTextViewStyle.ClientList"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/medical_history"
-            android:background="@color/medical_bar"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:text="@string/anc_health_facility_visits"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:layout_height="wrap_content">
+            <org.smartregister.view.customcontrols.CustomFontTextView
+                android:id="@+id/customFontTextViewHealthFacilityVisitTitle"
+                style="@style/CustomFontTextViewStyle.ClientList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/medical_bar"
+                android:layout_centerVertical="true"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/anc_health_facility_visits"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textview_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/hiv_visit_edit"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:textColor="@color/anc_member_profile_bg" />
+        </RelativeLayout>
 
 
         <LinearLayout
