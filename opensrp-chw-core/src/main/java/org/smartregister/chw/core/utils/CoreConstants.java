@@ -108,7 +108,7 @@ public class CoreConstants {
 
     public static final class EventType {
         public static final String ANC_PREGNANCY_CONFIRMATION = "Pregnancy Confirmation";
-        public static final String ANC_FOLLOWUP_CLIENT_FOLLOWUP = "ANC Followup Client Registration";
+        public static final String ANC_FOLLOWUP_CLIENT_REGISTRATION = "ANC Followup Client Registration";
 
         public static final String BIRTH_CERTIFICATION = "Birth Certification";
         public static final String OBS_ILLNESS = "Observations Illness";
@@ -247,6 +247,8 @@ public class CoreConstants {
         private static final String MALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/male_kvp_referral_form";
         private static final String FEMALE_KVP_FRIENDLY_SERVICES_REFERRAL_FORM = "referrals/female_kvp_referral_form";
         public static String PREGNANCY_CONFIRMATION_REFERRAL_FORM = "referrals/pregnancy_confirmation_referral_form";
+        public static final String ANC_PREGNANCY_CONFIRMATION = "anc_pregnancy_confirmation";
+        public static final String ANC_TRANSFER_IN_REGISTRATION = "anc_member_transfer_in_registration";
         private static final String FEMALE_FAMILY_PLANNING_UNIFIED_REFERRAL_FORM = "referrals/female_fp_referral_form";
         private static final String MALE_FAMILY_PLANNING_UNIFIED_REFERRAL_FORM = "referrals/male_fp_referral_form";
         private static final String CHILD_GBV_REFERRAL_FORM = "referrals/child_gbv_referral_form";
@@ -409,6 +411,14 @@ public class CoreConstants {
 
         public static String getPregnancyOutcome() {
             return Utils.getLocalForm(PREGNANCY_OUTCOME, locale, assetManager);
+        }
+
+        public static String getAncPregnancyConfirmation() {
+            return Utils.getLocalForm(ANC_PREGNANCY_CONFIRMATION, locale, assetManager);
+        }
+
+        public static String getAncTransferInRegistration() {
+            return Utils.getLocalForm(ANC_TRANSFER_IN_REGISTRATION, locale, assetManager);
         }
 
         public static String getMalariaConfirmation() {
