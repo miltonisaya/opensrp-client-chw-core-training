@@ -78,12 +78,6 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_mark_as_deceased"
-        android:enabled="true"
-        android:title="@string/mark_as_deceased"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action__pnc_danger_sign_outcome"
         android:enabled="true"
         android:visible="false"

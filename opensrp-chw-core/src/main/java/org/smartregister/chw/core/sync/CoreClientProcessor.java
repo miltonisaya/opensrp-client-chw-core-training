@@ -339,7 +339,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 break;
             case CoreConstants.EventType.ANC_PREGNANCY_CONFIRMATION:
             case CoreConstants.EventType.ANC_REGISTRATION:
-            case CoreConstants.EventType.ANC_FOLLOWUP_CLIENT_FOLLOWUP:
+            case CoreConstants.EventType.ANC_FOLLOWUP_CLIENT_REGISTRATION:
                 processAncRegistrationEvent(eventClient, clientClassification);
                 break;
             case CoreConstants.EventType.HIV_REGISTRATION:
