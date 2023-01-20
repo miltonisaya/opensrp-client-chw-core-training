@@ -48,7 +48,7 @@
     <string name="menu_child">Mtoto</string>
     <string name="menu_family_planning">Uzazi wa Mpango</string>
     <string name="menu_hiv_index_contacts">Washirika wa Ngono/Wakujidunga</string>
-    <string name="menu_hivst">Self Testing</string>
+    <string name="menu_hivst">Jipime</string>
 
     <!-- Family Register -->
     <string name="menu_malaria">Malaria</string>
@@ -789,6 +789,7 @@
     <string name="hivst_registration">Usajili kwenye huduma za jipime</string>
     <string name="agyw_screening">Uchunguzi wa AGYW</string>
     <string name="kvp_prep_registration">Usajili wa makundi maalumu (KVP/PrEP)</string>
-
+    <string name="kvp_registration">Uchunguzi wa Makundi maalum(KVP)</string>
+    <string name="telephone">"Simu: "</string>
 </resources>
 
