@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.utils;
 
+import static org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_OUTLET_REGISTRATION;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -76,8 +78,8 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
     public static final int REQUEST_CODE_GET_JSON = 2244;
     public static final String CURRENT_OPENSRP_ID = "current_opensrp_id";
     public static final String READ_ONLY = "read_only";
-    private static HashMap<String, String> actionMap = null;
     private static final String LOCATION_UUIDS = "location_uuids";
+    private static HashMap<String, String> actionMap = null;
 
     public static Intent getJsonIntent(Context context, JSONObject jsonForm, Class activityClass) {
         Intent intent = new Intent(context, activityClass);
@@ -890,6 +892,8 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
             Event event;
             if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.PARTNER_TESTING)) {
                 event = getEditAncPartnerTesting(baseEntityID);
+            } else if (formName.equalsIgnoreCase(org.smartregister.chw.cdp.util.Constants.FORMS.EDIT_CDP_OUTLET)) {
+                event = getEditOutletRegistration(baseEntityID);
             } else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_PREGNANCY_CONFIRMATION) || formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_TRANSFER_IN_REGISTRATION)) {
                 event = getEditAncRegistration(baseEntityID, eventType);
             } else {
@@ -947,6 +951,25 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
 
         String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s') order by updatedAt desc limit 1;",
                 baseEntityID, CoreConstants.EventType.ANC_PARTNER_TESTING);
+
+        try (Cursor cursor = CoreChwApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
+            cursor.moveToFirst();
+
+            while (!cursor.isAfterLast()) {
+                ecEvent = AssetHandler.jsonStringToJava(cursor.getString(0), Event.class);
+                cursor.moveToNext();
+            }
+        } catch (Exception e) {
+            Timber.e(e, e.toString());
+        }
+        return ecEvent;
+    }
+
+    private static Event getEditOutletRegistration(String baseEntityID) {
+        Event ecEvent = null;
+
+        String query_event = String.format("select json from event where baseEntityId = '%s' and eventType in ('%s') order by updatedAt desc limit 1;",
+                baseEntityID, CDP_OUTLET_REGISTRATION);
 
         try (Cursor cursor = CoreChwApplication.getInstance().getRepository().getReadableDatabase().rawQuery(query_event, new String[]{})) {
             cursor.moveToFirst();
@@ -1079,16 +1102,6 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
         return getFieldJSONObject(field, key);
     }
 
-    private static class NameID {
-        private String name;
-        private int position;
-
-        public NameID(String name, int position) {
-            this.name = name;
-            this.position = position;
-        }
-    }
-
     private static void updateValues(JSONArray jsonArray, List<Obs> observations) throws JSONException {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -1137,6 +1150,16 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
             } catch (Exception e) {
                 Timber.e(e);
             }
+        }
+    }
+
+    private static class NameID {
+        private String name;
+        private int position;
+
+        public NameID(String name, int position) {
+            this.name = name;
+            this.position = position;
         }
     }
 }

@@ -303,7 +303,7 @@ dependencies {
         exclude group: 'xpp3', module: 'xpp3'
     }
 
-    api('org.smartregister:opensrp-client-native-form:3.1.1-NACP-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-native-form:3.1.4-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'com.android.support', module: 'appcompat-v7'
         exclude group: 'com.android.support', module: 'cardview-v7'
@@ -317,7 +317,7 @@ dependencies {
 
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-    api('org.smartregister:opensrp-client-core:1.16.0-NACP-SNAPSHOT') {
+    api('org.smartregister:opensrp-client-core:1.16.1-NACP-SNAPSHOT') {
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
@@ -456,7 +456,7 @@ dependencies {
         exclude group: 'com.nerdstone', module: 'neat-form-core'
     }
 
-    api('org.smartregister:opensrp-chw-cdp:1.0.3-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-chw-cdp:1.0.4-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'

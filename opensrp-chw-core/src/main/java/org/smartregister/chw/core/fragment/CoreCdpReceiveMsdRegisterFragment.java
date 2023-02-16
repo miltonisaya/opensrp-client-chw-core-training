@@ -2,12 +2,12 @@ package org.smartregister.chw.core.fragment;
 
 import android.view.View;
 
-import org.smartregister.chw.cdp.fragment.BaseCdpReceiveMsdRegisterFragment;
+import org.smartregister.chw.cdp.fragment.BaseCdpReceiveFromOrganizationsRegisterFragment;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
 
 import timber.log.Timber;
 
-public class CoreCdpReceiveMsdRegisterFragment extends BaseCdpReceiveMsdRegisterFragment {
+public class CoreCdpReceiveMsdRegisterFragment extends BaseCdpReceiveFromOrganizationsRegisterFragment {
     @Override
     public void setupViews(View view) {
         super.setupViews(view);
