@@ -816,4 +816,6 @@
     <string name="kvp_registration">KVP Screening</string>
     <string name="telephone">"Tel: "</string>
 
+
+    <string name="iccm_enrollment">ICCM Enrollment</string>
 </resources>
