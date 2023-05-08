@@ -1223,6 +1223,7 @@ public class CoreConstants {
         public static final String LTFU_FEEDBACK = "LTFU Community Followup Feedback";
         public static final String KVP_FRIENDLY_SERVICES = "Huduma rafiki kwa makundi maalum";
         public static final String STI_REFERRAL = "STI Services";
+        public static final String ICCM_REFERRAL = "ICCM Services";
     }
 
     public static final class REGISTER_TYPE {
