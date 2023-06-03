@@ -47,7 +47,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-native-form")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-native-form")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -59,7 +59,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-core")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-core")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -71,7 +71,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-referral")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-referral")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -126,7 +126,18 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-hiv")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-hiv")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
+        maven {
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-pmtct")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -317,7 +328,7 @@ dependencies {
 
     compileOnly 'com.ibm.fhir:fhir-model:4.7.0'
 
-    api('org.smartregister:opensrp-client-core:1.16.2-NACP-SNAPSHOT') {
+    api('org.smartregister:opensrp-client-core:1.16.3-NACP-SNAPSHOT') {
         exclude group: 'com.github.bmelnychuk', module: 'atv'
         exclude group: 'com.google.guava', module: 'guava'
         exclude group: 'com.android.support', module: 'appcompat-v7'
