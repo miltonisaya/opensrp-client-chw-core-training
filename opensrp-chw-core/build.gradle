@@ -36,7 +36,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-client-chw-ld")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-client-chw-ld")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -82,7 +82,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-hivst")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-hivst")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -93,7 +93,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-cdp")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-cdp")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -104,7 +104,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-kvp")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-kvp")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
@@ -115,7 +115,7 @@ allprojects {
 
             name = "GitHubPackages"
 
-            url = uri("https://maven.pkg.github.com/SoftmedTanzania/opensrp-chw-agyw")
+            url = uri("https://maven.pkg.github.com/Digital-Square-Tanzania/opensrp-chw-agyw")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
                 password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
