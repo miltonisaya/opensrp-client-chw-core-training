@@ -139,7 +139,7 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 String sqlIccm = "select count (p.base_entity_id) from ec_iccm_enrollment p " +
                         "inner join ec_family_member m on p.base_entity_id = m.base_entity_id COLLATE NOCASE " +
                         "where m.date_removed is null and p.is_closed = 0 " +
-                        " AND datetime('NOW') <= datetime(p.last_interacted_with/1000, 'unixepoch', 'localtime','+1 days')";
+                        " AND date('now') <= date(strftime('%Y-%m-%d', p.last_interacted_with / 1000, 'unixepoch', 'localtime'))";
                 return NavigationDao.getQueryCount(sqlIccm);
 
             case FamilyPlanningConstants.DBConstants.FAMILY_PLANNING_TABLE:
