@@ -136,8 +136,8 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                 return NavigationDao.getQueryCount(sqlMalaria);
 
             case CoreConstants.TABLE_NAME.ICCM_ENROLLMENT:
-                String sqlIccm = "select count (p.base_entity_id) from ec_iccm_enrollment p " +
-                        "inner join ec_family_member m on p.base_entity_id = m.base_entity_id COLLATE NOCASE " +
+                String sqlIccm = "select count (p.entity_id) from ec_iccm_enrollment p " +
+                        "inner join ec_family_member m on p.entity_id = m.base_entity_id COLLATE NOCASE " +
                         "where m.date_removed is null and p.is_closed = 0 " +
                         " AND date('now') <= date(strftime('%Y-%m-%d', p.last_interacted_with / 1000, 'unixepoch', 'localtime'))";
                 return NavigationDao.getQueryCount(sqlIccm);

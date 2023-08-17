@@ -404,7 +404,7 @@ dependencies {
         exclude group: 'id.zelory', module: 'compressor'
     }
 
-    api('org.smartregister:opensrp-client-chw-malaria:1.3.0-NACP-ALPHA-SNAPSHOT@aar') {
+    api('org.smartregister:opensrp-client-chw-malaria:1.3.0-ALPHA-NACP-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
