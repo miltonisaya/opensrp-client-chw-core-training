@@ -506,6 +506,12 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                                 " INNER JOIN task ON  " + mainOrdersTable + "." + "base_entity_id" + " = " + "task" + "." + "for" + " COLLATE NOCASE " +
                                 " where " + sqlCDPOrdersCondition;
                 return NavigationDao.getQueryCount(sqlCDPOrders);
+            case org.smartregister.chw.sbc.util.Constants.TABLES.SBC_REGISTER:
+                String sqlSbc =
+                        "SELECT count(*) " +
+                                "   from " + org.smartregister.chw.sbc.util.Constants.TABLES.SBC_REGISTER + " p " +
+                                "              where p.is_closed is 0 ";
+                return NavigationDao.getQueryCount(sqlSbc);
             default:
                 return NavigationDao.getTableCount(tableName);
         }

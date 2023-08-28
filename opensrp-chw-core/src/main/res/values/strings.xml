@@ -813,6 +813,7 @@
     <string name="agyw_screening">AGYW Screening</string>
     <string name="kvp_prep_registration">KVP Registration</string>
     <string name="prep_registration">PrEP Registration</string>
+    <string name="sbc_registration">SBC Registration</string>
     <string name="kvp_registration">KVP Screening</string>
     <string name="telephone">"Tel: "</string>
 
