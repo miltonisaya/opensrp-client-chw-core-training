@@ -1,5 +1,7 @@
 package org.smartregister.chw.core.sync;
 
+import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_HEALTH_EDUCATION_MOBILIZATION;
+
 import android.content.ContentValues;
 import android.content.Context;
 
@@ -34,6 +36,7 @@ import org.smartregister.chw.fp.util.FpUtil;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.MalariaUtil;
+import org.smartregister.chw.sbc.dao.SbcDao;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -334,6 +337,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case CoreConstants.EventType.MOTHER_CHAMPION_SBCC:
                 processSBCCEvent(eventClient.getEvent());
                 break;
+            case SBC_HEALTH_EDUCATION_MOBILIZATION:
+                processSBCMobilizationEvent(eventClient.getEvent());
+                break;
             case org.smartregister.chw.hivst.util.Constants.EVENT_TYPE.HIVST_MOBILIZATION:
                 processMobilizationEvent(eventClient.getEvent());
                 break;
@@ -493,6 +499,72 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             }
 
             SbccDao.updateData(event.getBaseEntityId(), sbccDate, sbccLocationType, sbccParticipantsNumber);
+        }
+    }
+
+    private void processSBCMobilizationEvent(Event event) {
+        List<Obs> sbcObs = event.getObs();
+        String mobilizationDate = null;
+        String communitySbcActivityProvided = null;
+        String iecMaterialsDistributed = null;
+        String numberAudioVisualsDistributed = null;
+        String numberAudioDistributed = null;
+        String numberPrintMaterialsDistributed = null;
+        String pmtctIecMaterialsDistributed = null;
+        String numberPmtctAudioVisualsDistributedMale = null;
+        String numberPmtctAudioVisualsDistributedFemale = null;
+        String numberPmtctAudioDistributedMale = null;
+        String numberPmtctAudioDistributedFemale = null;
+        String numberPmtctPrintMaterialsDistributedMale = null;
+        String numberPmtctPrintMaterialsDistributedFemale = null;
+
+
+        if (sbcObs.size() > 0) {
+            for (Obs obs : sbcObs) {
+                if ("mobilization_date".equals(obs.getFormSubmissionField())) {
+                    mobilizationDate = (String) obs.getValue();
+                } else if ("community_sbc_activity_provided".equals(obs.getFormSubmissionField())) {
+                    communitySbcActivityProvided = (String) obs.getValue();
+                } else if ("iec_materials_distributed".equals(obs.getFormSubmissionField())) {
+                    iecMaterialsDistributed = (String) obs.getValue();
+                } else if ("number_audio_visuals_distributed".equals(obs.getFormSubmissionField())) {
+                    numberAudioVisualsDistributed = (String) obs.getValue();
+                } else if ("number_audio_distributed".equals(obs.getFormSubmissionField())) {
+                    numberAudioDistributed = (String) obs.getValue();
+                } else if ("number_print_materials_distributed".equals(obs.getFormSubmissionField())) {
+                    numberPrintMaterialsDistributed = (String) obs.getValue();
+                } else if ("pmtct_iec_materials_distributed".equals(obs.getFormSubmissionField())) {
+                    pmtctIecMaterialsDistributed = (String) obs.getValue();
+                } else if ("number_pmtct_audio_visuals_distributed_male".equals(obs.getFormSubmissionField())) {
+                    numberPmtctAudioVisualsDistributedMale = (String) obs.getValue();
+                } else if ("number_pmtct_audio_visuals_distributed_female".equals(obs.getFormSubmissionField())) {
+                    numberPmtctAudioVisualsDistributedFemale = (String) obs.getValue();
+                } else if ("number_pmtct_audio_distributed_male".equals(obs.getFormSubmissionField())) {
+                    numberPmtctAudioDistributedMale = (String) obs.getValue();
+                } else if ("number_pmtct_audio_distributed_female".equals(obs.getFormSubmissionField())) {
+                    numberPmtctAudioDistributedFemale = (String) obs.getValue();
+                } else if ("number_pmtct_print_materials_distributed_male".equals(obs.getFormSubmissionField())) {
+                    numberPmtctPrintMaterialsDistributedMale = (String) obs.getValue();
+                } else if ("number_pmtct_print_materials_distributed_female".equals(obs.getFormSubmissionField())) {
+                    numberPmtctPrintMaterialsDistributedFemale = (String) obs.getValue();
+                }
+            }
+
+            SbcDao.updateSbcMobilization(event.getBaseEntityId(),
+                    mobilizationDate,
+                    communitySbcActivityProvided,
+                    iecMaterialsDistributed,
+                    numberAudioVisualsDistributed,
+                    numberAudioDistributed,
+                    numberPrintMaterialsDistributed,
+                    pmtctIecMaterialsDistributed,
+                    numberPmtctAudioVisualsDistributedMale,
+                    numberPmtctAudioVisualsDistributedFemale,
+                    numberPmtctAudioDistributedMale,
+                    numberPmtctAudioDistributedFemale,
+                    numberPmtctPrintMaterialsDistributedMale,
+                    numberPmtctPrintMaterialsDistributedFemale
+            );
         }
     }
 
