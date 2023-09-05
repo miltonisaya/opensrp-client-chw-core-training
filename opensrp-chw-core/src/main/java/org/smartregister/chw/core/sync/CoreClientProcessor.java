@@ -524,9 +524,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 if ("mobilization_date".equals(obs.getFormSubmissionField())) {
                     mobilizationDate = (String) obs.getValue();
                 } else if ("community_sbc_activity_provided".equals(obs.getFormSubmissionField())) {
-                    communitySbcActivityProvided = (String) obs.getValue();
+                    communitySbcActivityProvided = obs.getValues().toString();
                 } else if ("iec_materials_distributed".equals(obs.getFormSubmissionField())) {
-                    iecMaterialsDistributed = (String) obs.getValue();
+                    iecMaterialsDistributed = obs.getValues().toString();
                 } else if ("number_audio_visuals_distributed".equals(obs.getFormSubmissionField())) {
                     numberAudioVisualsDistributed = (String) obs.getValue();
                 } else if ("number_audio_distributed".equals(obs.getFormSubmissionField())) {
@@ -534,7 +534,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 } else if ("number_print_materials_distributed".equals(obs.getFormSubmissionField())) {
                     numberPrintMaterialsDistributed = (String) obs.getValue();
                 } else if ("pmtct_iec_materials_distributed".equals(obs.getFormSubmissionField())) {
-                    pmtctIecMaterialsDistributed = (String) obs.getValue();
+                    pmtctIecMaterialsDistributed = obs.getValues().toString();
                 } else if ("number_pmtct_audio_visuals_distributed_male".equals(obs.getFormSubmissionField())) {
                     numberPmtctAudioVisualsDistributedMale = (String) obs.getValue();
                 } else if ("number_pmtct_audio_visuals_distributed_female".equals(obs.getFormSubmissionField())) {
