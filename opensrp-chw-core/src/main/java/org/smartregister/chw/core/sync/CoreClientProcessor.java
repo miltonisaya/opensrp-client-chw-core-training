@@ -1,6 +1,7 @@
 package org.smartregister.chw.core.sync;
 
 import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_HEALTH_EDUCATION_MOBILIZATION;
+import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_MONTHLY_SOCIAL_MEDIA_REPORT;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -340,6 +341,9 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case SBC_HEALTH_EDUCATION_MOBILIZATION:
                 processSBCMobilizationEvent(eventClient.getEvent());
                 break;
+            case SBC_MONTHLY_SOCIAL_MEDIA_REPORT:
+                processSBCMonthlySocialMediaReportEvent(eventClient.getEvent());
+                break;
             case org.smartregister.chw.hivst.util.Constants.EVENT_TYPE.HIVST_MOBILIZATION:
                 processMobilizationEvent(eventClient.getEvent());
                 break;
@@ -564,6 +568,48 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     numberPmtctAudioDistributedFemale,
                     numberPmtctPrintMaterialsDistributedMale,
                     numberPmtctPrintMaterialsDistributedFemale
+            );
+        }
+    }
+
+    private void processSBCMonthlySocialMediaReportEvent(Event event) {
+        List<Obs> sbcObs = event.getObs();
+        String reporting_month = null;
+        String organization_name = null;
+        String other_organization_name = null;
+        String social_media_hiv_msg_distribution = null;
+        String number_beneficiaries_reached_facebook = null;
+        String number_messages_publications = null;
+        String number_aired_messages_broadcasted = null;
+
+
+        if (sbcObs.size() > 0) {
+            for (Obs obs : sbcObs) {
+                if ("reporting_month".equals(obs.getFormSubmissionField())) {
+                    reporting_month = (String) obs.getValue();
+                } else if ("organization_name".equals(obs.getFormSubmissionField())) {
+                    organization_name = obs.getValues().toString();
+                } else if ("other_organization_name".equals(obs.getFormSubmissionField())) {
+                    other_organization_name = obs.getValues().toString();
+                } else if ("social_media_hiv_msg_distribution".equals(obs.getFormSubmissionField())) {
+                    social_media_hiv_msg_distribution = (String) obs.getValue();
+                } else if ("number_beneficiaries_reached_facebook".equals(obs.getFormSubmissionField())) {
+                    number_beneficiaries_reached_facebook = (String) obs.getValue();
+                } else if ("number_messages_publications".equals(obs.getFormSubmissionField())) {
+                    number_messages_publications = (String) obs.getValue();
+                } else if ("number_aired_messages_broadcasted".equals(obs.getFormSubmissionField())) {
+                    number_aired_messages_broadcasted = obs.getValues().toString();
+                }
+            }
+
+            SbcDao.updateSbcSocialMediaMonthlyReport(event.getBaseEntityId(),
+                    reporting_month,
+                    organization_name,
+                    other_organization_name,
+                    social_media_hiv_msg_distribution,
+                    number_beneficiaries_reached_facebook,
+                    number_messages_publications,
+                    number_aired_messages_broadcasted
             );
         }
     }
