@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.jeasy.rules.api.Rules;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
-import org.smartregister.chw.anc.domain.Visit;
 import org.smartregister.chw.anc.util.DBConstants;
 import org.smartregister.chw.core.R;
 import org.smartregister.chw.core.rule.FpAlertRule;
@@ -18,6 +17,7 @@ import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.FpUtil;
 import org.smartregister.chw.core.utils.HomeVisitUtil;
 import org.smartregister.chw.fp.dao.FpDao;
+import org.smartregister.chw.fp.domain.Visit;
 import org.smartregister.chw.fp.provider.BaseFpRegisterProvider;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
@@ -107,7 +107,6 @@ public class CoreFpProvider extends BaseFpRegisterProvider {
         private final Context context;
         private FpAlertRule fpAlertRule;
         private Visit lastVisit;
-        private Integer pillCycles;
         private String dayFp;
         private String fpMethod;
 
@@ -122,12 +121,8 @@ public class CoreFpProvider extends BaseFpRegisterProvider {
             String baseEntityID = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.BASE_ENTITY_ID, false);
             dayFp = Utils.getValue(pc.getColumnmaps(), FamilyPlanningConstants.DBConstants.FP_FP_START_DATE, true);
             fpMethod = Utils.getValue(pc.getColumnmaps(), FamilyPlanningConstants.DBConstants.FP_METHOD_ACCEPTED, false);
-            pillCycles = FpDao.getLastPillCycle (baseEntityID, fpMethod);
-            if (fpMethod.equalsIgnoreCase(FamilyPlanningConstants.DBConstants.FP_INJECTABLE)) {
-                lastVisit = FpDao.getLatestInjectionVisit(baseEntityID, fpMethod);
-            } else {
-                lastVisit = FpDao.getLatestFpVisit(baseEntityID, FamilyPlanningConstants.EventType.FP_FOLLOW_UP_VISIT, fpMethod);
-            }
+
+            lastVisit = FpDao.getLatestVisit(baseEntityID);
             return null;
         }
 
@@ -139,7 +134,7 @@ public class CoreFpProvider extends BaseFpRegisterProvider {
                 lastVisitDate = lastVisit.getDate();
             }
             Rules rule = FpUtil.getFpRules(fpMethod);
-            fpAlertRule = HomeVisitUtil.getFpVisitStatus(rule, lastVisitDate, fpDate, pillCycles, fpMethod);
+            fpAlertRule = HomeVisitUtil.getFpVisitStatus(rule, lastVisitDate, fpDate, 0, fpMethod);
             if (fpAlertRule != null
                     && StringUtils.isNotBlank(fpAlertRule.getVisitID())
                     && !fpAlertRule.getButtonStatus().equalsIgnoreCase(CoreConstants.VISIT_STATE.EXPIRED)

@@ -30,7 +30,6 @@ import org.smartregister.chw.core.utils.ReportUtils;
 import org.smartregister.chw.core.utils.StockUsageReportUtils;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
-import org.smartregister.chw.fp.util.FpUtil;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.MalariaUtil;
@@ -229,8 +228,8 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.anc.util.Constants.EVENT_TYPE.ANC_HOME_VISIT_NOT_DONE_UNDO:
             case CoreConstants.EventType.PNC_HOME_VISIT:
             case CoreConstants.EventType.PNC_HOME_VISIT_NOT_DONE:
-            case FamilyPlanningConstants.EventType.FP_FOLLOW_UP_VISIT:
-            case FamilyPlanningConstants.EventType.FAMILY_PLANNING_REGISTRATION:
+            case FamilyPlanningConstants.EVENT_TYPE.FP_FOLLOW_UP_VISIT:
+            case FamilyPlanningConstants.EVENT_TYPE.FP_REGISTRATION:
             case org.smartregister.chw.tb.util.Constants.EventType.FOLLOW_UP_VISIT:
             case org.smartregister.chw.hiv.util.Constants.EventType.FOLLOW_UP_VISIT:
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_OUTLET_VISIT:
@@ -252,24 +251,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
                 processRemoveMember(eventClient.getClient().getBaseEntityId(), event);
                 break;
-            case FamilyPlanningConstants.EventType.FAMILY_PLANNING_CHANGE_METHOD:
-                clientProcessByObs(eventClient, clientClassification, event, "reason_stop_fp_chw", "decided_to_change_method");
-                break;
             case Constants.EVENT_TYPE.MALARIA_FOLLOW_UP_VISIT:
                 clientProcessByObs(eventClient, clientClassification, event, "fever_still", "Yes");
                 if (eventClient.getClient() == null) {
                     return;
                 }
-
                 processEvent(eventClient.getEvent(), eventClient.getClient(), clientClassification);
-                List<Obs> observations = event.getObs();
-                for (Obs obs : observations) {
-                    if (obs.getFormSubmissionField().equals("reason_stop_fp_chw") && !obs.getHumanReadableValues().get(0).equals("decided_to_change_method")) {
-                        processVisitEvent(eventClient);
-                        FpUtil.processChangeFpMethod(eventClient.getClient().getBaseEntityId());
-                        break;
-                    }
-                }
                 break;
             case CoreConstants.EventType.STOCK_USAGE_REPORT:
                 clientProcessStockEvent(event);
@@ -682,9 +669,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             List<Obs> observations = event.getObs();
             for (Obs obs : observations) {
                 if (obs.getFormSubmissionField().equals(formSubmissionField) && !obs.getHumanReadableValues().get(0).equals(humanReadableValues)) {
-                    if (event.getEventType().equals(FamilyPlanningConstants.EventType.FAMILY_PLANNING_CHANGE_METHOD)) {
-                        FpUtil.processChangeFpMethod(eventClient.getClient().getBaseEntityId());
-                    } else if (event.getEventType().equals(Constants.EVENT_TYPE.MALARIA_FOLLOW_UP_VISIT)) {
+                    if (event.getEventType().equals(Constants.EVENT_TYPE.MALARIA_FOLLOW_UP_VISIT)) {
                         org.smartregister.util.Utils.startAsyncTask(new MalariaUtil.CloseMalariaMemberFromRegister(event.getBaseEntityId()), null);
                     }
                     break;
