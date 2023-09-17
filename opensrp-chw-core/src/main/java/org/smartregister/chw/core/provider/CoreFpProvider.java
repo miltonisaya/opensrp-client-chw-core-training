@@ -119,7 +119,7 @@ public class CoreFpProvider extends BaseFpRegisterProvider {
         @Override
         protected Void doInBackground(Void... params) {
             String baseEntityID = Utils.getValue(pc.getColumnmaps(), DBConstants.KEY.BASE_ENTITY_ID, false);
-            dayFp = Utils.getValue(pc.getColumnmaps(), FamilyPlanningConstants.DBConstants.FP_FP_START_DATE, true);
+            dayFp = Utils.getValue(pc.getColumnmaps(), FamilyPlanningConstants.DBConstants.FP_NEXT_APPOINTMENT_DATE, true);
             fpMethod = Utils.getValue(pc.getColumnmaps(), FamilyPlanningConstants.DBConstants.FP_METHOD_ACCEPTED, false);
 
             lastVisit = FpDao.getLatestVisit(baseEntityID);

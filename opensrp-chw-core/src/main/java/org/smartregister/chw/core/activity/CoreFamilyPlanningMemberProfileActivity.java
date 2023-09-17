@@ -85,6 +85,7 @@ public abstract class CoreFamilyPlanningMemberProfileActivity extends BaseFpProf
         showProgressBar(true);
         fpProfilePresenter = new CoreFamilyPlanningProfilePresenter(this, new CoreFamilyPlanningProfileInteractor(), fpMemberObject);
         fetchProfileData();
+        fpProfilePresenter.refreshProfileBottom();
     }
 
     @Override
@@ -241,7 +242,7 @@ public abstract class CoreFamilyPlanningMemberProfileActivity extends BaseFpProf
 
             Rules rule = FpUtil.getFpRules(fpMemberObject.getFpMethod());
 
-            fpAlertRule = HomeVisitUtil.getFpVisitStatus(rule, lastVisitDate, FpUtil.parseFpStartDate(fpMemberObject.getFpStartDate()), 0, fpMemberObject.getFpMethod());
+            fpAlertRule = HomeVisitUtil.getFpVisitStatus(rule, lastVisitDate, FpUtil.parseFpStartDate(fpMemberObject.getFpNextAppointmentDate()), 0, fpMemberObject.getFpMethod());
             return null;
         }
 
