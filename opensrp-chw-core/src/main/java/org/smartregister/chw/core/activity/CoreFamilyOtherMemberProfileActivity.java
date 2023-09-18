@@ -189,21 +189,21 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_ld_registration) {
             startLDRegistration();
             return true;
-        }else if(i == R.id.action_hivst_registration){
+        } else if (i == R.id.action_hivst_registration) {
             startHivstRegistration();
             return true;
-        } else if(i == R.id.action_agyw_screening){
+        } else if (i == R.id.action_agyw_screening) {
             startAgywScreening();
             return true;
-        } else if(i == R.id.action_kvp_prep_registration){
+        } else if (i == R.id.action_kvp_prep_registration) {
             startKvpPrEPRegistration();
             return true;
-        }
-        else if(i == R.id.action_kvp_registration) {
+        } else if (i == R.id.action_kvp_registration) {
             startKvpRegistration();
-        }
-        else if(i == R.id.action_prep_registration) {
+        } else if (i == R.id.action_prep_registration) {
             startPrEPRegistration();
+        } else if (i == R.id.action_sbc_registration) {
+            startSbcRegistration();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -246,6 +246,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startPrEPRegistration();
 
     protected abstract void startAgywScreening();
+
+    protected abstract void startSbcRegistration();
 
     protected abstract void setIndependentClient(boolean isIndependent);
 

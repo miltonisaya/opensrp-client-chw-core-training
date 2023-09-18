@@ -122,6 +122,12 @@ public class NavigationListener implements View.OnClickListener {
                 case CoreConstants.DrawerMenu.REPORTS:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.REPORTS));
                     break;
+                case CoreConstants.DrawerMenu.SBC:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.SBC_REGISTER_ACTIVITY));
+                    break;
+                case CoreConstants.DrawerMenu.SBC_MONTHLY_SOCIAL_MEDIA_REPORT:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.SBC_MONTHLY_SOCIAL_MEDIA_REGISTER_ACTIVITY));
+                    break;
                 default:
                     Utils.showShortToast(activity.getApplicationContext(), "Unspecified navigation action");
                     break;
