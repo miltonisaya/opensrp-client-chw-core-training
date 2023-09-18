@@ -26,8 +26,7 @@ public class FpUtil extends org.smartregister.chw.fp.util.FpUtil {
             case FamilyPlanningConstants.DBConstants.FP_IUCD:
                 fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_IUCD);
                 break;
-            case FamilyPlanningConstants.DBConstants.FP_FEMALE_CONDOM:
-            case FamilyPlanningConstants.DBConstants.FP_MALE_CONDOM:
+            case FamilyPlanningConstants.DBConstants.FP_CONDOM:
                 fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_CONDOM_REFILL);
                 break;
             case FamilyPlanningConstants.DBConstants.FP_INJECTABLE:
