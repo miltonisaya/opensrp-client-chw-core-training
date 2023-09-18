@@ -59,9 +59,9 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected String PhoneNumber;
     protected CommonPersonObjectClient commonPersonObject;
     protected OnClickFloatingMenu onClickFloatingMenu;
+    protected boolean isIndependent;
     private TextView textViewFamilyHas;
     private RelativeLayout layoutFamilyHasRow;
-    protected boolean isIndependent;
 
     @Override
     protected void onCreation() {
@@ -150,13 +150,10 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_fp_initiation) {
             startFpRegister();
             return true;
-        } else if (i == R.id.action_fp_change) {
-            startFpChangeMethod();
-            return true;
         } else if (i == R.id.action_malaria_registration) {
             startMalariaRegister();
             return true;
-        }  else if (i == R.id.action_iccm_registration) {
+        } else if (i == R.id.action_iccm_registration) {
             startIntegratedCommunityCaseManagementEnrollment();
             return true;
         } else if (i == R.id.action_malaria_followup_visit) {
@@ -218,8 +215,6 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startPncRegister();
 
     protected abstract void startFpRegister();
-
-    protected abstract void startFpChangeMethod();
 
     protected abstract void startMalariaRegister();
 
