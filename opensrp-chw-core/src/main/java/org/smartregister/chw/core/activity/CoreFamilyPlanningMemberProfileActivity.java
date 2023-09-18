@@ -162,7 +162,7 @@ public abstract class CoreFamilyPlanningMemberProfileActivity extends BaseFpProf
 
             @Override
             public void onNext(Visit visit) {
-//                        onMemberDetailsReloaded(fpMemberObject);
+                //onMemberDetailsReloaded(fpMemberObject);
             }
 
             @Override

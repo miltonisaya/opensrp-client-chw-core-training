@@ -211,11 +211,11 @@ public abstract class CoreFpRegisterFragment extends BaseFpRegisterFragment {
 
 
             StringBuilder query = new StringBuilder(generator.generateQuery());
-//            if (dueFilterActive)
-//                query.append(getDueCondition());
+            //if (dueFilterActive)
+            //  query.append(getDueCondition());
 
-//            if (StringUtils.isNotBlank(filters))
-//                query.append(getSearchFilter(filters));
+            //f (StringUtils.isNotBlank(filters))
+            //  query.append(getSearchFilter(filters));
 
             cursor = commonRepository().rawCustomQueryForAdapter(query.toString());
             cursor.moveToFirst();
