@@ -313,6 +313,38 @@ public class NavigationInteractor implements NavigationContract.Interactor {
                         "             SELECT ec_family_planning.base_entity_id AS base_entity_id\n" +
                         "             FROM ec_family_planning\n" +
                         "         )\n" +
+                        "  UNION ALL\n" +
+                        "\n" +
+                        "/*ONLY SBC clients*/\n" +
+                        " SELECT  COUNT(*) AS c\n" +
+                        " FROM ec_family_member\n" +
+                        "         inner join ec_family on ec_family.base_entity_id = ec_family_member.relational_id\n" +
+                        "         inner join ec_sbc_register\n" +
+                        "                    on ec_family_member.base_entity_id = ec_sbc_register.base_entity_id\n" +
+                        " WHERE ec_family_member.date_removed is null\n" +
+                        "  AND ec_sbc_register.is_closed is 0\n" +
+                        "  AND ec_family_member.base_entity_id NOT IN (\n" +
+                        "    SELECT ec_kvp_prep_register.base_entity_id AS base_entity_id\n" +
+                        "    FROM ec_kvp_prep_register where ec_kvp_prep_register.is_closed is 0\n" +
+                        "    UNION ALL\n" +
+                        "    SELECT ec_anc_register.base_entity_id AS base_entity_id\n" +
+                        "    FROM ec_anc_register\n" +
+                        "    UNION ALL\n" +
+                        "    SELECT ec_pregnancy_outcome.base_entity_id AS base_entity_id\n" +
+                        "    FROM ec_pregnancy_outcome\n" +
+                        "    UNION ALL\n" +
+                        "    SELECT ec_child.base_entity_id AS base_entity_id\n" +
+                        "    FROM ec_child\n" +
+                        "    UNION ALL\n" +
+                        "    SELECT ec_malaria_confirmation.base_entity_id AS base_entity_id\n" +
+                        "    FROM ec_malaria_confirmation\n" +
+                        "    UNION ALL\n" +
+                        "    SELECT ec_tb_register.base_entity_id AS base_entity_id\n" +
+                        "    FROM ec_tb_register\n" +
+                        "    WHERE ec_tb_register.tb_case_closure_date is null\n" +
+                        "    UNION ALL\n" +
+                        "    SELECT ec_cbhs_register.base_entity_id AS base_entity_id\n" +
+                        "    FROM ec_cbhs_register)\n" +
                         "         UNION ALL\n" +
                         "/**COUNT FAMILY_PLANNING CLIENTS*/\n" +
                         "         SELECT COUNT(*) AS c\n" +
