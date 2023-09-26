@@ -497,7 +497,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         List<Obs> sbcObs = event.getObs();
         String mobilizationDate = null;
         String communitySbcActivityProvided = null;
-        String iecMaterialsDistributed = null;
+        String otherInterventionsIecMaterialsDistributed = null;
         String numberAudioVisualsDistributed = null;
         String numberAudioDistributed = null;
         String numberPrintMaterialsDistributed = null;
@@ -516,8 +516,8 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     mobilizationDate = (String) obs.getValue();
                 } else if ("community_sbc_activity_provided".equals(obs.getFormSubmissionField())) {
                     communitySbcActivityProvided = obs.getValues().toString();
-                } else if ("iec_materials_distributed".equals(obs.getFormSubmissionField())) {
-                    iecMaterialsDistributed = obs.getValues().toString();
+                } else if ("other_interventions_iec_materials_distributed".equals(obs.getFormSubmissionField())) {
+                    otherInterventionsIecMaterialsDistributed = obs.getValues().toString();
                 } else if ("number_audio_visuals_distributed".equals(obs.getFormSubmissionField())) {
                     numberAudioVisualsDistributed = (String) obs.getValue();
                 } else if ("number_audio_distributed".equals(obs.getFormSubmissionField())) {
@@ -544,7 +544,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             SbcDao.updateSbcMobilization(event.getBaseEntityId(),
                     mobilizationDate,
                     communitySbcActivityProvided,
-                    iecMaterialsDistributed,
+                    otherInterventionsIecMaterialsDistributed,
                     numberAudioVisualsDistributed,
                     numberAudioDistributed,
                     numberPrintMaterialsDistributed,
