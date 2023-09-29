@@ -1217,7 +1217,7 @@ public class CoreConstants {
         public static final String ANC_DANGER_SIGNS = "ANC Danger Signs";
         public static final String PREGNANCY_CONFIRMATION = "Pregnancy Confirmation";
         public static final String PNC_DANGER_SIGNS = "PNC Danger Signs";
-        public static final String FP_SIDE_EFFECTS = "FP Initiation";
+        public static final String FP_SIDE_EFFECTS = "FP Referral";
         public static final String SUSPECTED_MALARIA = "Suspected Malaria";
         public static final String CONVENTIONAL_HIV_TEST = "Conventional HIV Test";
         public static final String SICK_HIV = "HIV Treatment and Care";
