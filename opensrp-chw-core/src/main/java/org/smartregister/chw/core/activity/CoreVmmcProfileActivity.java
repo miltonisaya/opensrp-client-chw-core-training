@@ -56,7 +56,7 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
     private OnMemberTypeLoadedListener onMemberTypeLoadedListener;
 
     public interface OnMemberTypeLoadedListener {
-        void onMemberTypeLoaded(CoreVmmcProfileActivity.MemberType memberType);
+        void onMemberTypeLoaded(MemberType memberType);
     }
 
     public static class MemberType {
@@ -241,14 +241,14 @@ public abstract class CoreVmmcProfileActivity extends BaseVmmcProfileActivity im
         final Disposable[] disposable = new Disposable[1];
         getMemberType().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<CoreVmmcProfileActivity.MemberType>() {
+                .subscribe(new Observer<MemberType>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         disposable[0] = d;
                     }
 
                     @Override
-                    public void onNext(CoreVmmcProfileActivity.MemberType memberType) {
+                    public void onNext(MemberType memberType) {
                         listener.onMemberTypeLoaded(memberType);
                     }
 
