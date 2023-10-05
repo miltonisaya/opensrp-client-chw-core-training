@@ -59,12 +59,12 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
 
     @Override
     protected void startVmmcRegister() {
-
+        //TODO implement start vmmc register for HF
     }
 
     @Override
     protected void startIntegratedCommunityCaseManagementEnrollment() {
-
+        //TODO implement start startIntegratedCommunityCaseManagementEnrollment register for HF
     }
 
     @Override
@@ -109,22 +109,22 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
 
     @Override
     protected void startKvpPrEPRegistration() {
-
+        //TODO implement startKvpPrEPRegistration
     }
 
     @Override
     protected void startKvpRegistration() {
-
+        //TODO implement startKvpRegistration
     }
 
     @Override
     protected void startPrEPRegistration() {
-
+        //TODO implement startPrEPRegistration
     }
 
     @Override
     protected void startAgywScreening() {
-
+        //TODO implement startAgywScreening
     }
 
     @Override
