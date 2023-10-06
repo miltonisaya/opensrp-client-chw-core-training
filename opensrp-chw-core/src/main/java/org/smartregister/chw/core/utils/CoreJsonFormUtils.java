@@ -1011,7 +1011,7 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
 
     public static Intent getAncPncStartFormIntent(JSONObject jsonForm, Context context) {
         Intent intent = new Intent(context, org.smartregister.family.util.Utils.metadata().familyMemberFormActivity);
-        intent.putExtra(org.smartregister.family.util.Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
+        intent.putExtra(Constants.JSON_FORM_EXTRA.JSON, jsonForm.toString());
 
         Form form = new Form();
         form.setActionBarBackground(R.color.family_actionbar);
