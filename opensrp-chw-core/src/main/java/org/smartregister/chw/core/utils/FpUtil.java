@@ -18,25 +18,27 @@ public class FpUtil extends org.smartregister.chw.fp.util.FpUtil {
     public static Rules getFpRules(String fpMethod) {
         Rules fpRule = new Rules();
 
-        switch (fpMethod) {
-            case FamilyPlanningConstants.DBConstants.FP_POP:
-            case FamilyPlanningConstants.DBConstants.FP_COC:
-                fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_COC_POP_REFILL);
-                break;
-            case FamilyPlanningConstants.DBConstants.FP_IUCD:
-                fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_IUCD);
-                break;
-            case FamilyPlanningConstants.DBConstants.FP_CONDOM:
-                fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_CONDOM_REFILL);
-                break;
-            case FamilyPlanningConstants.DBConstants.FP_INJECTABLE:
-                fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_INJECTION_DUE);
-                break;
-            case FamilyPlanningConstants.DBConstants.FP_FEMALE_STERLIZATION:
-                fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_FEMALE_STERILIZATION);
-                break;
-            default:
-                break;
+        if (fpMethod != null) {
+            switch (fpMethod) {
+                case FamilyPlanningConstants.DBConstants.FP_POP:
+                case FamilyPlanningConstants.DBConstants.FP_COC:
+                    fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_COC_POP_REFILL);
+                    break;
+                case FamilyPlanningConstants.DBConstants.FP_IUCD:
+                    fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_IUCD);
+                    break;
+                case FamilyPlanningConstants.DBConstants.FP_CONDOM:
+                    fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_CONDOM_REFILL);
+                    break;
+                case FamilyPlanningConstants.DBConstants.FP_INJECTABLE:
+                    fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_INJECTION_DUE);
+                    break;
+                case FamilyPlanningConstants.DBConstants.FP_FEMALE_STERLIZATION:
+                    fpRule = CoreChwApplication.getInstance().getRulesEngineHelper().rules(CoreConstants.RULE_FILE.FP_FEMALE_STERILIZATION);
+                    break;
+                default:
+                    break;
+            }
         }
         return fpRule;
     }
@@ -44,7 +46,7 @@ public class FpUtil extends org.smartregister.chw.fp.util.FpUtil {
     public static Date parseFpStartDate(String startDate) {
         try {
             return sdf.parse(startDate);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             Timber.e(e);
         }
 

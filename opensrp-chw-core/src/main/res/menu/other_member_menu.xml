@@ -69,6 +69,13 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_fp_ecp_provision"
+        android:enabled="true"
+        android:title="@string/family_planning_ecp_provision"
+        android:visible="false"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_fp_change"
         android:enabled="true"
         android:title="@string/family_planning_change"
