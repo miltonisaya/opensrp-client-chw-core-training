@@ -122,6 +122,9 @@ public class NavigationListener implements View.OnClickListener {
                 case CoreConstants.DrawerMenu.REPORTS:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.REPORTS));
                     break;
+                case CoreConstants.DrawerMenu.VMMC:
+                    startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.VMMC_REGISTER_ACTIVITY));
+                    break;
                 case CoreConstants.DrawerMenu.SBC:
                     startRegisterActivity(getActivity(CoreConstants.REGISTERED_ACTIVITIES.SBC_REGISTER_ACTIVITY));
                     break;

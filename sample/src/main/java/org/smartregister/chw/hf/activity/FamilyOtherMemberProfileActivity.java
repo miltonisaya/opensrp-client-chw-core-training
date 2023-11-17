@@ -16,7 +16,6 @@ import org.smartregister.chw.hf.R;
 import org.smartregister.chw.hf.custom_view.FamilyMemberFloatingMenu;
 import org.smartregister.chw.hf.fragment.FamilyOtherMemberProfileFragment;
 import org.smartregister.chw.hf.presenter.FamilyOtherMemberActivityPresenter;
-import org.smartregister.chw.malaria.dao.MalariaDao;
 import org.smartregister.commonregistry.CommonPersonObjectClient;
 import org.smartregister.family.fragment.BaseFamilyOtherMemberProfileFragment;
 import org.smartregister.family.model.BaseFamilyOtherMemberProfileActivityModel;
@@ -59,6 +58,16 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     }
 
     @Override
+    protected void startVmmcRegister() {
+        //TODO implement start vmmc register for HF
+    }
+
+    @Override
+    protected void startIntegratedCommunityCaseManagementEnrollment() {
+        //TODO implement start startIntegratedCommunityCaseManagementEnrollment register for HF
+    }
+
+    @Override
     protected void startHivRegister() {
         //TODO implement start hiv register for HF
     }
@@ -96,6 +105,26 @@ public class FamilyOtherMemberProfileActivity extends CoreFamilyOtherMemberProfi
     @Override
     protected void  startHivstRegistration(){
         //TODO implement in HF and CHW
+    }
+
+    @Override
+    protected void startKvpPrEPRegistration() {
+        //TODO implement startKvpPrEPRegistration
+    }
+
+    @Override
+    protected void startKvpRegistration() {
+        //TODO implement startKvpRegistration
+    }
+
+    @Override
+    protected void startPrEPRegistration() {
+        //TODO implement startPrEPRegistration
+    }
+
+    @Override
+    protected void startAgywScreening() {
+        //TODO implement startAgywScreening
     }
 
     @Override
