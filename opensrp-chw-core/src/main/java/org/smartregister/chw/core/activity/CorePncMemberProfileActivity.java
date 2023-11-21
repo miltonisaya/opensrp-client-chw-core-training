@@ -1,5 +1,9 @@
 package org.smartregister.chw.core.activity;
 
+import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
+import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
+import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -8,6 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONObject;
 import org.smartregister.chw.anc.domain.MemberObject;
@@ -34,14 +42,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import timber.log.Timber;
-
-import static org.smartregister.chw.core.utils.CoreJsonFormUtils.getAutoPopulatedJsonEditFormString;
-import static org.smartregister.chw.core.utils.Utils.getCommonPersonObjectClient;
-import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
 
 public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileActivity implements CorePncMemberProfileContract.View {
 
@@ -93,9 +94,6 @@ public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileA
         } else if (itemId == R.id.action_tb_registration) {
             startTbRegister();
             return true;
-        } else if (itemId == R.id.action_fp_change) {
-            startFpChangeMethod();
-            return true;
         } else if (itemId == R.id.action__pnc_remove_member) {
             removePncMember();
             return true;
@@ -114,11 +112,10 @@ public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileA
 
     protected Intent getPNCIntent() {
         JSONObject form;
-        if(UpdateDetailsUtil.isIndependentClient(baseEntityID)){
+        if (UpdateDetailsUtil.isIndependentClient(baseEntityID)) {
             form = CoreJsonFormUtils.getAncPncForm(R.string.registration_info, CoreConstants.JSON_FORM.getAllClientUpdateRegistrationInfoForm(), memberObject, this);
-        }
-        else {
-             form = CoreJsonFormUtils.getAncPncForm(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getFamilyMemberRegister(), memberObject, this);
+        } else {
+            form = CoreJsonFormUtils.getAncPncForm(R.string.edit_member_form_title, CoreConstants.JSON_FORM.getFamilyMemberRegister(), memberObject, this);
         }
         return CoreJsonFormUtils.getAncPncStartFormIntent(form, this);
     }
@@ -271,8 +268,6 @@ public abstract class CorePncMemberProfileActivity extends BasePncMemberProfileA
     protected abstract void startMalariaRegister();
 
     protected abstract void startFpRegister();
-
-    protected abstract void startFpChangeMethod();
 
     protected abstract void startMalariaFollowUpVisit();
 

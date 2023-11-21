@@ -182,7 +182,7 @@ public class FpAlertRule implements ICommonRule {
                     }
                 }
             } else {
-                if (!(fpMethod.equalsIgnoreCase(FamilyPlanningConstants.DBConstants.FP_MALE_CONDOM)) && !(fpMethod.equalsIgnoreCase(FamilyPlanningConstants.DBConstants.FP_FEMALE_CONDOM))) {
+                if (!(fpMethod.equalsIgnoreCase(FamilyPlanningConstants.DBConstants.FP_CONDOM))) {
                     if (currentDate.isBefore(overDueDate) && (currentDate.isAfter(dueDate) || currentDate.isEqual(dueDate)))
                         return CoreConstants.VISIT_STATE.DUE;
                     if (currentDate.isAfter(overDueDate) || currentDate.isEqual(overDueDate))
