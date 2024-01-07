@@ -189,6 +189,18 @@ allprojects {
             }
         }
 
+
+        maven {
+
+            name = "GitHubPackages"
+
+            url = uri("https://maven.pkg.github.com/AbtPS3/opensrp-client-chw-gbv")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
+            }
+        }
+
     }
 }
 
@@ -567,6 +579,15 @@ dependencies {
     }
 
     api('org.smartregister:opensrp-chw-vmmc:1.0.0-SNAPSHOT@aar') {
+        transitive = true
+        exclude group: 'org.smartregister', module: 'opensrp-client-core'
+        exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
+        exclude group: 'org.smartregister', module: 'opensrp-client-configurable-views'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'id.zelory', module: 'compressor'
+    }
+
+    api('org.smartregister:opensrp-chw-gbv:1.0.0-SNAPSHOT@aar') {
         transitive = true
         exclude group: 'org.smartregister', module: 'opensrp-client-core'
         exclude group: 'org.smartregister', module: 'opensrp-client-native-form'
