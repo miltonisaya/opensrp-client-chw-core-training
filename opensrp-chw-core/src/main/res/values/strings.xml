@@ -818,6 +818,7 @@
     <string name="sbc_registration">SBC Registration</string>
     <string name="kvp_registration">KVP Screening</string>
     <string name="telephone">"Tel: "</string>
+    <string name="gbv_registration">GBV Registration</string>
 
 
     <string name="iccm_enrollment">ICCM Services</string>
