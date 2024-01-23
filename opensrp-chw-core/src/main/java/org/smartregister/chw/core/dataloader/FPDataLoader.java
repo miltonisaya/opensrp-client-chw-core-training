@@ -24,15 +24,14 @@ public class FPDataLoader extends NativeFormsDataLoader {
     public void bindNativeFormsMetaData(@NotNull JSONObject jsonObjectForm, Context context, String baseEntityID) throws JSONException {
         super.bindNativeFormsMetaData(jsonObjectForm, context, baseEntityID);
         JSONObject stepOne = jsonObjectForm.getJSONObject("step1");
-        if (StringUtils.isNotBlank(title))
-            stepOne.put("title", title);
+        if (StringUtils.isNotBlank(title)) stepOne.put("title", title);
     }
 
     @Override
     public List<String> getEventTypes() {
         List<String> eventTypeList = new ArrayList<>();
-        eventTypeList.add(FamilyPlanningConstants.EventType.FAMILY_PLANNING_REGISTRATION);
-        eventTypeList.add(FamilyPlanningConstants.EventType.UPDATE_FAMILY_PLANNING_REGISTRATION);
+        eventTypeList.add(FamilyPlanningConstants.EVENT_TYPE.FP_REGISTRATION);
+        eventTypeList.add(FamilyPlanningConstants.EVENT_TYPE.UPDATE_FP_REGISTRATION);
         return eventTypeList;
     }
 

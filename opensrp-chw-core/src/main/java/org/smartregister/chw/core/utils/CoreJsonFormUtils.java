@@ -899,7 +899,7 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
             } else if (formName.equalsIgnoreCase(org.smartregister.chw.cdp.util.Constants.FORMS.EDIT_CDP_OUTLET)) {
                 event = getEditOutletRegistration(baseEntityID);
             } else if (formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_PREGNANCY_CONFIRMATION) || formName.equalsIgnoreCase(CoreConstants.JSON_FORM.ANC_TRANSFER_IN_REGISTRATION)) {
-                event = getEditAncRegistration(baseEntityID, eventType);
+                event = getEditEvent(baseEntityID, eventType);
             } else {
                 event = getEditAncLatestProperties(baseEntityID);
             }
@@ -988,7 +988,7 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
         return ecEvent;
     }
 
-    private static Event getEditAncRegistration(String baseEntityID, String eventType) {
+    public static Event getEditEvent(String baseEntityID, String eventType) {
 
         Event ecEvent = null;
 
@@ -1106,7 +1106,7 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
         return getFieldJSONObject(field, key);
     }
 
-    private static void updateValues(JSONArray jsonArray, List<Obs> observations) throws JSONException {
+    public static void updateValues(JSONArray jsonArray, List<Obs> observations) throws JSONException {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             if (jsonObject.getString(KEY).equalsIgnoreCase("last_menstrual_period") ||
@@ -1131,9 +1131,13 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
                                 x--;
                             }
 
-                            String val = String.valueOf(obs.getValues().get(0));
-                            List<String> checkedList = new ArrayList<>(Arrays.asList(val.split(", ")));
-                            if (checkedList.size() > 1) {
+
+                            List<String> checkedList = new ArrayList<>();
+                            for (Object obj : obs.getValues()) {
+                                checkedList.add(obj.toString());
+                            }
+
+                            if (checkedList.size() > 0) {
                                 for (String item : checkedList) {
                                     NameID nid = valueMap.get(item);
                                     if (nid != null) {
@@ -1141,7 +1145,7 @@ public class CoreJsonFormUtils extends org.smartregister.family.util.JsonFormUti
                                     }
                                 }
                             } else {
-                                NameID nid = valueMap.get(val);
+                                NameID nid = valueMap.get(obs.getValues().get(0).toString());
                                 if (nid != null) {
                                     options.getJSONObject(nid.position).put(JsonFormConstants.VALUE, true);
                                 }

@@ -59,9 +59,9 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected String PhoneNumber;
     protected CommonPersonObjectClient commonPersonObject;
     protected OnClickFloatingMenu onClickFloatingMenu;
+    protected boolean isIndependent;
     private TextView textViewFamilyHas;
     private RelativeLayout layoutFamilyHasRow;
-    protected boolean isIndependent;
 
     @Override
     protected void onCreation() {
@@ -150,18 +150,17 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_fp_initiation) {
             startFpRegister();
             return true;
-        } else if (i == R.id.action_fp_change) {
-            startFpChangeMethod();
+        } else if (i == R.id.action_fp_ecp_provision) {
+            startFpEcpScreening();
             return true;
         } else if (i == R.id.action_malaria_registration) {
             startMalariaRegister();
             return true;
-        }
-        else if (i == R.id.action_vmmc_registration) {
-            startVmmcRegister();
-            return true;
-        }  else if (i == R.id.action_iccm_registration) {
+        } else if (i == R.id.action_iccm_registration) {
             startIntegratedCommunityCaseManagementEnrollment();
+            return true;
+        } else if (i == R.id.action_vmmc_registration) {
+            startVmmcRegister();
             return true;
         } else if (i == R.id.action_malaria_followup_visit) {
             startMalariaFollowUpVisit();
@@ -193,21 +192,21 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
         } else if (i == R.id.action_ld_registration) {
             startLDRegistration();
             return true;
-        }else if(i == R.id.action_hivst_registration){
+        } else if (i == R.id.action_hivst_registration) {
             startHivstRegistration();
             return true;
-        } else if(i == R.id.action_agyw_screening){
+        } else if (i == R.id.action_agyw_screening) {
             startAgywScreening();
             return true;
-        } else if(i == R.id.action_kvp_prep_registration){
+        } else if (i == R.id.action_kvp_prep_registration) {
             startKvpPrEPRegistration();
             return true;
-        }
-        else if(i == R.id.action_kvp_registration) {
+        } else if (i == R.id.action_kvp_registration) {
             startKvpRegistration();
-        }
-        else if(i == R.id.action_prep_registration) {
+        } else if (i == R.id.action_prep_registration) {
             startPrEPRegistration();
+        } else if (i == R.id.action_sbc_registration) {
+            startSbcRegistration();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -223,7 +222,7 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
 
     protected abstract void startFpRegister();
 
-    protected abstract void startFpChangeMethod();
+    protected abstract void startFpEcpScreening();
 
     protected abstract void startMalariaRegister();
 
@@ -253,6 +252,8 @@ public abstract class CoreFamilyOtherMemberProfileActivity extends BaseFamilyOth
     protected abstract void startPrEPRegistration();
 
     protected abstract void startAgywScreening();
+
+    protected abstract void startSbcRegistration();
 
     protected abstract void setIndependentClient(boolean isIndependent);
 

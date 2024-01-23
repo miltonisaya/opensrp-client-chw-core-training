@@ -264,8 +264,8 @@ public class CoreConstants {
         private static final String MALE_FAMILY_PLANNING_REFERRAL_FORM = "male_fp_referral_form";
         private static final String MALARIA_REFERRAL_FORM = "referrals/malaria_referral_form";
         private static final String ANC_DANGER_SIGNS_OUTCOME_FORM = "anc_danger_signs_outcome";
-        private static final String FEMALE_FAMILY_PLANNING_REGISTRATION_FORM = "female_family_planning_registration";
-        private static final String MALE_FAMILY_PLANNING_REGISTRATION_FORM = "male_family_planning_registration";
+        private static final String FEMALE_FAMILY_PLANNING_REGISTRATION_FORM = "fp_enrollment";
+        private static final String MALE_FAMILY_PLANNING_REGISTRATION_FORM = "fp_enrollment";
         private static final String FEMALE_FAMILY_PLANNING_CHANGE_METHOD_FORM = "female_family_planning_change_method";
         private static final String MALE_FAMILY_PLANNING_CHANGE_METHOD_FORM = "male_family_planning_change_method";
         private static final String PNC_DANGER_SIGNS_OUTCOME_FORM = "pnc_danger_signs_outcome";
@@ -956,6 +956,10 @@ public class CoreConstants {
         public static final String KVP = "KVP";
         public static final String PrEP = "PrEP";
         public static final String AGYW = "AGYW";
+
+        public static final String SBC = "SBC";
+
+        public static final String SBC_MONTHLY_SOCIAL_MEDIA_REPORT = "SBC MONTHLY SOCIAL MEDIA REPORT";
     }
 
     public static final class RULE_FILE {
@@ -1212,6 +1216,9 @@ public class CoreConstants {
         public static final String KVP_REGISTER_ACTIVITY = "KVP_REGISTER_ACTIVITY";
         public static final String PrEP_REGISTER_ACTIVITY = "PrEP_REGISTER_ACTIVITY";
         public static final String AGYW_REGISTER_ACTIVITY = "AGYW_REGISTER_ACTIVITY";
+
+        public static final String SBC_REGISTER_ACTIVITY = "SBC_REGISTER_ACTIVITY";
+        public static final String SBC_MONTHLY_SOCIAL_MEDIA_REGISTER_ACTIVITY = "SBC_MONTHLY_SOCIAL_MEDIA_REPORT_REGISTER_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {
@@ -1227,7 +1234,7 @@ public class CoreConstants {
         public static final String ANC_DANGER_SIGNS = "ANC Danger Signs";
         public static final String PREGNANCY_CONFIRMATION = "Pregnancy Confirmation";
         public static final String PNC_DANGER_SIGNS = "PNC Danger Signs";
-        public static final String FP_SIDE_EFFECTS = "FP Initiation";
+        public static final String FP_SIDE_EFFECTS = "FP Referral";
         public static final String SUSPECTED_MALARIA = "Suspected Malaria";
         public static final String CONVENTIONAL_HIV_TEST = "Conventional HIV Test";
         public static final String SICK_HIV = "HIV Treatment and Care";
@@ -1262,6 +1269,9 @@ public class CoreConstants {
         public static final String AGYW = "AGYW";
         public static final String KVP = "KVP";
         public static final String KVP_PrEP = "KVP/PrEP";
+
+        public static final String SBC = "SBC";
+
         public static final String VMMC = "VMMC";
 
     }

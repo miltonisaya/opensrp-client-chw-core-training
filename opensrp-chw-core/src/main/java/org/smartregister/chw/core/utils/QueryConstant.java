@@ -117,6 +117,9 @@ public interface QueryConstant {
             "    SELECT ec_family_planning.base_entity_id AS base_entity_id\n" +
             "    FROM ec_family_planning\n" +
             "    UNION ALL\n" +
+            "    SELECT ec_sbc_register.base_entity_id AS base_entity_id\n" +
+            "    FROM ec_sbc_register\n" +
+            "    UNION ALL\n" +
             "    SELECT ec_tb_register.base_entity_id AS base_entity_id\n" +
             "    FROM ec_tb_register\n" +
             "    WHERE ec_tb_register.tb_case_closure_date is null\n" +
@@ -198,6 +201,9 @@ public interface QueryConstant {
             "    UNION ALL\n" +
             "    SELECT ec_family_planning.base_entity_id AS base_entity_id\n" +
             "    FROM ec_family_planning\n" +
+            "    UNION ALL\n" +
+            "    SELECT ec_sbc_register.base_entity_id AS base_entity_id\n" +
+            "    FROM ec_sbc_register\n" +
             "    UNION ALL\n" +
             "    SELECT ec_tb_register.base_entity_id AS base_entity_id\n" +
             "    FROM ec_tb_register\n" +

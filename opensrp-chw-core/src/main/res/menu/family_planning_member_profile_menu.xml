@@ -39,6 +39,14 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_fp_ecp_provision"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/family_planning_ecp_provision"
+        android:orderInCategory="1000"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_remove_member"
         android:enabled="true"
         android:title="@string/remove_this_person"

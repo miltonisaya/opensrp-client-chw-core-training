@@ -1,5 +1,8 @@
 package org.smartregister.chw.core.sync;
 
+import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_HEALTH_EDUCATION_MOBILIZATION;
+import static org.smartregister.chw.sbc.util.Constants.EVENT_TYPE.SBC_MONTHLY_SOCIAL_MEDIA_REPORT;
+
 import android.content.ContentValues;
 import android.content.Context;
 
@@ -30,10 +33,10 @@ import org.smartregister.chw.core.utils.ReportUtils;
 import org.smartregister.chw.core.utils.StockUsageReportUtils;
 import org.smartregister.chw.core.utils.Utils;
 import org.smartregister.chw.fp.util.FamilyPlanningConstants;
-import org.smartregister.chw.fp.util.FpUtil;
 import org.smartregister.chw.hivst.dao.HivstMobilizationDao;
 import org.smartregister.chw.malaria.util.Constants;
 import org.smartregister.chw.malaria.util.MalariaUtil;
+import org.smartregister.chw.sbc.dao.SbcDao;
 import org.smartregister.clientandeventmodel.DateUtil;
 import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
@@ -229,8 +232,8 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             case org.smartregister.chw.anc.util.Constants.EVENT_TYPE.ANC_HOME_VISIT_NOT_DONE_UNDO:
             case CoreConstants.EventType.PNC_HOME_VISIT:
             case CoreConstants.EventType.PNC_HOME_VISIT_NOT_DONE:
-            case FamilyPlanningConstants.EventType.FP_FOLLOW_UP_VISIT:
-            case FamilyPlanningConstants.EventType.FAMILY_PLANNING_REGISTRATION:
+            case FamilyPlanningConstants.EVENT_TYPE.FP_FOLLOW_UP_VISIT:
+            case FamilyPlanningConstants.EVENT_TYPE.FP_REGISTRATION:
             case org.smartregister.chw.tb.util.Constants.EventType.FOLLOW_UP_VISIT:
             case org.smartregister.chw.hiv.util.Constants.EventType.FOLLOW_UP_VISIT:
             case org.smartregister.chw.cdp.util.Constants.EVENT_TYPE.CDP_OUTLET_VISIT:
@@ -252,24 +255,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 }
                 processRemoveMember(eventClient.getClient().getBaseEntityId(), event);
                 break;
-            case FamilyPlanningConstants.EventType.FAMILY_PLANNING_CHANGE_METHOD:
-                clientProcessByObs(eventClient, clientClassification, event, "reason_stop_fp_chw", "decided_to_change_method");
-                break;
             case Constants.EVENT_TYPE.MALARIA_FOLLOW_UP_VISIT:
                 clientProcessByObs(eventClient, clientClassification, event, "fever_still", "Yes");
                 if (eventClient.getClient() == null) {
                     return;
                 }
-
                 processEvent(eventClient.getEvent(), eventClient.getClient(), clientClassification);
-                List<Obs> observations = event.getObs();
-                for (Obs obs : observations) {
-                    if (obs.getFormSubmissionField().equals("reason_stop_fp_chw") && !obs.getHumanReadableValues().get(0).equals("decided_to_change_method")) {
-                        processVisitEvent(eventClient);
-                        FpUtil.processChangeFpMethod(eventClient.getClient().getBaseEntityId());
-                        break;
-                    }
-                }
                 break;
             case CoreConstants.EventType.STOCK_USAGE_REPORT:
                 clientProcessStockEvent(event);
@@ -333,6 +324,12 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                 break;
             case CoreConstants.EventType.MOTHER_CHAMPION_SBCC:
                 processSBCCEvent(eventClient.getEvent());
+                break;
+            case SBC_HEALTH_EDUCATION_MOBILIZATION:
+                processSBCMobilizationEvent(eventClient.getEvent());
+                break;
+            case SBC_MONTHLY_SOCIAL_MEDIA_REPORT:
+                processSBCMonthlySocialMediaReportEvent(eventClient.getEvent());
                 break;
             case org.smartregister.chw.hivst.util.Constants.EVENT_TYPE.HIVST_MOBILIZATION:
                 processMobilizationEvent(eventClient.getEvent());
@@ -493,6 +490,86 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             }
 
             SbccDao.updateData(event.getBaseEntityId(), sbccDate, sbccLocationType, sbccParticipantsNumber);
+        }
+    }
+
+    private void processSBCMobilizationEvent(Event event) {
+        List<Obs> sbcObs = event.getObs();
+        SbcDao.SbcMobilization sbcMobilization = new SbcDao.SbcMobilization();
+        if (sbcObs.size() > 0) {
+            for (Obs obs : sbcObs) {
+                if ("mobilization_date".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setMobilizationDate((String) obs.getValue());
+                } else if ("community_sbc_activity_provided".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setCommunitySbcActivityProvided(obs.getValues().toString());
+                } else if ("other_interventions_iec_materials_distributed".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setOtherInterventionsIecMaterialsDistributed(obs.getValues().toString());
+                } else if ("number_audio_visuals_distributed".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberAudioVisualsDistributed((String) obs.getValue());
+                } else if ("number_audio_distributed".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberAudioDistributed((String) obs.getValue());
+                } else if ("number_print_materials_distributed".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberPrintMaterialsDistributed((String) obs.getValue());
+                } else if ("pmtct_iec_materials_distributed".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setPmtctIecMaterialsDistributed(obs.getValues().toString());
+                } else if ("number_pmtct_audio_visuals_distributed_male".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberPmtctAudioVisualsDistributedMale((String) obs.getValue());
+                } else if ("number_pmtct_audio_visuals_distributed_female".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberPmtctAudioVisualsDistributedFemale((String) obs.getValue());
+                } else if ("number_pmtct_audio_distributed_male".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberPmtctAudioDistributedMale((String) obs.getValue());
+                } else if ("number_pmtct_audio_distributed_female".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberPmtctAudioDistributedFemale((String) obs.getValue());
+                } else if ("number_pmtct_print_materials_distributed_male".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberPmtctPrintMaterialsDistributedMale((String) obs.getValue());
+                } else if ("number_pmtct_print_materials_distributed_female".equals(obs.getFormSubmissionField())) {
+                    sbcMobilization.setNumberPmtctPrintMaterialsDistributedFemale((String) obs.getValue());
+                }
+            }
+
+            SbcDao.updateSbcMobilization(sbcMobilization);
+        }
+    }
+
+    private void processSBCMonthlySocialMediaReportEvent(Event event) {
+        List<Obs> sbcObs = event.getObs();
+        String reporting_month = null;
+        String organization_name = null;
+        String other_organization_name = null;
+        String social_media_hiv_msg_distribution = null;
+        String number_beneficiaries_reached_facebook = null;
+        String number_messages_publications = null;
+        String number_aired_messages_broadcasted = null;
+
+
+        if (sbcObs.size() > 0) {
+            for (Obs obs : sbcObs) {
+                if ("reporting_month".equals(obs.getFormSubmissionField())) {
+                    reporting_month = (String) obs.getValue();
+                } else if ("organization_name".equals(obs.getFormSubmissionField())) {
+                    organization_name = obs.getValues().toString();
+                } else if ("other_organization_name".equals(obs.getFormSubmissionField())) {
+                    other_organization_name = obs.getValues().toString();
+                } else if ("social_media_hiv_msg_distribution".equals(obs.getFormSubmissionField())) {
+                    social_media_hiv_msg_distribution = (String) obs.getValue();
+                } else if ("number_beneficiaries_reached_facebook".equals(obs.getFormSubmissionField())) {
+                    number_beneficiaries_reached_facebook = (String) obs.getValue();
+                } else if ("number_messages_publications".equals(obs.getFormSubmissionField())) {
+                    number_messages_publications = (String) obs.getValue();
+                } else if ("number_aired_messages_broadcasted".equals(obs.getFormSubmissionField())) {
+                    number_aired_messages_broadcasted = obs.getValues().toString();
+                }
+            }
+
+            SbcDao.updateSbcSocialMediaMonthlyReport(event.getBaseEntityId(),
+                    reporting_month,
+                    organization_name,
+                    other_organization_name,
+                    social_media_hiv_msg_distribution,
+                    number_beneficiaries_reached_facebook,
+                    number_messages_publications,
+                    number_aired_messages_broadcasted
+            );
         }
     }
 
@@ -682,9 +759,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
             List<Obs> observations = event.getObs();
             for (Obs obs : observations) {
                 if (obs.getFormSubmissionField().equals(formSubmissionField) && !obs.getHumanReadableValues().get(0).equals(humanReadableValues)) {
-                    if (event.getEventType().equals(FamilyPlanningConstants.EventType.FAMILY_PLANNING_CHANGE_METHOD)) {
-                        FpUtil.processChangeFpMethod(eventClient.getClient().getBaseEntityId());
-                    } else if (event.getEventType().equals(Constants.EVENT_TYPE.MALARIA_FOLLOW_UP_VISIT)) {
+                    if (event.getEventType().equals(Constants.EVENT_TYPE.MALARIA_FOLLOW_UP_VISIT)) {
                         org.smartregister.util.Utils.startAsyncTask(new MalariaUtil.CloseMalariaMemberFromRegister(event.getBaseEntityId()), null);
                     }
                     break;

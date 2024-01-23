@@ -209,13 +209,15 @@ public abstract class CoreFpRegisterFragment extends BaseFpRegisterFragment {
 
                     .withWhereClause(presenter().getMainCondition());
 
-            if (dueFilterActive)
-                generator.withWhereClause(getDueCondition());
 
-            if (StringUtils.isNotBlank(filters))
-                generator.withWhereClause(getSearchFilter(filters));
+            StringBuilder query = new StringBuilder(generator.generateQuery());
+            //if (dueFilterActive)
+            //  query.append(getDueCondition());
 
-            cursor = commonRepository().rawCustomQueryForAdapter(generator.generateQuery());
+            //f (StringUtils.isNotBlank(filters))
+            //  query.append(getSearchFilter(filters));
+
+            cursor = commonRepository().rawCustomQueryForAdapter(query.toString());
             cursor.moveToFirst();
             clientAdapter.setTotalcount(cursor.getInt(0));
             Timber.v("total count here %d", clientAdapter.getTotalcount());
@@ -231,28 +233,28 @@ public abstract class CoreFpRegisterFragment extends BaseFpRegisterFragment {
         }
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
-        if (id == LOADER_ID) {
-            return new CursorLoader(getActivity()) {
-                @Override
-                public Cursor loadInBackground() {
-                    // Count query
-                    final String COUNT = "count_execute";
-                    if (args != null && args.getBoolean(COUNT)) {
-                        countExecute();
-                    }
-
-                    String query = defaultFilterAndSortQuery();
-                    return commonRepository().rawCustomQueryForAdapter(query);
-                }
-            };
-        }
-        return super.onCreateLoader(id, args);
-    }
+//    @Override
+//    public Loader<Cursor> onCreateLoader(int id, final Bundle args) {
+//        if (id == LOADER_ID) {
+//            return new CursorLoader(getActivity()) {
+//                @Override
+//                public Cursor loadInBackground() {
+//                    // Count query
+//                    final String COUNT = "count_execute";
+//                    if (args != null && args.getBoolean(COUNT)) {
+//                        countExecute();
+//                    }
+//
+//                    String query = defaultFilterAndSortQuery();
+//                    return commonRepository().rawCustomQueryForAdapter(query);
+//                }
+//            };
+//        }
+//        return super.onCreateLoader(id, args);
+//    }
 
     public String getDueCondition() {
-        return FamilyPlanningConstants.DBConstants.FAMILY_PLANNING_TABLE + ".base_entity_id in (select base_entity_id from schedule_service where strftime('%Y-%m-%d') BETWEEN due_date and ifnull(expiry_date,strftime('%Y-%m-%d')) and schedule_name = '" + CoreConstants.SCHEDULE_TYPES.FP_VISIT + "' and ifnull(not_done_date,'') = '' and ifnull(completion_date,'') = '' )  ";
+        return FamilyPlanningConstants.TABLES.FP_REGISTER + ".base_entity_id in (select base_entity_id from schedule_service where strftime('%Y-%m-%d') BETWEEN due_date and ifnull(expiry_date,strftime('%Y-%m-%d')) and schedule_name = '" + CoreConstants.SCHEDULE_TYPES.FP_VISIT + "' and ifnull(not_done_date,'') = '' and ifnull(completion_date,'') = '' )  ";
     }
 
     protected void dueFilter(View dueOnlyLayout) {

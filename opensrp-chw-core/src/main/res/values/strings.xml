@@ -442,7 +442,8 @@
     <string name="permanent_blt"> Permanent (BTL)</string>
     <string name="permanent_vasectomy"> Permanent (Vasectomy)</string>
     <string name="hf_malaria_follow_up">Malaria follow-up</string>
-    <string name="family_planning_initiation">FP initiation</string>
+    <string name="family_planning_initiation">FP Initiation</string>
+    <string name="family_planning_ecp_provision">FP ECP Provision</string>
     <string name="family_planning_change">FP method change</string>
     <string name="pregnancy_confirmation">Pregnancy confirmation</string>
     <string name="pnc_danger_sign_outcome">PNC danger signs outcome</string>
@@ -814,6 +815,7 @@
     <string name="agyw_screening">AGYW Screening</string>
     <string name="kvp_prep_registration">KVP Registration</string>
     <string name="prep_registration">PrEP Registration</string>
+    <string name="sbc_registration">SBC Registration</string>
     <string name="kvp_registration">KVP Screening</string>
     <string name="telephone">"Tel: "</string>
 
