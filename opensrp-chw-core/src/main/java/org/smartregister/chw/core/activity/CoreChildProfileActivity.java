@@ -637,8 +637,16 @@ public class CoreChildProfileActivity extends BaseProfileActivity implements Cor
         } else if (i == R.id.action_sick_child_form) {
             presenter().startSickChildForm(presenter().getChildClient());
             return true;
+        } else if (i == R.id.action_gbv_registration) {
+            startVacRegistration();
+            return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    protected void startVacRegistration(){
+        //Implement where required
     }
 
     @Override

@@ -93,5 +93,12 @@
         android:visible="false"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_gbv_registration"
+        android:enabled="true"
+        android:visible="false"
+        android:title="@string/vac_registration"
+        app:showAsAction="never" />
+
 
 </menu>
