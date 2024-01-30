@@ -1279,6 +1279,8 @@ public class CoreConstants {
 
         public static final String VMMC = "VMMC";
 
+        public static final String GBV = "GBV/VAC";
+
     }
 
     public static final class KeyIndicatorsUtil {
