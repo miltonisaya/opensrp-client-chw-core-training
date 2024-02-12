@@ -1,5 +1,8 @@
 package org.smartregister.chw.core.activity;
 
+import static org.smartregister.chw.core.utils.Utils.passToolbarTitle;
+import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -60,9 +63,6 @@ import java.util.Set;
 import de.hdodenhof.circleimageview.CircleImageView;
 import timber.log.Timber;
 
-import static org.smartregister.chw.core.utils.Utils.passToolbarTitle;
-import static org.smartregister.chw.core.utils.Utils.updateToolbarTitle;
-
 public class CoreChildProfileActivity extends BaseProfileActivity implements CoreChildProfileContract.View, CoreChildRegisterContract.InteractorCallBack {
     public static IntentFilter sIntentFilter;
 
@@ -87,6 +87,7 @@ public class CoreChildProfileActivity extends BaseProfileActivity implements Cor
     public View viewLastVisitRow;
     public View viewVaccineHistoryRow;
     public TextView textViewFamilyHas;
+    public View viewFamilyRow;
     protected TextView textViewParentName;
     protected TextView textViewMedicalHistory;
     protected CircleImageView imageViewProfile;
@@ -123,7 +124,6 @@ public class CoreChildProfileActivity extends BaseProfileActivity implements Cor
             }
         }
     };
-    public View viewFamilyRow;
     private View viewDividerSickRow;
     private TextView textViewNotVisitMonth;
     private TextView textViewUndo;
