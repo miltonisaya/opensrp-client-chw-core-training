@@ -21,7 +21,8 @@ public abstract class CoreFamilyMemberFloatingMenu extends LinearLayout implemen
     protected Animation fabOpen, fabClose, rotateForward, rotateBack;
     protected boolean isFabMenuOpen = false;
     protected View callLayout;
-    protected View referLayout, addoLayout;
+    protected View referLayout;
+    protected View addoLayout;
 
     public CoreFamilyMemberFloatingMenu(Context context) {
         super(context);
