@@ -245,6 +245,10 @@ public class CoreConstants {
         private static final String CHILD_UNIFIED_REFERRAL_FORM = "referrals/child_referral_form";
         private static final String ANC_UNIFIED_REFERRAL_FORM = "referrals/anc_referral_form";
         private static final String PNC_UNIFIED_REFERRAL_FORM = "referrals/pnc_referral_form";
+        private static final String CHILD_UNIFIED_LINKAGE_FORM = "linkages/child_linkage_form";
+        private static final String ANC_UNIFIED_LINKAGE_FORM = "linkages/anc_linkage_form";
+        private static final String PNC_UNIFIED_LINKAGE_FORM = "linkages/pnc_linkage_form";
+        private static final String ADOLESCENT_UNIFIED_LINKAGE_FORM = "linkages/adolescent_linkage_form";
         private static final String HIV_REFERRAL_FORM = "referrals/hiv_referral_form";
         private static final String HTS_REFERRAL_FORM = "referrals/hts_referral_form";
         private static final String VMMC_REFERRAL= "referrals/vmmc_referral_form";
@@ -343,6 +347,22 @@ public class CoreConstants {
 
         public static String getPncUnifiedReferralForm() {
             return PNC_UNIFIED_REFERRAL_FORM;
+        }
+
+        public static String getAncUnifiedLinkageForm() {
+            return ANC_UNIFIED_LINKAGE_FORM;
+        }
+
+        public static String getPncUnifiedLinkageForm() {
+            return PNC_UNIFIED_LINKAGE_FORM;
+        }
+
+        public static String getChildUnifiedLinkageForm() {
+            return CHILD_UNIFIED_LINKAGE_FORM;
+        }
+
+        public static String getAdolescentUnifiedLinkageForm() {
+            return ADOLESCENT_UNIFIED_LINKAGE_FORM;
         }
 
         public static String getFamilyPlanningReferralForm(String gender) {
