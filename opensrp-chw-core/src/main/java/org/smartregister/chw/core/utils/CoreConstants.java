@@ -1275,6 +1275,14 @@ public class CoreConstants {
         public static final String VMMC = "VMMC";
 
         public static final String ICCM_REFERRAL = "ICCM Services";
+
+        public static final class ADDO {
+            public static final String CHILD_MINOR_AILMENTS = "Child Minor Ailments";
+            public static final String ANC_MINOR_AILMENTS = "ANC Minor Ailments";
+            public static final String PNC_MINOR_AILMENTS = "PNC Minor Ailments";
+            public static final String ADOLESCENT_MINOR_AILMENTS = "Adolescent Minor Ailments";
+        }
+
     }
 
     public static final class REGISTER_TYPE {
