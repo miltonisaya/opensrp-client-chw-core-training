@@ -12,6 +12,8 @@ public class CoreConstants {
 
     public static final String ENTITY_ID = "entity_id";
     public static final String REFERRAL_PLAN_ID = "5270285b-5a3b-4647-b772-c0b3c52e2b71";
+
+    public static final String ADDO_LINKAGE_PLAN_ID = "6270285b-5a3b-4647-b772-c0b3c52e2b72";
     public static final String DB_DATE_FORMAT = "yyyy-MM-dd";
     public static final String CURRENT_LOCATION_ID = "CURRENT_LOCATION_ID";
     public static final String FORMSUBMISSION_FIELD = "formsubmissionField";
