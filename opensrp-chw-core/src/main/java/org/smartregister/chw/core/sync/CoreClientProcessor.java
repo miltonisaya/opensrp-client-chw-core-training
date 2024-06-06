@@ -44,7 +44,6 @@ import org.smartregister.commonregistry.AllCommonsRepository;
 import org.smartregister.commonregistry.CommonFtsObject;
 import org.smartregister.domain.Client;
 import org.smartregister.domain.Event;
-import org.smartregister.domain.Location;
 import org.smartregister.domain.Obs;
 import org.smartregister.domain.db.EventClient;
 import org.smartregister.domain.jsonmapping.ClientClassification;
@@ -61,7 +60,6 @@ import org.smartregister.immunization.repository.VaccineRepository;
 import org.smartregister.immunization.service.intent.RecurringIntentService;
 import org.smartregister.immunization.service.intent.VaccineIntentService;
 import org.smartregister.immunization.util.IMConstants;
-import org.smartregister.repository.LocationRepository;
 import org.smartregister.sync.ClientProcessorForJava;
 
 import java.text.DateFormat;
@@ -774,7 +772,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
         String destinationHub = "";
         String samplesList = "";
 
-        if (visitObs.size() > 0) {
+        if (!visitObs.isEmpty()) {
             for (Obs obs : visitObs) {
                 if (org.smartregister.chw.lab.util.Constants.JSON_FORM_KEY.BATCH_NUMBER.equals(obs.getFieldCode())) {
                     batchNumber = (String) obs.getValue();
@@ -786,7 +784,7 @@ public class CoreClientProcessor extends ClientProcessorForJava {
                     samplesList = (String) obs.getValue();
                 }
             }
-            LabDao.insertManifest(batchNumber, manifestType, destinationHub, samplesList);
+            LabDao.insertManifest(batchNumber, manifestType, destinationHub, samplesList, String.valueOf(event.getVersion()));
             LabLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
         }
     }
@@ -820,19 +818,20 @@ public class CoreClientProcessor extends ClientProcessorForJava {
     protected void processLabSettingsEvent(Event event) {
         List<Obs> visitObs = event.getObs();
         String destinationHubName = "";
+        String locationId = "";
 
-        if (visitObs.size() > 0) {
+        if (!visitObs.isEmpty()) {
             for (Obs obs : visitObs) {
                 if ("name_of_hf".equals(obs.getFieldCode())) {
                     destinationHubName = (String) obs.getHumanReadableValue();
                 }
+                if ("location_id".equals(obs.getFieldCode())) {
+                    locationId = (String) obs.getValue();
+                }
             }
 
-            LocationRepository locationRepository = new LocationRepository();
-            Location location = locationRepository.getLocationByName(destinationHubName);
-
-            if (location.getId() != null) {
-                LabDao.saveDestinationHub(destinationHubName, location.getId());
+            if (locationId != null) {
+                LabDao.saveDestinationHub(destinationHubName, locationId);
                 LabLibrary.getInstance().context().getEventClientRepository().markEventAsProcessed(event.getFormSubmissionId());
             }
         }
