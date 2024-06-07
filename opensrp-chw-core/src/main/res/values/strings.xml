@@ -151,6 +151,7 @@
     <string name="visit_month">%1$s visit done</string>
     <string name="refer_to_facility">Refer to facility</string>
     <string name="updating">Updating....</string>
+    <string name="link_to_addo">Link to ADDO</string>
 
     <string name="growth_and_nutrition">GROWTH AND NUTRITION</string>
     <string name="vitamin_given">When was %1$s given?</string>
@@ -826,6 +827,7 @@
     <string name="vmmc_registration">VMMC Enrollment</string>
     <string name="vmmc_confirmation">Vmmc Confirmation</string>
     <string name="menu_vmmc">VMMC</string>
+    <string name="refer_to_addo">Linkage to Addo</string>
 
 
     <!--    GBV/VAC-->
