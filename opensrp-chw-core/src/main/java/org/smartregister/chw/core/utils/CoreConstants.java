@@ -251,6 +251,8 @@ public class CoreConstants {
         private static final String ANC_UNIFIED_LINKAGE_FORM = "linkages/anc_linkage_form";
         private static final String PNC_UNIFIED_LINKAGE_FORM = "linkages/pnc_linkage_form";
         private static final String ADOLESCENT_UNIFIED_LINKAGE_FORM = "linkages/adolescent_linkage_form";
+
+        private static final String LINKAGE_FOLLOW_UP_FORM = "linkages/followup_form";
         private static final String HIV_REFERRAL_FORM = "referrals/hiv_referral_form";
         private static final String HTS_REFERRAL_FORM = "referrals/hts_referral_form";
         private static final String VMMC_REFERRAL= "referrals/vmmc_referral_form";
@@ -365,6 +367,14 @@ public class CoreConstants {
 
         public static String getAdolescentUnifiedLinkageForm() {
             return ADOLESCENT_UNIFIED_LINKAGE_FORM;
+        }
+
+        public static String getLinkageFollowUpFormName(){
+            return LINKAGE_FOLLOW_UP_FORM;
+        }
+
+        public static String getLinkageFollowUpForm() {
+            return Utils.getLocalForm(LINKAGE_FOLLOW_UP_FORM, locale, assetManager);
         }
 
         public static String getFamilyPlanningReferralForm(String gender) {
@@ -958,6 +968,7 @@ public class CoreConstants {
         public static final String PNC = "PNC";
         public static final String FAMILY_PLANNING = "Family Planning";
         public static final String MALARIA = "Malaria";
+        public static final String ADDO_LINKAGE = "ADDO Linkage";
 
         public static final String ICCM = "iCCM";
         public static final String REFERRALS = "Referrals";
@@ -1246,6 +1257,8 @@ public class CoreConstants {
         public static final String SBC_MONTHLY_SOCIAL_MEDIA_REGISTER_ACTIVITY = "SBC_MONTHLY_SOCIAL_MEDIA_REPORT_REGISTER_ACTIVITY";
 
         public static final String GBV_REGISTER_ACTIVITY = "GBV_REGISTER_ACTIVITY";
+
+        public static final String ADDO_LINKAGE_ACTIVITY = "ADDO_LINKAGE_ACTIVITY";
     }
 
     public static final class BUSINESS_STATUS {
