@@ -10,7 +10,6 @@ import androidx.loader.content.Loader;
 
 import org.apache.commons.lang3.StringUtils;
 import org.smartregister.chw.core.custom_views.NavigationMenu;
-import org.smartregister.chw.core.utils.CoreConstants;
 import org.smartregister.chw.core.utils.QueryBuilder;
 import org.smartregister.chw.lab.fragment.BaseLabManifestsRegisterFragment;
 import org.smartregister.chw.lab.util.Constants;
