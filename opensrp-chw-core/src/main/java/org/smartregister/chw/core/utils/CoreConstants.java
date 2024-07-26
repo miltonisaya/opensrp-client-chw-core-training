@@ -922,6 +922,7 @@ public class CoreConstants {
         public static final String HEI = "ec_hei";
         public static final String LABOUR_AND_DELIVERY = "ec_ld_confirmation";
         public static final String LTFU_REFERRALS = "ec_ltfu_referrals";
+        public static final String GE_REGISTRATIONS = "ec_gender_equality";
     }
 
     public static final class INTENT_KEY {
